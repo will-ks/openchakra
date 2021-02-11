@@ -132,7 +132,7 @@ const GradientControl = (props: GradientControlPropsType) => {
           <ColorPickerControl
             withFullColor={props.withFullColor}
             name={props.name}
-            gradient={true}
+            gradient
             index={i}
             gradientColor={e}
             updateGradient={updateGradient}
