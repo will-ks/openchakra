@@ -5,6 +5,8 @@ import templates, { TemplateType } from '~templates'
 import { generateId } from '~utils/generateId'
 import { duplicateComponent, deleteComponent } from '~utils/recursive'
 import omit from 'lodash/omit'
+import {IComponent, IComponents} from "~componentDefsTypes";
+import {ComponentType} from "~componentDefs";
 
 export type ComponentsState = {
   components: IComponents
@@ -19,6 +21,7 @@ export type ComponentsStateWithUndo = {
 
 const DEFAULT_ID = 'root'
 
+// TODO: generalization. 'Box' is hardcoded.
 export const INITIAL_COMPONENTS: IComponents = {
   root: {
     id: DEFAULT_ID,

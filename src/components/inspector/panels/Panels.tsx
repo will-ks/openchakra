@@ -48,6 +48,8 @@ import NumberInputPanel from '~components/inspector/panels/components/NumberInpu
 import AspectRatioPanel from '~components/inspector/panels/components/AspectRatioPanel'
 import BreadcrumbPanel from '~components/inspector/panels/components/BreadcrumbPanel'
 import BreadcrumbItemPanel from '~components/inspector/panels/components/BreadcrumbItemPanel'
+import {IComponent} from "~componentDefsTypes";
+import {inspectorComponents} from "~componentDefs";
 
 const Panels: React.FC<{ component: IComponent; isRoot: boolean }> = ({
   component,
@@ -59,61 +61,66 @@ const Panels: React.FC<{ component: IComponent; isRoot: boolean }> = ({
     return null
   }
 
-  return (
-    <>
-      {type === 'Button' && <ButtonPanel />}
-      {type === 'Checkbox' && <CheckboxPanel />}
-      {type === 'Box' && <BoxPanel />}
-      {type === 'Badge' && <BadgePanel />}
-      {type === 'Image' && <ImagePanel />}
-      {type === 'Icon' && <IconPanel />}
-      {type === 'IconButton' && <IconButtonPanel />}
-      {type === 'Progress' && <ProgressPanel />}
-      {type === 'Text' && <ChildrenControl />}
-      {type === 'Link' && <LinkPanel />}
-      {type === 'Avatar' && <AvatarPanel />}
-      {type === 'AvatarGroup' && <AvatarGroupPanel />}
-      {type === 'AvatarBadge' && <AvatarBadgePanel />}
-      {type === 'Spinner' && <SpinnerPanel />}
-      {type === 'Code' && <CodePanel />}
-      {type === 'CloseButton' && <CloseButtonPanel />}
-      {type === 'Divider' && <DividerPanel />}
-      {type === 'Textarea' && <TextareaPanel />}
-      {type === 'CircularProgress' && <CircularProgressPanel />}
-      {type === 'Heading' && <HeadingPanel />}
-      {type === 'SimpleGrid' && <SimpleGridPanel />}
-      {type === 'Switch' && <SwitchPanel />}
-      {type === 'Alert' && <AlertPanel />}
-      {type === 'AlertIcon' && <AlertIconPanel />}
-      {type === 'AlertTitle' && <AlertTitlePanel />}
-      {type === 'AlertDescription' && <AlertDescriptionPanel />}
-      {type === 'Tag' && <TagPanel />}
-      {type === 'Flex' && <FlexPanel />}
-      {type === 'Stack' && <StackPanel />}
-      {type === 'FormControl' && <FormControlPanel />}
-      {type === 'Tabs' && <TabsPanel />}
-      {type === 'Input' && <InputPanel />}
-      {type === 'Radio' && <RadioPanel />}
-      {type === 'RadioGroup' && <RadioGroupPanel />}
-      {type === 'Select' && <SelectPanel />}
-      {type === 'List' && <ListPanel />}
-      {type === 'ListItem' && <ListItemPanel />}
-      {type === 'ListIcon' && <ListIconPanel />}
-      {type === 'Accordion' && <AccordionPanel />}
-      {type === 'AccordionItem' && <AccordionItemPanel />}
-      {type === 'FormLabel' && <FormLabelPanel />}
-      {type === 'FormHelperText' && <FormHelperTextPanel />}
-      {type === 'FormErrorMessage' && <FormErrorMessagePanel />}
-      {type === 'InputRightAddon' && <ChildrenControl />}
-      {type === 'InputLeftAddon' && <ChildrenControl />}
-      {type === 'Grid' && <GridPanel />}
-      {type === 'NumberInput' && <NumberInputPanel />}
-      {type === 'AspectRatio' && <AspectRatioPanel />}
-      {type === 'Breadcrumb' && <BreadcrumbPanel />}
-      {type === 'BreadcrumbItem' && <BreadcrumbItemPanel />}
-      {type === 'BreadcrumbLink' && <LinkPanel />}
-    </>
-  )
+  const InspectorComponent = inspectorComponents[type]
+  if (InspectorComponent) {
+    return <InspectorComponent/>
+  }
+  return null
+  // return (
+  //   <>
+  //     {type === 'Button' && <ButtonPanel />}
+  //     {type === 'Checkbox' && <CheckboxPanel />}
+  //     {type === 'Box' && <BoxPanel />}
+  //     {type === 'Badge' && <BadgePanel />}
+  //     {type === 'Image' && <ImagePanel />}
+  //     {type === 'Icon' && <IconPanel />}
+  //     {type === 'IconButton' && <IconButtonPanel />}
+  //     {type === 'Progress' && <ProgressPanel />}
+  //     {type === 'Text' && <ChildrenControl />}
+  //     {type === 'Link' && <LinkPanel />}
+  //     {type === 'Avatar' && <AvatarPanel />}
+  //     {type === 'AvatarGroup' && <AvatarGroupPanel />}
+  //     {type === 'AvatarBadge' && <AvatarBadgePanel />}
+  //     {type === 'Spinner' && <SpinnerPanel />}
+  //     {type === 'Code' && <CodePanel />}
+  //     {type === 'CloseButton' && <CloseButtonPanel />}
+  //     {type === 'Divider' && <DividerPanel />}
+  //     {type === 'Textarea' && <TextareaPanel />}
+  //     {type === 'CircularProgress' && <CircularProgressPanel />}
+  //     {type === 'Heading' && <HeadingPanel />}
+  //     {type === 'SimpleGrid' && <SimpleGridPanel />}
+  //     {type === 'Switch' && <SwitchPanel />}
+  //     {type === 'Alert' && <AlertPanel />}
+  //     {type === 'AlertIcon' && <AlertIconPanel />}
+  //     {type === 'AlertTitle' && <AlertTitlePanel />}
+  //     {type === 'AlertDescription' && <AlertDescriptionPanel />}
+  //     {type === 'Tag' && <TagPanel />}
+  //     {type === 'Flex' && <FlexPanel />}
+  //     {type === 'Stack' && <StackPanel />}
+  //     {type === 'FormControl' && <FormControlPanel />}
+  //     {type === 'Tabs' && <TabsPanel />}
+  //     {type === 'Input' && <InputPanel />}
+  //     {type === 'Radio' && <RadioPanel />}
+  //     {type === 'RadioGroup' && <RadioGroupPanel />}
+  //     {type === 'Select' && <SelectPanel />}
+  //     {type === 'List' && <ListPanel />}
+  //     {type === 'ListItem' && <ListItemPanel />}
+  //     {type === 'ListIcon' && <ListIconPanel />}
+  //     {type === 'Accordion' && <AccordionPanel />}
+  //     {type === 'AccordionItem' && <AccordionItemPanel />}
+  //     {type === 'FormLabel' && <FormLabelPanel />}
+  //     {type === 'FormHelperText' && <FormHelperTextPanel />}
+  //     {type === 'FormErrorMessage' && <FormErrorMessagePanel />}
+  //     {type === 'InputRightAddon' && <ChildrenControl />}
+  //     {type === 'InputLeftAddon' && <ChildrenControl />}
+  //     {type === 'Grid' && <GridPanel />}
+  //     {type === 'NumberInput' && <NumberInputPanel />}
+  //     {type === 'AspectRatio' && <AspectRatioPanel />}
+  //     {type === 'Breadcrumb' && <BreadcrumbPanel />}
+  //     {type === 'BreadcrumbItem' && <BreadcrumbItemPanel />}
+  //     {type === 'BreadcrumbLink' && <LinkPanel />}
+  //   </>
+  // )
 }
 
 export default memo(Panels)

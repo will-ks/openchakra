@@ -1,4 +1,5 @@
 import { RootState } from '~core/store'
+import {IComponent} from "~componentDefsTypes";
 
 export const getShowLayout = (state: RootState) => state.app.showLayout
 

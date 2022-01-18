@@ -3,6 +3,8 @@ import { useInteractive } from '~hooks/useInteractive'
 import { useDropComponent } from '~hooks/useDropComponent'
 import ComponentPreview from '~components/editor/ComponentPreview'
 import { Alert, Box } from '@chakra-ui/react'
+import {IPreviewProps} from "~componentDefsTypes";
+import {ComponentType} from "~componentDefs";
 
 const AlertPreview: React.FC<IPreviewProps> = ({ component }) => {
   const acceptedTypes = [

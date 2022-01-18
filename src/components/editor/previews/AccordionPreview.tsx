@@ -9,9 +9,17 @@ import {
   AccordionPanel,
 } from '@chakra-ui/react'
 import ComponentPreview from '~components/editor/ComponentPreview'
-import { AccordionWhitelist } from '~utils/editor'
+import {ComponentType} from "~componentDefs";
+import {IPreviewProps} from "~componentDefsTypes";
 
 const acceptedTypes: ComponentType[] = ['AccordionItem']
+
+let AccordionWhitelist : string[]
+
+function setAccordionWhitelist(list: string[])
+{
+  AccordionWhitelist = list
+}
 
 const AccordionPreview: React.FC<IPreviewProps> = ({ component }) => {
   const { props, ref } = useInteractive(component, true)
@@ -94,3 +102,7 @@ export const AccordionPanelPreview = ({ component }: IPreviewProps) => {
 }
 
 export default AccordionPreview
+
+export  {
+  setAccordionWhitelist
+}

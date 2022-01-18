@@ -37,7 +37,8 @@ import ActionButton from './ActionButton'
 import { generateComponentCode, formatCode } from '~utils/code'
 import useClipboard from '~hooks/useClipboard'
 import { useInspectorUpdate } from '~contexts/inspector-context'
-import { componentsList } from '~componentsList'
+// import { componentsList } from '~componentsList'
+import { componentNames as componentsList } from "~componentDefs";
 
 const CodeActionButton = memo(() => {
   const [isLoading, setIsLoading] = useState(false)

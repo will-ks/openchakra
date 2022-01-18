@@ -9,7 +9,9 @@ import {
 } from '@chakra-ui/react'
 import { CloseIcon, SearchIcon } from '@chakra-ui/icons'
 import DragItem from './DragItem'
-import { menuItems, MenuItem } from '~componentsList'
+import {componentNames, menuItems, MenuItem, ComponentType} from "~componentDefs";
+
+console.log("componentNames2", componentNames)
 
 const Menu = () => {
   const [searchTerm, setSearchTerm] = useState('')

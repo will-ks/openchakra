@@ -1,5 +1,6 @@
 import map from 'lodash/map'
 import { RootState } from '~core/store'
+import {IComponent} from "~componentDefsTypes";
 
 export const getComponents = (state: RootState) =>
   state.components.present.components
