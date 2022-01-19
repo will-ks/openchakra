@@ -1,11 +1,19 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '~core/store'
-import { getDefaultFormProps } from '~utils/defaultProps'
 import { useInspectorUpdate } from '~contexts/inspector-context'
 import { useEffect } from 'react'
+import {useComponentDefinitions} from "~contexts/component-definition";
+import {ComponentType} from "~core/ComponentDefinitions";
 
 const usePropsSelector = (propsName: string) => {
   const { addActiveProps } = useInspectorUpdate()
+  const componentDefs = useComponentDefinitions()
+
+  const getDefaultFormProps = (type: ComponentType) => {
+    const previewProps = componentDefs.previewDefaultProps[type]
+    const defaultProps = componentDefs.targetComponents[type]!.defaultProps
+    return { ...defaultProps, ...previewProps?.form }
+  }
 
   useEffect(() => {
     // Register form props name for custom props panel

@@ -1,43 +1,46 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 
-import AlertPreview from '~components/editor/previews/AlertPreview'
+import AlertPreview from '~chakraui/previews/AlertPreview'
 import AvatarPreview, {
   AvatarBadgePreview,
   AvatarGroupPreview,
-} from '~components/editor/previews/AvatarPreview'
+} from '~chakraui/previews/AvatarPreview'
 import AccordionPreview, {
   AccordionButtonPreview,
   AccordionItemPreview,
   AccordionPanelPreview,
-} from '~components/editor/previews/AccordionPreview'
+} from '~chakraui/previews/AccordionPreview'
 import * as Chakra from '@chakra-ui/react'
 import { getComponentBy } from '~core/selectors/components'
-import { InputRightElementPreview } from '~components/editor/previews/InputRightElement'
-import { InputLeftElementPreview } from '~components/editor/previews/InputLeftElement'
-import AspectRatioPreview from '~components/editor/previews/AspectRatioBoxPreview'
-import ButtonPreview from '~components/editor/previews/ButtonPreview'
+import { InputRightElementPreview } from '~chakraui/previews/InputRightElement'
+import { InputLeftElementPreview } from '~chakraui/previews/InputLeftElement'
+import AspectRatioPreview from '~chakraui/previews/AspectRatioBoxPreview'
+import ButtonPreview from '~chakraui/previews/ButtonPreview'
 import PreviewContainer from '~components/editor/PreviewContainer'
 import WithChildrenPreviewContainer from '~components/editor/WithChildrenPreviewContainer'
-import IconPreview from './previews/IconPreview'
-import IconButtonPreview from './previews/IconButtonPreview'
-import SelectPreview from '~components/editor/previews/SelectPreview'
-import NumberInputPreview from '~components/editor/previews/NumberInputPreview'
-import BreadcrumbPreview from './previews/BreadcrumbPreview'
-import BreadcrumbItemPreview from './previews/BreadcrumbItemPreview'
-import {previewComponents} from "~componentDefs";
+import IconPreview from '../../chakraui/previews/IconPreview'
+import IconButtonPreview from '../../chakraui/previews/IconButtonPreview'
+import SelectPreview from '~chakraui/previews/SelectPreview'
+import NumberInputPreview from '~chakraui/previews/NumberInputPreview'
+import BreadcrumbPreview from '../../chakraui/previews/BreadcrumbPreview'
+import BreadcrumbItemPreview from '../../chakraui/previews/BreadcrumbItemPreview'
+import {useComponentDefinitions} from "~contexts/component-definition";
 
 const ComponentPreview: React.FC<{
   componentName: string
 }> = ({ componentName, ...forwardedProps }) => {
+  const componentDefs = useComponentDefinitions()
   const component = useSelector(getComponentBy(componentName))
   if (!component) {
     console.error(`ComponentPreview unavailable for component ${componentName}`)
   }
 
   const type = (component && component.type) || null
-
-  const prevCompo = previewComponents[type]
+  if (!type) {
+    return null
+  }
+  const prevCompo = componentDefs.previewComponents[type]
   if (!prevCompo) {
     return null
   }

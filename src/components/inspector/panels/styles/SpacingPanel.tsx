@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import TextControl from '~components/inspector/controls/TextControl'
+import TextControl from '~chakraui/inspector/controls/TextControl'
 import PaddingPanel from "~components/inspector/panels/styles/PaddingPanel";
 import {StylePanelProps} from "~components/inspector/panels/styles/types";
 

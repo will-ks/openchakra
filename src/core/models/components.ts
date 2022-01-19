@@ -4,8 +4,8 @@ import templates, { TemplateType } from '~templates'
 import { generateId } from '~utils/generateId'
 import { duplicateComponent, deleteComponent } from '~utils/recursive'
 import omit from 'lodash/omit'
-import {IComponent, IComponents} from "~componentDefsTypes";
-import {ComponentType, previewDefaultProps} from "~componentDefs";
+import {ComponentType, IComponent, IComponents} from "~core/ComponentDefinitions";
+import {previewDefaultProps} from "~core/store";
 
 export type ComponentsState = {
   components: IComponents
@@ -54,6 +54,8 @@ const components = createModel({
     resetProps(state: ComponentsState, componentId: string): ComponentsState {
       return produce(state, (draftState: ComponentsState) => {
         const component = draftState.components[componentId]
+        console.log("*** resetProps", previewDefaultProps)
+
         const { form, ...defaultProps } = previewDefaultProps[component.type] || {}
 
         draftState.components[componentId].props = defaultProps || {}
@@ -159,6 +161,8 @@ const components = createModel({
     ): ComponentsState {
       return produce(state, (draftState: ComponentsState) => {
         const id = payload.testId || generateId()
+        console.log("*** produce", previewDefaultProps)
+
         const { form, ...defaultProps } = previewDefaultProps[payload.type] || {}
         draftState.selectedId = id
         draftState.components[payload.parentName].children.push(id)

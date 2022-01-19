@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { IconButton, ButtonGroup, useTheme } from '@chakra-ui/react'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
+import ColorsControl from '~chakraui/inspector/controls/ColorsControl'
 import { GoBold, GoItalic } from 'react-icons/go'
 import {
   MdFormatAlignLeft,
@@ -8,13 +8,13 @@ import {
   MdFormatAlignCenter,
   MdFormatAlignJustify,
 } from 'react-icons/md'
-import FormControl from '~components/inspector/controls/FormControl'
+import FormControl from '~chakraui/inspector/controls/FormControl'
 import { ComboboxOption } from '@reach/combobox'
 import InputSuggestion from '~components/inspector/inputs/InputSuggestion'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import {StylePanelProps} from "~components/inspector/panels/styles/types";
-import {isStylePropEnabled, targetStyleProp} from "~componentDefs";
+import {isStylePropEnabled, targetStyleProp} from "~core/ComponentDefinitions";
 
 const TextPanel: React.FC<StylePanelProps> = ({
   isRoot,

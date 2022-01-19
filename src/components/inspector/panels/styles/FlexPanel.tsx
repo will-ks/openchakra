@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
 import { Select } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
+import FormControl from '~chakraui/inspector/controls/FormControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import {StylePanelProps} from "~components/inspector/panels/styles/types";
-import {targetStyleProp} from "~componentDefs";
+import {targetStyleProp} from "~core/ComponentDefinitions";
 
 const FlexPanel: React.FC<StylePanelProps> = ({
   isRoot,

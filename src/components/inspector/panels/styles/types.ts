@@ -1,4 +1,4 @@
-import {StylePanelDef} from "~componentDefs";
+import {StylePanelDef} from "~core/ComponentDefinitions";
 
 export type StylePanelProps = {
   panelDef: StylePanelDef,
