@@ -94,10 +94,12 @@ import BorderPanel from '~components/inspector/panels/styles/BorderPanel'
 import DimensionPanel from '~components/inspector/panels/styles/DimensionPanel'
 import EffectsPanel from '~components/inspector/panels/styles/EffectsPanel'
 import DisplayPanel from '~components/inspector/panels/styles/DisplayPanel'
+import PaddingPanel from '~components/inspector/panels/styles/PaddingPanel'
 import TextPanel from '~components/inspector/panels/styles/TextPanel'
 import BackgroundColorPanel from '~components/inspector/panels/styles/BackgroundColorPanel'
 import SpacingPanel from '~components/inspector/panels/styles/SpacingPanel'
 import {BuilderFn, ComponentType} from '~core/ComponentDefinitions'
+import {Button} from "native-base";
 // using ChildrenControl following original Panel.tsx logic
 // import TextPanel from "~components/inspector/panels/styles/TextPanel";
 
@@ -170,7 +172,7 @@ export type ComponentDefs = {
 // component. Here we can se what properties should be set. The key is the abstract name
 // of the property, the value is the actual value to set. be default the two are the same
 // for chakraui
-const chakrauiStylePanels: StylePanelsDef = {
+const nativebaseStylePanels: StylePanelsDef = {
   Layout: {
     title: 'Layout',
     component: DisplayPanel,
@@ -272,11 +274,12 @@ const chakrauiStylePanels: StylePanelsDef = {
   },
 }
 
-const chakrauiComponentDefDefaults: ComponentDefDefault = {
+const nativebaseComponentDefDefaults: ComponentDefDefault = {
   previewComponents: {
     simple: {
       component: PreviewContainer,
       applyTo: [
+        'NativeBaseButton',
         'Badge',
         'Image',
         'Text',
@@ -352,10 +355,22 @@ const chakrauiComponentDefDefaults: ComponentDefDefault = {
 
   // The default style panel configuration to use for components, which do not specify and
   // explicit configuration
-  stylePanelDef: chakrauiStylePanels,
+  stylePanelDef: nativebaseStylePanels,
 }
 
-const chakrauiComponentDefs: ComponentDefs = {
+const nativebaseComponentDefs: ComponentDefs = {
+  NativeBaseButton: {
+    component: Button,
+    inspectorComponent: ButtonPanel,
+    // previewComponent: ButtonPreview,
+    previewDefaultProps: {
+      children: 'A NativeBaseButton',
+      width: 200,
+      mr: 1,
+      fontWeight: 'bold',
+      bg: 'green.500',
+    },
+  },
   Accordion: {
     component: Chakra['Accordion'],
     previewComponent: AccordionPreview,
@@ -848,4 +863,4 @@ const chakrauiComponentDefs: ComponentDefs = {
 // // dependency
 // setAccordionWhitelist(AccordionWhitelist)
 
-export { chakrauiComponentDefs, chakrauiComponentDefDefaults }
+export { nativebaseComponentDefs, nativebaseComponentDefDefaults }

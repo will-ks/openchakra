@@ -10,24 +10,27 @@ import AppErrorBoundary from '~components/errorBoundaries/AppErrorBoundary'
 import { AppProps } from 'next/app'
 import { ComponentDefinitionsProvider } from '~contexts/component-definition'
 import {
-  chakrauiComponentDefDefaults,
-  chakrauiComponentDefs,
-} from '~chakraui/componentDefs'
+  nativebaseComponentDefDefaults,
+  nativebaseComponentDefs,
+} from '~nativebase/componentDefs'
 import ComponentDefinitions from '~core/ComponentDefinitions'
+import { NativeBaseProvider } from "native-base";
 
 const componentDefs = new ComponentDefinitions(
-  chakrauiComponentDefs,
-  chakrauiComponentDefDefaults,
+  nativebaseComponentDefs,
+  nativebaseComponentDefDefaults,
 )
 
 const Main = ({ Component, pageProps }: AppProps) => (
   <BugsnagErrorBoundary>
     <ComponentDefinitionsProvider definitions={componentDefs}>
-      <ChakraProvider resetCSS theme={theme}>
-        <AppErrorBoundary>
-          <Component {...pageProps} />
-        </AppErrorBoundary>
-      </ChakraProvider>
+      <NativeBaseProvider>
+        <ChakraProvider resetCSS theme={theme}>
+          <AppErrorBoundary>
+            <Component {...pageProps} />
+          </AppErrorBoundary>
+        </ChakraProvider>
+      </NativeBaseProvider>
     </ComponentDefinitionsProvider>
   </BugsnagErrorBoundary>
 )
