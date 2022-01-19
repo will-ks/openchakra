@@ -38,7 +38,7 @@ import { generateComponentCode, formatCode } from '~utils/code'
 import useClipboard from '~hooks/useClipboard'
 import { useInspectorUpdate } from '~contexts/inspector-context'
 // import { componentsList } from '~componentsList'
-import { componentNames as componentsList } from "~componentDefs";
+import {componentNames as componentsList, stylePanels} from "~componentDefs";
 
 const CodeActionButton = memo(() => {
   const [isLoading, setIsLoading] = useState(false)
@@ -192,6 +192,7 @@ const Inspector = () => {
         isRoot={isRoot}
         showChildren={componentHasChildren}
         parentIsRoot={parentIsRoot}
+        stylePanels={stylePanels[component.type]!}
       />
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay>

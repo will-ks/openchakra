@@ -13,94 +13,69 @@ import EffectsPanel from './styles/EffectsPanel'
 import ChildrenInspector from '~components/inspector/ChildrenInspector'
 import ParentInspector from '~components/inspector/ParentInspector'
 import CustomPropsPanel from './CustomPropsPanel'
+import BackgroundColorPanel from "~components/inspector/panels/styles/BackgroundColorPanel";
+import {StylePanelsDef} from "~componentDefs";
 
 interface Props {
   isRoot: boolean
   showChildren: boolean
-  parentIsRoot: boolean
+  parentIsRoot: boolean,
+  stylePanels: StylePanelsDef
 }
 
 const StylesPanel: React.FC<Props> = ({
   isRoot,
   showChildren,
   parentIsRoot,
-}) => (
-  <Accordion defaultIndex={[0]} allowMultiple>
-    {!isRoot && (
-      <AccordionContainer title="Custom props">
-        <CustomPropsPanel />
+  stylePanels
+}) => {
+
+  let panels = []
+  if (isRoot) {
+    const panelDef = stylePanels["Backgrounds"]
+    const BgComp = panelDef.component
+
+    panels.push(
+      <AccordionContainer title={panelDef.title}>
+        <BgComp isRoot={isRoot} panelDef={panelDef}/>
       </AccordionContainer>
-    )}
-
-    {!isRoot && !parentIsRoot && (
-      <AccordionContainer title="Parent">
-        <ParentInspector />
-      </AccordionContainer>
-    )}
-
-    {showChildren && (
-      <AccordionContainer title="Children">
-        <ChildrenInspector />
-      </AccordionContainer>
-    )}
-
-    {!isRoot && (
-      <>
-        <AccordionContainer title="Layout">
-          <DisplayPanel />
+    )
+  }
+  else {
+    Object.keys(stylePanels).map(key => {
+      const panelDef = stylePanels[key]
+      const Panel = panelDef.component
+      panels.push(
+        <AccordionContainer title={panelDef.title}>
+          <Panel isRoot={isRoot} panelDef={panelDef}/>
         </AccordionContainer>
-        <AccordionContainer title="Spacing">
-          <PaddingPanel type="margin" />
-          <PaddingPanel type="padding" />
-        </AccordionContainer>
-        <AccordionContainer title="Size">
-          <DimensionPanel />
-        </AccordionContainer>
-        <AccordionContainer title="Typography">
-          <TextPanel />
-        </AccordionContainer>
-      </>
-    )}
+      )
 
-    <AccordionContainer title="Backgrounds">
-      <ColorsControl
-        withFullColor
-        label="Color"
-        name="backgroundColor"
-        enableHues
-      />
+    })
+  }
+
+  return (
+    <Accordion defaultIndex={[0]} allowMultiple>
       {!isRoot && (
-        <GradientControl
-          withFullColor
-          label="Gradient"
-          name="bgGradient"
-          options={[
-            'to top',
-            'to top right',
-            'to top left',
-            'to bottom right',
-            'to bottom',
-            'to bottom left',
-            'to right',
-            'to left',
-          ]}
-          enableHues
-        />
+        <AccordionContainer title="Custom props">
+          <CustomPropsPanel/>
+        </AccordionContainer>
       )}
-    </AccordionContainer>
 
-    {!isRoot && (
-      <>
-        <AccordionContainer title="Border">
-          <BorderPanel />
+      {!isRoot && !parentIsRoot && (
+        <AccordionContainer title="Parent">
+          <ParentInspector/>
         </AccordionContainer>
+      )}
 
-        <AccordionContainer title="Effect">
-          <EffectsPanel />
+      {showChildren && (
+        <AccordionContainer title="Children">
+          <ChildrenInspector/>
         </AccordionContainer>
-      </>
-    )}
-  </Accordion>
-)
+      )}
 
+      {panels}
+    </Accordion>
+  )
+}
 export default memo(StylesPanel)
