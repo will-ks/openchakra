@@ -206,6 +206,7 @@ const componentDefs = {
     inspectorComponent: AccordionPanel,
     componentModelBuilder: buildAccordion,
     children: [
+      'Accordion',
       'AccordionItem',
       'AccordionButton',
       'AccordionPanel',
@@ -234,7 +235,7 @@ const componentDefs = {
     previewComponent: AlertPreview,
     inspectorComponent: AlertPanel,
     componentModelBuilder: buildAlert,
-    children: ['AlertDescription', 'AlertIcon', 'AlertTitle'],
+    children: ['Alert', 'AlertDescription', 'AlertIcon', '' + 'AlertTitle'],
   },
   AlertDescription: {
     component: Chakra['AlertDescription'],
@@ -395,7 +396,12 @@ const componentDefs = {
     component: Chakra['FormControl'],
     inspectorComponent: FormControlPanel,
     componentModelBuilder: buildFormControl,
-    children: ['FormLabel', 'FormHelperText', 'FormErrorMessage'],
+    children: [
+      'FormControl',
+      'FormLabel',
+      'FormHelperText',
+      'FormErrorMessage',
+    ],
   },
   FormLabel: {
     component: Chakra['FormLabel'],
@@ -521,7 +527,7 @@ const componentDefs = {
         styleType: 'none',
       },
     },
-    children: ['ListItem'],
+    children: ['List', 'ListItem'],
   },
   ListItem: {
     component: Chakra['ListItem'],
@@ -530,11 +536,11 @@ const componentDefs = {
       children: 'list',
     },
   },
-  // ListIcon was missing from original menuItems
-  ListIcon: {
-    component: Chakra['ListIcon'],
-    inspectorComponent: ListIconPanel,
-  },
+  // ListIcon was missing from original menuItems and it crashes if added
+  // ListIcon: {
+  //   component: Chakra['ListIcon'],
+  //   inspectorComponent: ListIconPanel,
+  // },
   NumberInput: {
     component: Chakra['NumberInput'],
     inspectorComponent: NumberInputPanel,
@@ -690,19 +696,24 @@ function collectComponentNames(defs: ComponentDefsType) {
  * Collects only root component names
  * @param defs
  */
-function collectRootComponentNames(defs: ComponentDefsType) {
-  //: ComponentDefsTypeKeys[]
-  const childNames = collectChildComponentNames(defs)
-  return Object.keys(defs).filter(k => !childNames.includes(k))
+function collectRootComponentNames(_defs: ComponentDefsType) {
+  const defs = _defs as ComponentDefs
+  // && !defs[name].rootParentType
+  const childNames = collectChildComponentNames(_defs)
+  // Roots are everything that is not a child, except those that have children and can act both as root and child
+  return Object.keys(defs).filter(k => {
+    return !childNames.includes(k) || defs[k].children
+  })
 }
 
 /**
  * Collects only child components names, ie. components that are bound to a parent component.
  * @param defs
  */
-function collectChildComponentNames(defs: ComponentDefsType) {
+function collectChildComponentNames(_defs: ComponentDefsType) {
+  const defs = _defs as ComponentDefs
   const childNames = Object.keys(defs).reduce((accum, key) => {
-    const obj = (defs as any)[key]
+    const obj = defs[key]
     if (obj.children) {
       return [...accum, ...obj.children]
     }
