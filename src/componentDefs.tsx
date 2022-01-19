@@ -2,8 +2,6 @@
 import * as Chakra from '@chakra-ui/react'
 
 // Specific preview components for core components in editor mode
-// import { InputRightElementPreview } from '~components/editor/previews/InputRightElement'
-// import { InputLeftElementPreview } from '~components/editor/previews/InputLeftElement'
 import AspectRatioPreview from '~components/editor/previews/AspectRatioBoxPreview'
 import ButtonPreview from '~components/editor/previews/ButtonPreview'
 import PreviewContainer from '~components/editor/PreviewContainer'
@@ -64,189 +62,60 @@ import NumberInputPanel from '~components/inspector/panels/components/NumberInpu
 import AspectRatioPanel from '~components/inspector/panels/components/AspectRatioPanel'
 import BreadcrumbPanel from '~components/inspector/panels/components/BreadcrumbPanel'
 import BreadcrumbItemPanel from '~components/inspector/panels/components/BreadcrumbItemPanel'
-import {BreadcrumbLink} from "@chakra-ui/react";
-import {buildAccordion, buildAlert, buildBreadcrumb} from "~core/models/composer/builder";
-import React, {Component, ReactInstance} from "react";
-import {BuilderFn, MetaComponentType} from "~componentDefsTypes";
+import { BreadcrumbLink } from '@chakra-ui/react'
+import {
+  buildAccordion,
+  buildAlert,
+  buildBreadcrumb,
+  buildFormControl,
+  buildInputGroup,
+  buildList,
+} from '~core/models/composer/builder'
+import React from 'react'
+import { BuilderFn, MetaComponentType } from '~componentDefsTypes'
 import AccordionPreview, {
   AccordionButtonPreview,
-  AccordionItemPreview, AccordionPanelPreview, setAccordionWhitelist
-} from "~components/editor/previews/AccordionPreview";
-import AlertPreview from "~components/editor/previews/AlertPreview";
-import AvatarPreview, {AvatarBadgePreview, AvatarGroupPreview} from "~components/editor/previews/AvatarPreview";
-
-
-
-
-// TODO: add all to componentDefs.Compo.previewDefaultProps
-const DEFAULT_PROPS /*: PreviewDefaultProps*/ = {
-  AlertDescription: {
-    children: 'Alert description',
-  },
-  AlertTitle: {
-    children: 'Alert title',
-    mr: 1,
-    fontWeight: 'bold',
-  },
-  AvatarBadge: {
-    bg: 'green.500',
-    boxSize: '1.25rem',
-    borderColor: 'white',
-  },
-  AvatarGroup: {
-    spacing: -3,
-    max: 3,
-    size: 'md',
-    form: {
-      display: 'flex',
-    },
-  },
-  Badge: {
-    children: 'Badge name',
-    variant: 'subtle',
-  },
-  Breadcrumb: {
-    form: {
-      separator: '/',
-    },
-  },
-  BreadcrumbLink: {
-    children: 'Lorem Ipsum',
-  },
-  Button: {
-    children: 'Button text',
-    variant: 'solid',
-    size: 'md',
-  },
-  Checkbox: {
-    children: 'Label checkbox',
-    isReadOnly: true,
-    isChecked: false,
-  },
-  CircularProgress: {
-    size: '48px',
-    value: 60,
-    min: 0,
-    max: 100,
-  },
-  CloseButton: {
-    size: 'md',
-  },
-  Code: {
-    children: 'Code value',
-  },
-  Divider: { borderColor: 'blackAlpha.500' },
-  Flex: {
-    form: {
-      display: 'flex',
-    },
-  },
-  FormLabel: { children: 'Label' },
-  FormHelperText: {
-    children: 'Helper message',
-  },
-  FormErrorMessage: {
-    children: 'Error message',
-  },
-  Grid: {
-    templateColumns: 'repeat(5, 1fr)',
-    gap: 6,
-    form: {
-      display: 'grid',
-    },
-  },
-  Heading: {
-    children: 'Heading title',
-  },
-  Icon: { icon: 'CopyIcon' },
-  IconButton: {
-    'aria-label': 'icon',
-    // @ts-ignore
-    icon: 'CopyIcon',
-    size: 'md',
-  },
-  Image: {
-    height: '100px',
-    width: '100px',
-  },
-  InputLeftAddon: { children: 'left' },
-  InputRightAddon: {
-    children: 'right',
-  },
-  Link: { children: 'Link text' },
-  List: {
-    form: {
-      styleType: 'none',
-    },
-  },
-  ListItem: { children: 'list' },
-  Progress: {
-    value: 60,
-    min: 0,
-    max: 100,
-  },
-  Radio: { children: 'Radio' },
-  Select: {
-    // @ts-ignore
-    icon: 'ChevronDownIcon',
-    variant: 'outline',
-    size: 'md',
-    // @ts-ignore
-    form: {
-      children: (
-        <>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </>
-      ),
-    },
-  },
-  SimpleGrid: {
-    columns: 2,
-    spacingX: 1,
-    spacingY: 1,
-  },
-  Stack: {
-    spacing: 2,
-    form: {
-      display: 'flex',
-    },
-  },
-  Switch: {
-    isChecked: false,
-  },
-  Tab: { children: 'Tab' },
-  TabPanel: { children: 'Tab' },
-  Tag: {
-    children: 'Tag name',
-  },
-  Text: { children: 'Text value' },
-}
+  AccordionItemPreview,
+  AccordionPanelPreview,
+  setAccordionWhitelist,
+} from '~components/editor/previews/AccordionPreview'
+import AlertPreview from '~components/editor/previews/AlertPreview'
+import AvatarPreview, {
+  AvatarBadgePreview,
+  AvatarGroupPreview,
+} from '~components/editor/previews/AvatarPreview'
+import InputGroupPreview from '~components/editor/previews/InputGroupPreview'
+import InputLeftAddonPreview from '~components/editor/previews/InputLeftAddonPreview'
+import InputRightAddonPreview from '~components/editor/previews/InputRightAddonPreview'
+import { InputRightElementPreview } from '~components/editor/previews/InputRightElement'
+import { InputLeftElementPreview } from '~components/editor/previews/InputLeftElement'
+import StackPreview from '~components/editor/previews/StackPreview'
+// using ChildrenControl following original Panel.tsx logic
+// import TextPanel from "~components/inspector/panels/styles/TextPanel";
 
 type ComponentDefDefault = {
-    previewComponents: {
-      [key: string]: {
-        component: React.ComponentType<any>,
-        applyTo: string[],
-        props?: {
-          [key: string]: any
-        }
+  previewComponents: {
+    [key: string]: {
+      component: React.ComponentType<any>
+      applyTo: string[]
+      props?: {
+        [key: string]: any
       }
     }
+  }
 }
 
 type ComponentDef = {
-  component: React.ComponentType<any>,
-  inspectorComponent?: React.ComponentType<any>,
-  componentModelBuilder?: BuilderFn,
-  previewComponent?: React.ComponentType<any>,
+  component: React.ComponentType<any>
+  inspectorComponent?: React.ComponentType<any>
+  componentModelBuilder?: BuilderFn
+  previewComponent?: React.ComponentType<any>
   previewDefaultProps?: {
     [key: string]: any
   }
-  children?: string[],
-  rootParentType?: ComponentType,
-  rootDraggable?: boolean, // default: true for root elements and false for child elements.
+  children?: string[]
+  rootParentType?: ComponentType
+  rootDraggable?: boolean // default: true for root elements and false for child elements.
   soon?: boolean
 }
 
@@ -278,12 +147,12 @@ const componentDefDefaults: ComponentDefDefault = {
         'Radio',
         'ListItem',
         'BreadcrumbLink',
-      ]
+      ],
     },
     simpleWrapped: {
       component: PreviewContainer,
       props: {
-        isBoxWrapped: true
+        isBoxWrapped: true,
       },
       applyTo: [
         'AlertIcon',
@@ -298,12 +167,12 @@ const componentDefDefaults: ComponentDefDefault = {
         'InputRightAddon',
         'InputLeftAddon',
         'Tag',
-      ]
+      ],
     },
     withChildren: {
       component: WithChildrenPreviewContainer,
       props: {
-        enableVisualHelper: true
+        enableVisualHelper: true,
       },
       applyTo: [
         'Box',
@@ -316,90 +185,84 @@ const componentDefDefaults: ComponentDefDefault = {
         'TabPanels',
         'Grid',
         'Center',
-        'Container'
-      ]
+        'Container',
+      ],
     },
     withChildrenWrapped: {
       component: WithChildrenPreviewContainer,
       props: {
         isBoxWrapped: true,
-        enableVisualHelper: true
+        enableVisualHelper: true,
       },
-      applyTo: [
-        'RadioGroup',
-        'Stack',
-        'InputGroup',
-      ]
-    }
-
-  }
+      applyTo: ['RadioGroup', 'Stack', 'InputGroup'],
+    },
+  },
 }
 
-const componentDefs  = {
+const componentDefs = {
   Accordion: {
-    component: Chakra["Accordion"],
+    component: Chakra['Accordion'],
     previewComponent: AccordionPreview,
     inspectorComponent: AccordionPanel,
     componentModelBuilder: buildAccordion,
     children: [
-      "AccordionItem",
-      "AccordionButton",
-      "AccordionPanel",
-      "AccordionIcon"
-    ]
+      'AccordionItem',
+      'AccordionButton',
+      'AccordionPanel',
+      'AccordionIcon',
+    ],
   },
   AccordionItem: {
-    component: Chakra["AccordionItem"],
+    component: Chakra['AccordionItem'],
     previewComponent: AccordionItemPreview,
     inspectorComponent: AccordionItemPanel,
     rootDraggable: true, // child, but still want to include in rootDraggables
   },
   AccordionButton: {
-    component: Chakra["AccordionButton"],
+    component: Chakra['AccordionButton'],
     previewComponent: AccordionButtonPreview,
   },
   AccordionPanel: {
-    component: Chakra["AccordionPanel"],
-    previewComponent: AccordionPanelPreview
+    component: Chakra['AccordionPanel'],
+    previewComponent: AccordionPanelPreview,
   },
   AccordionIcon: {
-    component: Chakra["AccordionIcon"],
+    component: Chakra['AccordionIcon'],
   },
   Alert: {
-    component: Chakra["Alert"],
+    component: Chakra['Alert'],
     previewComponent: AlertPreview,
     inspectorComponent: AlertPanel,
     componentModelBuilder: buildAlert,
-    children: [
-      "AlertDescription",
-      "AlertIcon",
-      "AlertTitle",
-    ],
+    children: ['AlertDescription', 'AlertIcon', 'AlertTitle'],
   },
   AlertDescription: {
-    component: Chakra["AlertDescription"],
+    component: Chakra['AlertDescription'],
+    inspectorComponent: AlertDescriptionPanel,
     previewDefaultProps: {
       children: 'Alert description',
-    }
+    },
   },
   AlertIcon: {
-    component: Chakra["AlertIcon"],
+    component: Chakra['AlertIcon'],
+    inspectorComponent: AlertIconPanel,
   },
   AlertTitle: {
-    component: Chakra["AlertTitle"],
+    component: Chakra['AlertTitle'],
+    inspectorComponent: AlertTitlePanel,
     previewDefaultProps: {
       children: 'Alert title',
       mr: 1,
       fontWeight: 'bold',
-    }
+    },
   },
   AspectRatio: {
-    component: Chakra["AspectRatio"],
+    component: Chakra['AspectRatio'],
     previewComponent: AspectRatioPreview,
     inspectorComponent: AspectRatioPanel,
   },
   AvatarGroup: {
-    component: Chakra["AvatarGroup"] as React.ComponentType,
+    component: Chakra['AvatarGroup'] as React.ComponentType,
     previewComponent: AvatarGroupPreview,
     inspectorComponent: AvatarGroupPanel,
     previewDefaultProps: {
@@ -413,12 +276,12 @@ const componentDefs  = {
     rootParentType: 'Avatar',
   },
   Avatar: {
-    component: Chakra["Avatar"],
+    component: Chakra['Avatar'],
     previewComponent: AvatarPreview,
     inspectorComponent: AvatarPanel,
   },
   AvatarBadge: {
-    component: Chakra["AvatarBadge"],
+    component: Chakra['AvatarBadge'],
     previewComponent: AvatarBadgePreview,
     inspectorComponent: AvatarBadgePanel,
     previewDefaultProps: {
@@ -429,19 +292,19 @@ const componentDefs  = {
     rootParentType: 'Avatar',
   },
   Badge: {
-    component: Chakra["Badge"],
+    component: Chakra['Badge'],
     inspectorComponent: BadgePanel,
     previewDefaultProps: {
       children: 'Badge name',
       variant: 'subtle',
-    }
+    },
   },
   Box: {
-    component: Chakra["Box"],
+    component: Chakra['Box'],
     inspectorComponent: BoxPanel,
   },
   Breadcrumb: {
-    component: Chakra["Breadcrumb"],
+    component: Chakra['Breadcrumb'],
     previewComponent: BreadcrumbPreview,
     inspectorComponent: BreadcrumbPanel,
     componentModelBuilder: buildBreadcrumb,
@@ -450,96 +313,343 @@ const componentDefs  = {
         separator: '/',
       },
     },
-    children: [
-      "BreadcrumbItem",
-      "BreadcrumbLink",
-    ],
+    children: ['BreadcrumbItem', 'BreadcrumbLink'],
   },
   BreadcrumbItem: {
-    component: Chakra["BreadcrumbItem"],
+    component: Chakra['BreadcrumbItem'],
     previewComponent: BreadcrumbItemPreview,
     inspectorComponent: BreadcrumbItemPanel,
   },
   BreadcrumbLink: {
-    component: Chakra["BreadcrumbLink"],
+    component: Chakra['BreadcrumbLink'],
     previewDefaultProps: {
       children: 'Lorem Ipsum',
     },
   },
   Button: {
-    component: Chakra["Button"],
+    component: Chakra['Button'],
     previewComponent: ButtonPreview,
     inspectorComponent: ButtonPanel,
     previewDefaultProps: {
       children: 'Button text',
       variant: 'solid',
       size: 'md',
-    }
+    },
   },
   Center: {
-    component: Chakra["Center"],
+    component: Chakra['Center'],
   },
-  // Container: {},
-  // Checkbox: {},
-  // CircularProgress: {},
-  // CloseButton: {},
-  // Code: {},
-  // Divider: {},
-  // Flex: {},
-  // FormControl: {
-  //   children: [
-  //     "FormLabel",
-  //     "FormHelperText",
-  //     "FormErrorMessage",
-  //   ],
+  Container: {
+    component: Chakra['Container'],
+  },
+  Checkbox: {
+    component: Chakra['Checkbox'],
+    inspectorComponent: CheckboxPanel,
+    previewDefaultProps: {
+      children: 'Label checkbox',
+      isReadOnly: true,
+      isChecked: false,
+    },
+  },
+  CircularProgress: {
+    component: Chakra['CircularProgress'],
+    inspectorComponent: CircularProgressPanel,
+    previewDefaultProps: {
+      size: '48px',
+      value: 60,
+      min: 0,
+      max: 100,
+    },
+  },
+  CloseButton: {
+    component: Chakra['CloseButton'],
+    inspectorComponent: CloseButtonPanel,
+    previewDefaultProps: {
+      size: 'md',
+    },
+  },
+  Code: {
+    component: Chakra['Code'],
+    inspectorComponent: CodePanel,
+    previewDefaultProps: {
+      children: 'Code value',
+    },
+  },
+  Divider: {
+    component: Chakra['Divider'],
+    inspectorComponent: DividerPanel,
+    previewDefaultProps: {
+      borderColor: 'blackAlpha.500',
+    },
+  },
+  Flex: {
+    component: Chakra['Flex'],
+    inspectorComponent: FlexPanel,
+    previewDefaultProps: {
+      form: {
+        display: 'flex',
+      },
+    },
+  },
+  FormControl: {
+    component: Chakra['FormControl'],
+    inspectorComponent: FormControlPanel,
+    componentModelBuilder: buildFormControl,
+    children: ['FormLabel', 'FormHelperText', 'FormErrorMessage'],
+  },
+  FormLabel: {
+    component: Chakra['FormLabel'],
+    inspectorComponent: FormLabelPanel,
+    previewDefaultProps: {
+      children: 'Label',
+    },
+  },
+  FormHelperText: {
+    component: Chakra['FormHelperText'],
+    inspectorComponent: FormHelperTextPanel,
+    previewDefaultProps: {
+      children: 'Helper message',
+    },
+  },
+  FormErrorMessage: {
+    component: Chakra['FormErrorMessage'],
+    inspectorComponent: FormErrorMessagePanel,
+    previewDefaultProps: {
+      children: 'Error message',
+    },
+  },
+  Grid: {
+    component: Chakra['Grid'],
+    inspectorComponent: GridPanel,
+    previewDefaultProps: {
+      templateColumns: 'repeat(5, 1fr)',
+      gap: 6,
+      form: {
+        display: 'grid',
+      },
+    },
+  },
+  Heading: {
+    component: Chakra['Heading'],
+    inspectorComponent: HeadingPanel,
+    previewDefaultProps: {
+      children: 'Heading title',
+    },
+  },
+  Icon: {
+    component: Chakra['Icon'],
+    inspectorComponent: IconPanel,
+    previewComponent: IconPreview,
+    previewDefaultProps: {
+      icon: 'CopyIcon',
+    },
+  },
+  IconButton: {
+    component: Chakra['IconButton'],
+    inspectorComponent: IconButtonPanel,
+    previewComponent: IconButtonPreview,
+    previewDefaultProps: {
+      'aria-label': 'icon',
+      // @ts-ignore
+      icon: 'CopyIcon',
+      size: 'md',
+    },
+  },
+  Image: {
+    component: Chakra['Image'],
+    inspectorComponent: ImagePanel,
+    previewDefaultProps: {
+      height: '100px',
+      width: '100px',
+    },
+  },
+  Input: {
+    component: Chakra['Input'],
+    inspectorComponent: InputPanel,
+  },
+  InputGroup: {
+    component: Chakra['InputGroup'],
+    previewComponent: InputGroupPreview,
+    componentModelBuilder: buildInputGroup,
+    rootParentType: 'Input',
+    children: [
+      'InputGroup',
+      'Input',
+      'InputLeftAddon',
+      'InputRightAddon',
+      'InputRightElement',
+      'InputLeftElement',
+    ],
+  },
+  InputLeftAddon: {
+    component: Chakra['InputLeftAddon'],
+    inspectorComponent: ChildrenControl,
+    previewComponent: InputLeftAddonPreview,
+    previewDefaultProps: {
+      children: 'left',
+    },
+  },
+  InputRightAddon: {
+    component: Chakra['InputRightAddon'],
+    inspectorComponent: ChildrenControl,
+    previewComponent: InputRightAddonPreview,
+    previewDefaultProps: {
+      children: 'right',
+    },
+  },
+  InputRightElement: {
+    component: Chakra['InputRightElement'],
+    previewComponent: InputRightElementPreview,
+  },
+  InputLeftElement: {
+    component: Chakra['InputLeftElement'],
+    previewComponent: InputLeftElementPreview,
+  },
+  Link: {
+    component: Chakra['Link'],
+    inspectorComponent: LinkPanel,
+    previewDefaultProps: {
+      children: 'Link text',
+    },
+  },
+  List: {
+    component: Chakra['List'],
+    inspectorComponent: ListPanel,
+    componentModelBuilder: buildList,
+    previewDefaultProps: {
+      form: {
+        styleType: 'none',
+      },
+    },
+    children: ['ListItem'],
+  },
+  ListItem: {
+    component: Chakra['ListItem'],
+    inspectorComponent: ListItemPanel,
+    previewDefaultProps: {
+      children: 'list',
+    },
+  },
+  // ListIcon was missing from original menuItems
+  ListIcon: {
+    component: Chakra['ListIcon'],
+    inspectorComponent: ListIconPanel,
+  },
+  NumberInput: {
+    component: Chakra['NumberInput'],
+    inspectorComponent: NumberInputPanel,
+    previewComponent: NumberInputPreview,
+  },
+  Progress: {
+    component: Chakra['Progress'],
+    inspectorComponent: ProgressPanel,
+    previewDefaultProps: {
+      value: 60,
+      min: 0,
+      max: 100,
+    },
+  },
+  Radio: {
+    component: Chakra['Radio'],
+    inspectorComponent: RadioPanel,
+    previewDefaultProps: {
+      children: 'Radio',
+    },
+  },
+  RadioGroup: {
+    component: Chakra['RadioGroup'],
+    inspectorComponent: RadioGroupPanel,
+    rootParentType: 'Radio',
+  },
+  SimpleGrid: {
+    component: Chakra['SimpleGrid'],
+    inspectorComponent: SimpleGridPanel,
+    previewDefaultProps: {
+      columns: 2,
+      spacingX: 1,
+      spacingY: 1,
+    },
+  },
+  Spinner: {
+    component: Chakra['Spinner'],
+    inspectorComponent: SpinnerPanel,
+  },
+  Select: {
+    component: Chakra['Select'],
+    inspectorComponent: SelectPanel,
+    previewComponent: SelectPreview,
+    previewDefaultProps: {
+      // @ts-ignore
+      icon: 'ChevronDownIcon',
+      variant: 'outline',
+      size: 'md',
+      // @ts-ignore
+      form: {
+        children: (
+          <>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </>
+        ),
+      },
+    },
+  },
+  Stack: {
+    component: Chakra['Stack'],
+    inspectorComponent: StackPanel,
+    previewComponent: StackPreview,
+    previewDefaultProps: {
+      spacing: 2,
+      form: {
+        display: 'flex',
+      },
+    },
+  },
+  Switch: {
+    component: Chakra['Switch'],
+    inspectorComponent: SwitchPanel,
+    previewDefaultProps: {
+      isChecked: false,
+    },
+  },
+  Tag: {
+    component: Chakra['Tag'],
+    inspectorComponent: TagPanel,
+    previewDefaultProps: {
+      children: 'Tag name',
+    },
+  },
+  Text: {
+    component: Chakra['Text'],
+    inspectorComponent: ChildrenControl, // Panel.tsx uses ChildrenControl instead of TextPanel,
+    previewDefaultProps: {
+      children: 'Text value',
+    },
+  },
+  Textarea: {
+    component: Chakra['Textarea'],
+    inspectorComponent: TextareaPanel,
+  },
+  // Menu: {
+  //   soon: true,
+  //   component: Chakra["Menu"]
   // },
-  // FormLabel: {},
-  // FormHelperText: {},
-  // FormErrorMessage: {},
-  // Grid: {},
-  // Heading: {},
-  // Icon: {},
-  // IconButton: {},
-  // Image: {},
-  // Input: {},
-  // InputGroup: {
-  //   rootParentType: 'Input',
-  //   children: [
-  //     "InputGroup",
-  //     "Input",
-  //     "InputLeftAddon",
-  //     "InputRightAddon",
-  //     "InputRightElement",
-  //     "InputLeftElement",
-  //   ],
+  // Tab: {
+  //   soon: true,
+  //   component: Chakra["Tab"],
+  //   inspectorComponent: TabsPanel,
+  //   previewDefaultProps: {
+  //     children: 'Tab'
+  //   }
   // },
-  // InputLeftAddon: {},
-  // InputRightAddon: {},
-  // InputRightElement: {},
-  // InputLeftElement: {},
-  // Link: {},
-  // List: {
-  //   children: [
-  //     "ListItem",
-  //   ],
+  // TabPanel: {
+  //   soon: true,
+  //   component: Chakra["TabPanel"],
+  //   previewDefaultProps: {
+  //     children: 'Tab'
+  //   }
   // },
-  // ListItem: {},
-  // NumberInput: {},
-  // Progress: {},
-  // Radio: {},
-  // RadioGroup: {
-  //   rootParentType: 'Radio',
-  // },
-  // SimpleGrid: {},
-  // Spinner: {},
-  // Select: {},
-  // Stack: {},
-  // Switch: {},
-  // Tag: {},
-  // Text: {},
-  // Textarea: {},
-  // Menu: { soon: true },
-  // Tab: { soon: true },
   // /*"Tabs",
   // "TabList",
   // "TabPanel",
@@ -569,17 +679,19 @@ type MenuItems = Partial<
  * Collects all component names available
  * @param defs
  */
-function collectComponentNames(defs: ComponentDefsType) //: ComponentDefsTypeKeys[]
-{
-  return Object.keys(defs).filter(k => k != "_Defaults") as ComponentDefsTypeKeys[]
+function collectComponentNames(defs: ComponentDefsType) {
+  //: ComponentDefsTypeKeys[]
+  return Object.keys(defs).filter(
+    k => k != '_Defaults',
+  ) as ComponentDefsTypeKeys[]
 }
 
 /**
  * Collects only root component names
  * @param defs
  */
-function collectRootComponentNames(defs: ComponentDefsType) //: ComponentDefsTypeKeys[]
-{
+function collectRootComponentNames(defs: ComponentDefsType) {
+  //: ComponentDefsTypeKeys[]
   const childNames = collectChildComponentNames(defs)
   return Object.keys(defs).filter(k => !childNames.includes(k))
 }
@@ -588,10 +700,9 @@ function collectRootComponentNames(defs: ComponentDefsType) //: ComponentDefsTyp
  * Collects only child components names, ie. components that are bound to a parent component.
  * @param defs
  */
-function collectChildComponentNames(defs: ComponentDefsType)
-{
+function collectChildComponentNames(defs: ComponentDefsType) {
   const childNames = Object.keys(defs).reduce((accum, key) => {
-    const obj = (defs  as any)[key]
+    const obj = (defs as any)[key]
     if (obj.children) {
       return [...accum, ...obj.children]
     }
@@ -605,15 +716,14 @@ function collectChildComponentNames(defs: ComponentDefsType)
  * Generates menuItems structure expected by Sidebar.tsx
  * @param defs
  */
-function collectMenuItems(defs: ComponentDefsType)
-{
-  const menuItems : MenuItems = {}
+function collectMenuItems(defs: ComponentDefsType) {
+  const menuItems: MenuItems = {}
 
   rootComponentNames.forEach(name => {
-    const compoDef : ComponentDef = (defs as ComponentDefs)[name]
+    const compoDef: ComponentDef = (defs as ComponentDefs)[name]
 
     // Create root item
-    const menuItem : MenuItem = {}
+    const menuItem: MenuItem = {}
     if (compoDef.rootParentType) {
       menuItem.rootParentType = compoDef.rootParentType
     }
@@ -624,8 +734,8 @@ function collectMenuItems(defs: ComponentDefsType)
     // Add children
     if (compoDef.children) {
       menuItem.children = {}
-      compoDef.children.reduce((accum, childName : string) => {
-        const childDef : ComponentDef = (defs as ComponentDefs)[childName]
+      compoDef.children.reduce((accum, childName: string) => {
+        const childDef: ComponentDef = (defs as ComponentDefs)[childName]
         const childMenu: MenuItem = {}
 
         if (childDef.rootParentType) {
@@ -635,45 +745,45 @@ function collectMenuItems(defs: ComponentDefsType)
           childMenu.soon = childDef.soon
         }
 
-        (accum as any)[childName] = childMenu
+        ;(accum as any)[childName] = childMenu
         return accum
       }, menuItem.children as MenuItems)
     }
 
-    (menuItems as any)[name] = menuItem
+    ;(menuItems as any)[name] = menuItem
   })
 
   return menuItems
 }
 
-function collectPreviewComponents(_defs: ComponentDefsType)
-{
+function collectPreviewComponents(_defs: ComponentDefsType) {
   const defs = _defs as ComponentDefs
 
-  const previewComponents : Partial<
+  const previewComponents: Partial<
     {
       [k in ComponentType]: {
-      previewComponent: React.ComponentType,
-      component: React.ComponentType,
-      props?: {[key: string] : any}
+        previewComponent: React.ComponentType
+        component: React.ComponentType
+        props?: { [key: string]: any }
+      }
     }
-    }
-    > = {}
+  > = {}
 
-  Object.keys(defs).forEach( compoName => {
+  Object.keys(defs).forEach(compoName => {
     const compoDef = defs[compoName]
 
     // Component with its own previewComponent
     if (compoDef.previewComponent) {
       previewComponents[compoName as ComponentType] = {
         previewComponent: compoDef.previewComponent,
-        component: defs[compoName].component
+        component: defs[compoName].component,
       }
-    }
-    else {
+    } else {
       // Find in one of the default previewComponents where compoName appears in the section's
       // applyTo
-      const sectionKey = Object.keys(componentDefDefaults.previewComponents).find(sectionKey => {
+      const sectionKey = Object.keys(
+        componentDefDefaults.previewComponents,
+      ).find(sectionKey => {
         const section = componentDefDefaults.previewComponents[sectionKey]
         return section.applyTo.includes(compoName)
       })
@@ -684,7 +794,7 @@ function collectPreviewComponents(_defs: ComponentDefsType)
       previewComponents[compoName as ComponentType] = {
         previewComponent: section.component,
         component: defs[compoName].component,
-        props: section.props
+        props: section.props,
       }
     }
   })
@@ -696,10 +806,11 @@ function collectPreviewComponents(_defs: ComponentDefsType)
  *
  * @param defs
  */
-function collectRootDraggables(_defs: ComponentDefsType)
-{
+function collectRootDraggables(_defs: ComponentDefsType) {
   const defs = _defs as ComponentDefs
-  const draggables: string[] = collectRootComponentNames(defs as ComponentDefsType).filter(name => {
+  const draggables: string[] = collectRootComponentNames(
+    defs as ComponentDefsType,
+  ).filter(name => {
     const obj = defs[name]
     // For roots: if undefined defaults to true
     return obj.rootDraggable === undefined || obj.rootDraggable === true
@@ -709,7 +820,7 @@ function collectRootDraggables(_defs: ComponentDefsType)
   draggables.forEach(name => {
     const obj = defs[name]
     if (obj.children) {
-      draggables.push(name+"Meta")
+      draggables.push(name + 'Meta')
     }
   })
 
@@ -723,27 +834,25 @@ function collectRootDraggables(_defs: ComponentDefsType)
   return draggables
 }
 
-function collectBuilders(_defs: ComponentDefsType)
-{
+function collectBuilders(_defs: ComponentDefsType) {
   const defs = _defs as ComponentDefs
 
   const builders: Partial<{ [k: string]: BuilderFn }> = {}
-  Object.keys(defs).forEach( name => {
+  Object.keys(defs).forEach(name => {
     const obj = defs[name]
     if (obj.componentModelBuilder) {
-      builders[name+"Meta"] = obj.componentModelBuilder
+      builders[name + 'Meta'] = obj.componentModelBuilder
     }
   })
 
   return builders
 }
 
-function collectInspectorComponents(_defs: ComponentDefsType)
-{
+function collectInspectorComponents(_defs: ComponentDefsType) {
   const defs = _defs as ComponentDefs
 
   const inspectorComponents: Partial<{ [k: string]: React.ComponentType }> = {}
-  Object.keys(defs).forEach( name => {
+  Object.keys(defs).forEach(name => {
     const obj = defs[name]
     if (obj.inspectorComponent) {
       inspectorComponents[name] = obj.inspectorComponent
@@ -756,19 +865,19 @@ function collectInspectorComponents(_defs: ComponentDefsType)
 const componentNames = collectComponentNames(componentDefs)
 const rootComponentNames = collectRootComponentNames(componentDefs)
 const childComponentNames = collectChildComponentNames(componentDefs)
-const menuItems : MenuItems = collectMenuItems(componentDefs)
+const menuItems: MenuItems = collectMenuItems(componentDefs)
 const previewComponents = collectPreviewComponents(componentDefs)
 const rootDraggables = collectRootDraggables(componentDefs)
 const componentModelBuilders = collectBuilders(componentDefs)
 const inspectorComponents = collectInspectorComponents(componentDefs)
 
-console.log("*** componentNames", componentNames)
-console.log("*** rootComponentNames", rootComponentNames)
-console.log("*** childComponentNames", childComponentNames)
-console.log("*** menuItems", menuItems)
-console.log("*** previewComponents", previewComponents)
-console.log("*** componentModelBuilder", componentModelBuilders)
-console.log("*** inspectorComponents", inspectorComponents)
+console.log('*** componentNames', componentNames)
+console.log('*** rootComponentNames', rootComponentNames)
+console.log('*** childComponentNames', childComponentNames)
+console.log('*** menuItems', menuItems)
+console.log('*** previewComponents', previewComponents)
+console.log('*** componentModelBuilder', componentModelBuilders)
+console.log('*** inspectorComponents', inspectorComponents)
 
 // TODO: this cannot be moved to AccordionPreview becuase it causes circular dependency
 // because of componentNames
@@ -779,7 +888,9 @@ const ALERT_COMPONENTS = [
   'AlertTitle',
 ]
 
-const AccordionWhitelist = componentNames.filter(name => !ALERT_COMPONENTS.includes(name))
+const AccordionWhitelist = componentNames.filter(
+  name => !ALERT_COMPONENTS.includes(name),
+)
 
 // Must be called here, AccordionPreview.tsd cannot call functions from here otherwise we have circular
 // dependency
@@ -794,5 +905,5 @@ export {
   previewComponents,
   rootDraggables,
   componentModelBuilders,
-  inspectorComponents
+  inspectorComponents,
 }
