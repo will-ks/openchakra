@@ -8,14 +8,17 @@ import { wrapper } from '~core/store'
 import { ErrorBoundary as BugsnagErrorBoundary } from '~utils/bugsnag'
 import AppErrorBoundary from '~components/errorBoundaries/AppErrorBoundary'
 import { AppProps } from 'next/app'
+import { NativeBaseProvider } from 'native-base'
 
 const Main = ({ Component, pageProps }: AppProps) => (
   <BugsnagErrorBoundary>
-    <ChakraProvider resetCSS theme={theme}>
-      <AppErrorBoundary>
-        <Component {...pageProps} />
-      </AppErrorBoundary>
-    </ChakraProvider>
+    <NativeBaseProvider>
+      <ChakraProvider resetCSS theme={theme}>
+        <AppErrorBoundary>
+          <Component {...pageProps} />
+        </AppErrorBoundary>
+      </ChakraProvider>
+    </NativeBaseProvider>
   </BugsnagErrorBoundary>
 )
 

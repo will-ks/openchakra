@@ -92,6 +92,7 @@ import { InputLeftElementPreview } from '~components/editor/previews/InputLeftEl
 import StackPreview from '~components/editor/previews/StackPreview'
 // using ChildrenControl following original Panel.tsx logic
 // import TextPanel from "~components/inspector/panels/styles/TextPanel";
+import { Button } from 'native-base'
 
 type ComponentDefDefault = {
   previewComponents: {
@@ -155,6 +156,7 @@ const componentDefDefaults: ComponentDefDefault = {
         isBoxWrapped: true,
       },
       applyTo: [
+        'NativeBaseButton',
         'AlertIcon',
         'Progress',
         'CloseButton',
@@ -200,6 +202,18 @@ const componentDefDefaults: ComponentDefDefault = {
 }
 
 const componentDefs = {
+  NativeBaseButton: {
+    component: Button,
+    inspectorComponent: ButtonPanel,
+    // previewComponent: ButtonPreview,
+    previewDefaultProps: {
+      children: 'A NativeBaseButton',
+      width: 200,
+      mr: 1,
+      fontWeight: 'bold',
+      bg: 'green.500',
+    },
+  },
   Accordion: {
     component: Chakra['Accordion'],
     previewComponent: AccordionPreview,
@@ -898,7 +912,6 @@ function collectTargetComponents(_defs: ComponentDefsType) {
   return defaultProps
 }
 
-
 const componentNames = collectComponentNames(componentDefs)
 const rootComponentNames = collectRootComponentNames(componentDefs)
 const childComponentNames = collectChildComponentNames(componentDefs)
@@ -946,5 +959,5 @@ export {
   componentModelBuilders,
   inspectorComponents,
   previewDefaultProps,
-  targetComponents
+  targetComponents,
 }
