@@ -1,6 +1,7 @@
 import omit from 'lodash/omit'
 import filter from 'lodash/filter'
 import { generateId } from './generateId'
+import {IComponent, IComponents} from "~componentDefsTypes";
 
 export const duplicateComponent = (
   componentToClone: IComponent,

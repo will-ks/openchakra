@@ -1,4 +1,5 @@
 import { createModel } from '@rematch/core'
+import {ComponentType} from "~componentDefs";
 
 type Overlay = undefined | { rect: DOMRect; id: string; type: ComponentType }
 
