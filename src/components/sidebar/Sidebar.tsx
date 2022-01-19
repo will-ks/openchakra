@@ -9,12 +9,12 @@ import {
 } from '@chakra-ui/react'
 import { CloseIcon, SearchIcon } from '@chakra-ui/icons'
 import DragItem from './DragItem'
-import {componentNames, menuItems, MenuItem, ComponentType} from "~componentDefs";
-
-console.log("componentNames2", componentNames)
+import { useComponentDefinitions } from '~contexts/component-definition'
+import { ComponentType, MenuItem } from '~core/ComponentDefinitions'
 
 const Menu = () => {
   const [searchTerm, setSearchTerm] = useState('')
+  const componentDefs = useComponentDefinitions()
 
   return (
     <DarkMode>
@@ -60,10 +60,10 @@ const Menu = () => {
           </InputRightElement>
         </InputGroup>
 
-        {(Object.keys(menuItems) as ComponentType[])
+        {(Object.keys(componentDefs.menuItems) as ComponentType[])
           .filter(c => c.toLowerCase().includes(searchTerm.toLowerCase()))
           .map(name => {
-            const { children, soon } = menuItems[name] as MenuItem
+            const { children, soon } = componentDefs.menuItems[name] as MenuItem
 
             if (children) {
               const elements = Object.keys(children).map(childName => (
@@ -73,7 +73,9 @@ const Menu = () => {
                   label={childName}
                   type={childName as any}
                   id={childName as any}
-                  rootParentType={menuItems[name]?.rootParentType || name}
+                  rootParentType={
+                    componentDefs.menuItems[name]?.rootParentType || name
+                  }
                 >
                   {childName}
                 </DragItem>
@@ -87,7 +89,9 @@ const Menu = () => {
                   label={name}
                   type={`${name}Meta` as any}
                   id={`${name}Meta` as any}
-                  rootParentType={menuItems[name]?.rootParentType || name}
+                  rootParentType={
+                    componentDefs.menuItems[name]?.rootParentType || name
+                  }
                 >
                   {name}
                 </DragItem>,
@@ -102,7 +106,9 @@ const Menu = () => {
                 label={name}
                 type={name as any}
                 id={name as any}
-                rootParentType={menuItems[name]?.rootParentType || name}
+                rootParentType={
+                  componentDefs.menuItems[name]?.rootParentType || name
+                }
               >
                 {name}
               </DragItem>

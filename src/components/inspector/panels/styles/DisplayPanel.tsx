@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
 import { Select } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
+import FormControl from '~chakraui/inspector/controls/FormControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import FlexPanel from './FlexPanel'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
-import { isStylePropEnabled, targetStyleProp } from '~componentDefs'
+import { isStylePropEnabled, targetStyleProp } from '~core/ComponentDefinitions'
 
 const DisplayPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()

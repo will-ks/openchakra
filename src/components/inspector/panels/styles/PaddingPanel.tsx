@@ -17,7 +17,7 @@ import {
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
-import { stylePropDetail } from '~componentDefs'
+import { stylePropDetail } from '~core/ComponentDefinitions'
 
 type PaddingPanelPropsType = {
   type: 'margin' | 'padding'

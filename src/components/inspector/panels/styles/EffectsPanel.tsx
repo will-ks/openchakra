@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react'
-import FormControl from '~components/inspector/controls/FormControl'
+import FormControl from '~chakraui/inspector/controls/FormControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import {
@@ -8,9 +8,9 @@ import {
   Slider,
   SliderThumb,
 } from '@chakra-ui/react'
-import TextControl from '~components/inspector/controls/TextControl'
+import TextControl from '~chakraui/inspector/controls/TextControl'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
-import { isStylePropEnabled, targetStyleProp } from '~componentDefs'
+import { isStylePropEnabled, targetStyleProp } from '~core/ComponentDefinitions'
 
 const EffectsPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValue } = useForm()

@@ -1,15 +1,15 @@
 import React, { memo } from 'react'
 import { SimpleGrid, Select } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
+import FormControl from '~chakraui/inspector/controls/FormControl'
 import usePropsSelector from '~hooks/usePropsSelector'
 import { useForm } from '~hooks/useForm'
-import TextControl from '~components/inspector/controls/TextControl'
+import TextControl from '~chakraui/inspector/controls/TextControl'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
 import {
   isStylePropEnabled,
   stylePropDetail,
   targetStyleProp,
-} from '~componentDefs'
+} from '~core/ComponentDefinitions'
 
 const DimensionPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()
