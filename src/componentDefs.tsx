@@ -873,6 +873,32 @@ function collectInspectorComponents(_defs: ComponentDefsType) {
   return inspectorComponents
 }
 
+function collectPreviewDefaultProps(_defs: ComponentDefsType) {
+  const defs = _defs as ComponentDefs
+
+  const defaultProps: Partial<{ [k: string]: any }> = {}
+  Object.keys(defs).forEach(name => {
+    const obj = defs[name]
+    let props = obj.previewDefaultProps || {}
+    defaultProps[name] = props
+  })
+
+  return defaultProps
+}
+
+function collectTargetComponents(_defs: ComponentDefsType) {
+  const defs = _defs as ComponentDefs
+
+  const defaultProps: Partial<{ [k: string]: React.ComponentType }> = {}
+  Object.keys(defs).forEach(name => {
+    const obj = defs[name]
+    defaultProps[name] = obj.component
+  })
+
+  return defaultProps
+}
+
+
 const componentNames = collectComponentNames(componentDefs)
 const rootComponentNames = collectRootComponentNames(componentDefs)
 const childComponentNames = collectChildComponentNames(componentDefs)
@@ -881,6 +907,8 @@ const previewComponents = collectPreviewComponents(componentDefs)
 const rootDraggables = collectRootDraggables(componentDefs)
 const componentModelBuilders = collectBuilders(componentDefs)
 const inspectorComponents = collectInspectorComponents(componentDefs)
+const previewDefaultProps = collectPreviewDefaultProps(componentDefs)
+const targetComponents = collectTargetComponents(componentDefs)
 
 console.log('*** componentNames', componentNames)
 console.log('*** rootComponentNames', rootComponentNames)
@@ -917,4 +945,6 @@ export {
   rootDraggables,
   componentModelBuilders,
   inspectorComponents,
+  previewDefaultProps,
+  targetComponents
 }
