@@ -90,11 +90,20 @@ import InputRightAddonPreview from '~components/editor/previews/InputRightAddonP
 import { InputRightElementPreview } from '~components/editor/previews/InputRightElement'
 import { InputLeftElementPreview } from '~components/editor/previews/InputLeftElement'
 import StackPreview from '~components/editor/previews/StackPreview'
+import StylesPanel from '~components/inspector/panels/StylesPanel'
+import BorderPanel from '~components/inspector/panels/styles/BorderPanel'
+import DimensionPanel from '~components/inspector/panels/styles/DimensionPanel'
+import EffectsPanel from '~components/inspector/panels/styles/EffectsPanel'
+import DisplayPanel from '~components/inspector/panels/styles/DisplayPanel'
+import PaddingPanel from '~components/inspector/panels/styles/PaddingPanel'
+import TextPanel from '~components/inspector/panels/styles/TextPanel'
+import BackgroundColorPanel from '~components/inspector/panels/styles/BackgroundColorPanel'
+import SpacingPanel from '~components/inspector/panels/styles/SpacingPanel'
 // using ChildrenControl following original Panel.tsx logic
 // import TextPanel from "~components/inspector/panels/styles/TextPanel";
 import { Button } from 'native-base'
 
-type ComponentDefDefault = {
+export type ComponentDefDefault = {
   previewComponents: {
     [key: string]: {
       component: React.ComponentType<any>
@@ -104,11 +113,46 @@ type ComponentDefDefault = {
       }
     }
   }
+  stylePanelComponent: React.ComponentType<any>
+  // The default style panel configuration to use for components, which do not specify and
+  // explicit configuration
+  stylePanelDef: StylePanelsDef
 }
 
-type ComponentDef = {
+export type StylePanelsDef = {
+  [key: string]: StylePanelDef
+}
+
+export type StylePanelDef = {
+  title: string
+  component: React.ComponentType<any>
+  props?: {
+    [key: string]: any
+  }
+  children?: StylePanelsDef
+  // Complex config in case styleProps mapping is not enough/applicable
+  config?: {
+    [key: string]: any
+  }
+  styleProps: {
+    [key: string]: string | StylePropDetail
+  }
+}
+
+export type StylePropDetail = {
+  targetName: string
+  enabled?: boolean
+  [key: string]: any
+}
+
+export type ComponentDef = {
   component: React.ComponentType<any>
   inspectorComponent?: React.ComponentType<any>
+  // Use a specific StylePanelsDef
+  stylePanelsDef?: StylePanelsDef
+  // Override some of the setting of the default StylePanelsDef or the one defiend in
+  // stylePanelsDef
+  stylePanelsOverride?: StylePanelsDef
   componentModelBuilder?: BuilderFn
   previewComponent?: React.ComponentType<any>
   previewDefaultProps?: {
@@ -120,8 +164,114 @@ type ComponentDef = {
   soon?: boolean
 }
 
-type ComponentDefs = {
+export type ComponentDefs = {
   [key: string]: ComponentDef
+}
+
+// Style panels displayed by StylesPanel set styleProps on the currently selected
+// component. Here we can se what properties should be set. The key is the abstract name
+// of the property, the value is the actual value to set. be default the two are the same
+// for chakraui
+const chakrauiStylePanels: StylePanelsDef = {
+  Layout: {
+    title: 'Layout',
+    component: DisplayPanel,
+    children: {
+      FlexPanel: {
+        title: 'Flex',
+        component: FlexPanel,
+        styleProps: {
+          alignItems: 'alignItems',
+          flexDirection: 'flexDirection',
+          justifyContent: 'justifyContent',
+        },
+      },
+    },
+    styleProps: {
+      display: {
+        targetName: 'display',
+        options: ['block', 'flex', 'inline', 'grid', 'inline-block'],
+      },
+    },
+  },
+  Spacing: {
+    title: 'Spacing',
+    component: SpacingPanel,
+    // PaddingPanel handles both margin and padding, normal styleProps based config is not used
+    config: {
+      margin: {
+        all: 'm',
+        left: 'ml',
+        right: 'mr',
+        bottom: 'mb',
+        top: 'mt',
+      },
+      padding: {
+        all: 'p',
+        left: 'pl',
+        right: 'pr',
+        bottom: 'pb',
+        top: 'pt',
+      },
+    },
+    styleProps: {},
+  },
+  Size: {
+    title: 'Size',
+    component: DimensionPanel,
+    styleProps: {
+      width: 'width',
+      height: 'height',
+      minWidth: 'minWidth',
+      minHeight: 'minHeight',
+      maxWidth: 'maxWidth',
+      maxHeight: 'maxHeight',
+      // Example of detailed setting: the value maybe disabled
+      overflow: {
+        targetName: 'overflow',
+        enabled: true,
+        // configuration of the setting
+        options: ['visible', 'scroll', 'visible'],
+      },
+    },
+  },
+  Typography: {
+    title: 'Typography',
+    component: TextPanel,
+    styleProps: {
+      fontWeight: 'fontWeight',
+      fontStyle: 'fontStyle',
+      textAlign: 'textAlign',
+      fontSize: 'fontSize',
+      letterSpacing: 'letterSpacing',
+      lineHeight: 'lineHeight',
+      color: 'color',
+    },
+  },
+  Backgrounds: {
+    title: 'Backgrounds',
+    component: BackgroundColorPanel,
+    styleProps: {
+      backgroundColor: 'backgroundColor',
+      bgGradient: 'bgGradient',
+    },
+  },
+  Border: {
+    title: 'Border',
+    component: BorderPanel,
+    styleProps: {
+      border: 'border',
+      borderRadius: 'borderRadius',
+    },
+  },
+  Effect: {
+    title: 'Effect',
+    component: EffectsPanel,
+    styleProps: {
+      opacity: 'opacity',
+      boxShadow: 'boxShadow',
+    },
+  },
 }
 
 const componentDefDefaults: ComponentDefDefault = {
@@ -199,9 +349,16 @@ const componentDefDefaults: ComponentDefDefault = {
       applyTo: ['RadioGroup', 'Stack', 'InputGroup'],
     },
   },
+
+  // The main component which displays stylePanels configured below
+  stylePanelComponent: StylesPanel,
+
+  // The default style panel configuration to use for components, which do not specify and
+  // explicit configuration
+  stylePanelDef: chakrauiStylePanels,
 }
 
-const componentDefs = {
+const componentDefs: ComponentDefs = {
   NativeBaseButton: {
     component: Button,
     inspectorComponent: ButtonPanel,
@@ -219,6 +376,19 @@ const componentDefs = {
     previewComponent: AccordionPreview,
     inspectorComponent: AccordionPanel,
     componentModelBuilder: buildAccordion,
+    stylePanelsOverride: {
+      Backgrounds: {
+        title: 'Accordion BG',
+        component: BackgroundColorPanel,
+        styleProps: {
+          backgroundColor: 'bg',
+          bgGradient: {
+            targetName: 'bgGradient',
+            enabled: false,
+          },
+        },
+      },
+    },
     children: [
       'Accordion',
       'AccordionItem',
@@ -679,7 +849,8 @@ const componentDefs = {
 // const componentDefsValidation: ComponentDefs = componentDefs
 
 type ComponentDefsType = typeof componentDefs
-type ComponentDefsTypeKeys = keyof ComponentDefsType
+type ComponentDefsTypeKeys = Extract<keyof ComponentDefsType, string>
+
 // Same as in react-app-env.d.ts
 export type ComponentType = ComponentDefsTypeKeys
 
@@ -912,6 +1083,90 @@ function collectTargetComponents(_defs: ComponentDefsType) {
   return defaultProps
 }
 
+function collectStylePanels(_defs: ComponentDefsType) {
+  const defs = _defs as ComponentDefs
+
+  function merge(source: any, target: any) {
+    for (const [key, val] of Object.entries(source)) {
+      if (val !== null && typeof val === `object`) {
+        // @ts-ignore
+        target[key] = val
+        merge(val, target[key])
+      } else {
+        target[key] = val
+      }
+    }
+    return target // we're replacing in-situ, so this is more for chaining than anything else
+  }
+
+  function cloneObject(obj: any) {
+    var clone = {} as any
+    for (var i in obj) {
+      if (obj[i] != null && typeof obj[i] == 'object')
+        clone[i] = cloneObject(obj[i])
+      else clone[i] = obj[i]
+    }
+    return clone
+  }
+
+  const stylePanels: Partial<{ [k: string]: StylePanelsDef }> = {}
+  Object.keys(defs).forEach(name => {
+    const obj = defs[name]
+    let stylePanelsDef =
+      obj.stylePanelsDef || componentDefDefaults.stylePanelDef
+    if (obj.stylePanelsOverride) {
+      // we will modify stylePanelsDef, so clone it
+      stylePanelsDef = cloneObject(stylePanelsDef)
+      // Merge the override into the default one
+      stylePanelsDef = merge(obj.stylePanelsOverride, stylePanelsDef)
+    }
+    stylePanels[name] = stylePanelsDef
+  })
+
+  return stylePanels
+}
+
+function isStylePropEnabled(prop: string, panelDef: StylePanelDef) {
+  const propDef = panelDef.styleProps[prop]
+  if (!propDef) {
+    return true
+  }
+  if (typeof propDef === 'object') {
+    // if explicitly set, then use this value
+    if (typeof (propDef as StylePropDetail).enabled !== 'undefined') {
+      return (propDef as StylePropDetail).enabled
+    }
+    // .. otherwise default to true
+  }
+  return true
+}
+
+function targetStyleProp(prop: string, panelDef: StylePanelDef) {
+  const propDef = panelDef.styleProps[prop]
+  if (!propDef) {
+    return prop
+  }
+  if (typeof propDef === 'object') {
+    return (propDef as StylePropDetail).targetName
+  }
+  return propDef
+}
+
+function stylePropDetail(
+  prop: string,
+  detail: string,
+  panelDef: StylePanelDef,
+) {
+  const propDef = panelDef.styleProps[prop]
+  if (!propDef) {
+    return null
+  }
+  if (typeof propDef === 'object') {
+    return propDef[detail]
+  }
+  return null
+}
+
 const componentNames = collectComponentNames(componentDefs)
 const rootComponentNames = collectRootComponentNames(componentDefs)
 const childComponentNames = collectChildComponentNames(componentDefs)
@@ -922,6 +1177,7 @@ const componentModelBuilders = collectBuilders(componentDefs)
 const inspectorComponents = collectInspectorComponents(componentDefs)
 const previewDefaultProps = collectPreviewDefaultProps(componentDefs)
 const targetComponents = collectTargetComponents(componentDefs)
+const stylePanels = collectStylePanels(componentDefs)
 
 console.log('*** componentNames', componentNames)
 console.log('*** rootComponentNames', rootComponentNames)
@@ -930,6 +1186,7 @@ console.log('*** menuItems', menuItems)
 console.log('*** previewComponents', previewComponents)
 console.log('*** componentModelBuilder', componentModelBuilders)
 console.log('*** inspectorComponents', inspectorComponents)
+console.log('*** stylePanels', stylePanels)
 
 // TODO: this cannot be moved to AccordionPreview becuase it causes circular dependency
 // because of componentNames
@@ -960,4 +1217,8 @@ export {
   inspectorComponents,
   previewDefaultProps,
   targetComponents,
+  stylePanels,
+  isStylePropEnabled,
+  targetStyleProp,
+  stylePropDetail,
 }

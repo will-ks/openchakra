@@ -1,13 +1,28 @@
 import React, { memo } from 'react'
 import TextControl from '~components/inspector/controls/TextControl'
+import { StylePanelProps } from '~components/inspector/panels/styles/types'
+import { isStylePropEnabled, targetStyleProp } from '~componentDefs'
 
-const BorderPanel = () => {
+const BackgroundColorPanel: React.FC<StylePanelProps> = ({
+  isRoot,
+  panelDef,
+}) => {
   return (
     <>
-      <TextControl name="border" label="Border" />
-      <TextControl name="borderRadius" label="Border radius" />
+      {isStylePropEnabled('border', panelDef) && (
+        <TextControl
+          name={targetStyleProp('border', panelDef)}
+          label="Border"
+        />
+      )}
+      {isStylePropEnabled('borderRadius', panelDef) && (
+        <TextControl
+          name={targetStyleProp('borderRadius', panelDef)}
+          label="Border radius"
+        />
+      )}
     </>
   )
 }
 
-export default memo(BorderPanel)
+export default memo(BackgroundColorPanel)
