@@ -1,3 +1,5 @@
+import {IComponents} from "~componentDefsTypes";
+
 export const productHunt: IComponents = {
   root: {
     id: 'root',

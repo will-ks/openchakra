@@ -2,6 +2,7 @@ import isBoolean from 'lodash/isBoolean'
 import filter from 'lodash/filter'
 import icons from '~iconsList'
 import { propNames } from '@chakra-ui/react'
+import {IComponent, IComponents} from "~componentDefsTypes";
 
 const capitalize = (value: string) => {
   return value.charAt(0).toUpperCase() + value.slice(1)
