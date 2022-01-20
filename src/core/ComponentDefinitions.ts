@@ -13,6 +13,12 @@ export type ComponentDefDefault = {
   // The default style panel configuration to use for components, which do not specify and
   // explicit configuration
   stylePanelDef: StylePanelsDef
+
+  // When a component is hovered with the mouse in the Editor, add to props to make it highglight. Eg. boxShadow
+  calcComponentHoverStyle: (component: IComponent, props: any, focusInput: boolean) => any
+
+  // When a component is selected in the Editor, add to props to make it "selected". Eg. border
+  calcComponentVisualHelperStyle: (component: IComponent, props: any) => any
 }
 
 export type StylePanelsDef = {
@@ -411,21 +417,31 @@ class ComponentDefinitions {
     }
 
     const stylePanels: Partial<{ [k: string]: StylePanelsDef }> = {}
-    Object.keys(this.defs).forEach(name => {
-      const obj = this.defs[name]
-      let stylePanelsDef = obj.stylePanelsDef || this.defDefaults.stylePanelDef
-      if (obj.stylePanelsOverride) {
-        // we will modify stylePanelsDef, so clone it
-        stylePanelsDef = cloneObject(stylePanelsDef)
-        // Merge the override into the default one
-        stylePanelsDef = merge(obj.stylePanelsOverride, stylePanelsDef)
-      }
-      stylePanels[name] = stylePanelsDef
-    })
+      Object.keys(this.defs).forEach(name => {
+        const obj = this.defs[name]
+        let stylePanelsDef = obj.stylePanelsDef || this.defDefaults.stylePanelDef
+        if (obj.stylePanelsOverride) {
+          // we will modify stylePanelsDef, so clone it
+          stylePanelsDef = cloneObject(stylePanelsDef)
+          // Merge the override into the default one
+          stylePanelsDef = merge(obj.stylePanelsOverride, stylePanelsDef)
+        }
+        stylePanels[name] = stylePanelsDef
+      })
 
-    return stylePanels
+      return stylePanels
+  }
+
+  calcComponentHoverStyle(component: IComponent, props: any, focusInput: boolean) {
+    return this.defDefaults.calcComponentHoverStyle(component, props, focusInput)
+  }
+
+  calcComponentVisualHelperStyle(component: IComponent, props: any) {
+    return this.defDefaults.calcComponentVisualHelperStyle(component, props)
   }
 }
+
+
 
 function isStylePropEnabled(prop: string, panelDef: StylePanelDef) {
   const propDef = panelDef.styleProps[prop]
