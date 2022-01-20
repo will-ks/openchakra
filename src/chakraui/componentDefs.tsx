@@ -72,7 +72,14 @@ import {
   buildList,
 } from '~core/models/composer/builder'
 import React from 'react'
-import { BuilderFn, MetaComponentType } from '~core/ComponentDefinitions'
+import {
+  BuilderFn,
+  ComponentDefDefault,
+  ComponentDefs,
+  IComponent,
+  MetaComponentType,
+  StylePanelsDef,
+} from '~core/ComponentDefinitions'
 import AccordionPreview, {
   AccordionButtonPreview,
   AccordionItemPreview,
@@ -102,71 +109,6 @@ import SpacingPanel from '~components/inspector/panels/styles/SpacingPanel'
 import { ComponentType } from '~core/ComponentDefinitions'
 // using ChildrenControl following original Panel.tsx logic
 // import TextPanel from "~components/inspector/panels/styles/TextPanel";
-
-export type ComponentDefDefault = {
-  previewComponents: {
-    [key: string]: {
-      component: React.ComponentType<any>
-      applyTo: string[]
-      props?: {
-        [key: string]: any
-      }
-    }
-  }
-  stylePanelComponent: React.ComponentType<any>
-  // The default style panel configuration to use for components, which do not specify and
-  // explicit configuration
-  stylePanelDef: StylePanelsDef
-}
-
-export type StylePanelsDef = {
-  [key: string]: StylePanelDef
-}
-
-export type StylePanelDef = {
-  title: string
-  component: React.ComponentType<any>
-  props?: {
-    [key: string]: any
-  }
-  children?: StylePanelsDef
-  // Complex config in case styleProps mapping is not enough/applicable
-  config?: {
-    [key: string]: any
-  }
-  styleProps: {
-    [key: string]: string | StylePropDetail
-  }
-}
-
-export type StylePropDetail = {
-  targetName: string
-  enabled?: boolean
-  [key: string]: any
-}
-
-export type ComponentDef = {
-  component: React.ComponentType<any>
-  inspectorComponent?: React.ComponentType<any>
-  // Use a specific StylePanelsDef
-  stylePanelsDef?: StylePanelsDef
-  // Override some of the setting of the default StylePanelsDef or the one defiend in
-  // stylePanelsDef
-  stylePanelsOverride?: StylePanelsDef
-  componentModelBuilder?: BuilderFn
-  previewComponent?: React.ComponentType<any>
-  previewDefaultProps?: {
-    [key: string]: any
-  }
-  children?: string[]
-  rootParentType?: ComponentType
-  rootDraggable?: boolean // default: true for root elements and false for child elements.
-  soon?: boolean
-}
-
-export type ComponentDefs = {
-  [key: string]: ComponentDef
-}
 
 // Style panels displayed by StylesPanel set styleProps on the currently selected
 // component. Here we can se what properties should be set. The key is the abstract name
@@ -355,6 +297,27 @@ const chakrauiComponentDefDefaults: ComponentDefDefault = {
   // The default style panel configuration to use for components, which do not specify and
   // explicit configuration
   stylePanelDef: chakrauiStylePanels,
+
+  // When a component is hovered with the mouse in the Editor, add to props to make it highglight. Eg. boxShadow
+  calcComponentHoverStyle: (
+    component: IComponent,
+    props: any,
+    focusInput: boolean,
+  ) => {
+    return {
+      ...props,
+      boxShadow: `${focusInput ? '#ffc4c7' : '#4FD1C5'} 0px 0px 0px 2px inset`,
+    }
+  },
+
+  // When a component is selected in the Editor, add to props to make it "selected". Eg. border
+  calcComponentVisualHelperStyle: (component: IComponent, props: any) => {
+    return {
+      ...props,
+      border: `1px dashed #718096`,
+      padding: props.p || props.padding ? props.p || props.padding : 4,
+    }
+  },
 }
 
 const chakrauiComponentDefs: ComponentDefs = {

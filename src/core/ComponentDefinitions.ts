@@ -12,6 +12,16 @@ export type ComponentDefDefault = {
   // The default style panel configuration to use for components, which do not specify and
   // explicit configuration
   stylePanelDef: StylePanelsDef
+
+  // When a component is hovered with the mouse in the Editor, add to props to make it highglight. Eg. boxShadow
+  calcComponentHoverStyle: (
+    component: IComponent,
+    props: any,
+    focusInput: boolean,
+  ) => any
+
+  // When a component is selected in the Editor, add to props to make it "selected". Eg. border
+  calcComponentVisualHelperStyle: (component: IComponent, props: any) => any
 }
 
 export type StylePanelsDef = {
@@ -425,6 +435,22 @@ class ComponentDefinitions {
     })
 
     return stylePanels
+  }
+
+  calcComponentHoverStyle(
+    component: IComponent,
+    props: any,
+    focusInput: boolean,
+  ) {
+    return this.defDefaults.calcComponentHoverStyle(
+      component,
+      props,
+      focusInput,
+    )
+  }
+
+  calcComponentVisualHelperStyle(component: IComponent, props: any) {
+    return this.defDefaults.calcComponentVisualHelperStyle(component, props)
   }
 }
 

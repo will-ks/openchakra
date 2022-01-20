@@ -8,6 +8,7 @@ import {
 } from '../core/selectors/components'
 import { getShowLayout, getFocusedComponent } from '../core/selectors/app'
 import { IComponent } from '~core/ComponentDefinitions'
+import { useComponentDefinitions } from '~contexts/component-definition'
 
 export const useInteractive = (
   component: IComponent,
@@ -18,6 +19,7 @@ export const useInteractive = (
   const isComponentSelected = useSelector(getIsSelectedComponent(component.id))
   const isHovered = useSelector(getIsHovered(component.id))
   const focusInput = useSelector(getFocusedComponent(component.id))
+  const componentDefs = useComponentDefinitions()
 
   const [, drag] = useDrag({
     item: { id: component.id, type: component.type, isMoved: true },
@@ -48,18 +50,11 @@ export const useInteractive = (
   }
 
   if (showLayout && enableVisualHelper) {
-    props = {
-      ...props,
-      border: `1px dashed #718096`,
-      padding: props.p || props.padding ? props.p || props.padding : 4,
-    }
+    props = componentDefs.calcComponentVisualHelperStyle(component, props)
   }
 
   if (isHovered || isComponentSelected) {
-    props = {
-      ...props,
-      boxShadow: `${focusInput ? '#ffc4c7' : '#4FD1C5'} 0px 0px 0px 2px inset`,
-    }
+    props = componentDefs.calcComponentHoverStyle(component, props, focusInput)
   }
 
   return { props, ref: drag(ref), drag }
