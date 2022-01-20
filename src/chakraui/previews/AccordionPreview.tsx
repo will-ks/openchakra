@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import ComponentPreview from '~components/editor/ComponentPreview'
 import {ComponentType} from "~core/ComponentDefinitions";
-import {IPreviewProps} from "~componentDefsTypes";
+import {IPreviewProps} from "~core/ComponentDefinitions";
 
 const acceptedTypes: ComponentType[] = ['AccordionItem']
 

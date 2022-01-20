@@ -7,7 +7,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from '@chakra-ui/react'
-import {IComponent} from "~componentDefsTypes";
+import {IComponent} from "~core/ComponentDefinitions";
 
 interface IProps {
   component: IComponent

@@ -72,7 +72,7 @@ import {
   buildList,
 } from '~core/models/composer/builder'
 import React from 'react'
-import { BuilderFn, MetaComponentType } from '~componentDefsTypes'
+import { BuilderFn, MetaComponentType } from '~core/ComponentDefinitions'
 import AccordionPreview, {
   AccordionButtonPreview,
   AccordionItemPreview,
@@ -567,7 +567,6 @@ const chakrauiComponentDefs : ComponentDefs = {
   },
   Flex: {
     component: Chakra['Flex'],
-    inspectorComponent: FlexPanel,
     previewDefaultProps: {
       form: {
         display: 'flex',

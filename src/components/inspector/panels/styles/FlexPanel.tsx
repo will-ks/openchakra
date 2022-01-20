@@ -11,7 +11,6 @@ const FlexPanel: React.FC<StylePanelProps> = ({
   panelDef
 }) => {
   const { setValueFromEvent } = useForm()
-
   const alignItems = usePropsSelector(targetStyleProp('alignItems', panelDef))
   const flexDirection = usePropsSelector(targetStyleProp('flexDirection', panelDef))
   const justifyContent = usePropsSelector(targetStyleProp('justifyContent', panelDef))

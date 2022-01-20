@@ -169,6 +169,18 @@ class ComponentDefinitions {
     this.previewDefaultProps = this.collectPreviewDefaultProps()
     this.targetComponents = this.collectTargetComponents()
     this.stylePanels = this.collectStylePanels()
+
+    console.log("*** componentNames", this.componentNames)
+    console.log("*** rootComponentNames", this.rootComponentNames)
+    console.log("*** childComponentNames", this.childComponentNames)
+    console.log("*** menuItems", this.menuItems)
+    console.log("*** previewComponents", this.previewComponents)
+    console.log("*** rootDraggables", this.rootDraggables)
+    console.log("*** componentModelBuilders", this.componentModelBuilders)
+    console.log("*** inspectorComponents", this.inspectorComponents)
+    console.log("*** previewDefaultProps", this.previewDefaultProps)
+    console.log("*** targetComponents", this.targetComponents)
+    console.log("*** stylePanels", this.stylePanels)
   }
 
   /**

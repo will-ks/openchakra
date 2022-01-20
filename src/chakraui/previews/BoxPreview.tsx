@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react'
 import ComponentPreview from '~components/editor/ComponentPreview'
 import { useDropComponent } from '~hooks/useDropComponent'
 import { useInteractive } from '~hooks/useInteractive'
-import {IComponent} from "~componentDefsTypes";
+import {IComponent} from "~core/ComponentDefinitions";
 
 const BoxPreview: React.FC<{ component: IComponent }> = ({ component }) => {
   const { drop, isOver } = useDropComponent(component.id)
