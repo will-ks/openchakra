@@ -72,6 +72,7 @@ import {
   buildList,
 } from '~core/models/composer/builder'
 import React from 'react'
+import { BuilderFn, MetaComponentType } from '~core/ComponentDefinitions'
 import AccordionPreview, {
   AccordionButtonPreview,
   AccordionItemPreview,
@@ -94,10 +95,11 @@ import BorderPanel from '~components/inspector/panels/styles/BorderPanel'
 import DimensionPanel from '~components/inspector/panels/styles/DimensionPanel'
 import EffectsPanel from '~components/inspector/panels/styles/EffectsPanel'
 import DisplayPanel from '~components/inspector/panels/styles/DisplayPanel'
+import PaddingPanel from '~components/inspector/panels/styles/PaddingPanel'
 import TextPanel from '~components/inspector/panels/styles/TextPanel'
 import BackgroundColorPanel from '~components/inspector/panels/styles/BackgroundColorPanel'
 import SpacingPanel from '~components/inspector/panels/styles/SpacingPanel'
-import {BuilderFn, ComponentType} from '~core/ComponentDefinitions'
+import { ComponentType } from '~core/ComponentDefinitions'
 // using ChildrenControl following original Panel.tsx logic
 // import TextPanel from "~components/inspector/panels/styles/TextPanel";
 
@@ -554,7 +556,6 @@ const chakrauiComponentDefs: ComponentDefs = {
   },
   Flex: {
     component: Chakra['Flex'],
-    inspectorComponent: FlexPanel,
     previewDefaultProps: {
       form: {
         display: 'flex',

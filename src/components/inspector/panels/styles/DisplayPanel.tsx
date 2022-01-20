@@ -11,7 +11,6 @@ const DisplayPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()
   const display = usePropsSelector(targetStyleProp('display', panelDef))
   const FlexPanel = panelDef.children!['FlexPanel']!.component
-
   return (
     <>
       {isStylePropEnabled('display', panelDef) && (

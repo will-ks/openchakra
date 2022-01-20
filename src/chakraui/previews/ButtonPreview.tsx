@@ -3,7 +3,7 @@ import { useDropComponent } from '~hooks/useDropComponent'
 import { useInteractive } from '~hooks/useInteractive'
 import { Button } from '@chakra-ui/react'
 import icons from '~iconsList'
-import { IComponent } from '~componentDefsTypes'
+import { IComponent } from '~core/ComponentDefinitions'
 
 interface Props {
   component: IComponent

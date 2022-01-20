@@ -11,7 +11,7 @@ import { useDropComponent } from '~hooks/useDropComponent'
 import ComponentPreview from '~components/editor/ComponentPreview'
 import { useSelector } from 'react-redux'
 import { getComponents } from '~core/selectors/components'
-import { IPreviewProps } from '~componentDefsTypes'
+import { IPreviewProps } from '~core/ComponentDefinitions'
 
 const AvatarPreview: React.FC<IPreviewProps & {
   spacing?: BoxProps['marginLeft']

@@ -8,7 +8,6 @@ import { targetStyleProp } from '~core/ComponentDefinitions'
 
 const FlexPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()
-
   const alignItems = usePropsSelector(targetStyleProp('alignItems', panelDef))
   const flexDirection = usePropsSelector(
     targetStyleProp('flexDirection', panelDef),

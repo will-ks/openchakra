@@ -14,7 +14,6 @@ export const useDropComponent = (
   if (finalAccept.length === 0) {
     finalAccept = componentDefs.rootDraggables
   }
-  console.log('finalAccept', finalAccept)
   const [{ isOver }, drop] = useDrop({
     accept: finalAccept,
     collect: monitor => ({

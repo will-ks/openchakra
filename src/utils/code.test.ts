@@ -1,5 +1,5 @@
 import { generateComponentCode, generateCode, formatCode } from './code'
-import {IComponents} from "~componentDefsTypes";
+import { IComponents } from '~core/ComponentDefinitions'
 
 const componentFixtures: IComponents = {
   root: {

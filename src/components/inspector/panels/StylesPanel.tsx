@@ -26,7 +26,7 @@ const StylesPanel: React.FC<Props> = ({
     const BgComp = panelDef.component
 
     panels.push(
-      <AccordionContainer title={panelDef.title}>
+      <AccordionContainer title={panelDef.title} key={'Backgrounds'}>
         <BgComp isRoot={isRoot} panelDef={panelDef} />
       </AccordionContainer>,
     )
@@ -35,7 +35,7 @@ const StylesPanel: React.FC<Props> = ({
       const panelDef = stylePanels[key]
       const Panel = panelDef.component
       panels.push(
-        <AccordionContainer title={panelDef.title}>
+        <AccordionContainer title={panelDef.title} key={key}>
           <Panel isRoot={isRoot} panelDef={panelDef} />
         </AccordionContainer>,
       )
