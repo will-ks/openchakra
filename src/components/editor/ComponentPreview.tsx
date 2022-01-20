@@ -1,30 +1,7 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 
-import AlertPreview from '~chakraui/previews/AlertPreview'
-import AvatarPreview, {
-  AvatarBadgePreview,
-  AvatarGroupPreview,
-} from '~chakraui/previews/AvatarPreview'
-import AccordionPreview, {
-  AccordionButtonPreview,
-  AccordionItemPreview,
-  AccordionPanelPreview,
-} from '~chakraui/previews/AccordionPreview'
-import * as Chakra from '@chakra-ui/react'
 import { getComponentBy } from '~core/selectors/components'
-import { InputRightElementPreview } from '~chakraui/previews/InputRightElement'
-import { InputLeftElementPreview } from '~chakraui/previews/InputLeftElement'
-import AspectRatioPreview from '~chakraui/previews/AspectRatioBoxPreview'
-import ButtonPreview from '~chakraui/previews/ButtonPreview'
-import PreviewContainer from '~components/editor/PreviewContainer'
-import WithChildrenPreviewContainer from '~components/editor/WithChildrenPreviewContainer'
-import IconPreview from '../../chakraui/previews/IconPreview'
-import IconButtonPreview from '../../chakraui/previews/IconButtonPreview'
-import SelectPreview from '~chakraui/previews/SelectPreview'
-import NumberInputPreview from '~chakraui/previews/NumberInputPreview'
-import BreadcrumbPreview from '../../chakraui/previews/BreadcrumbPreview'
-import BreadcrumbItemPreview from '../../chakraui/previews/BreadcrumbItemPreview'
 import { useComponentDefinitions } from '~contexts/component-definition'
 
 const ComponentPreview: React.FC<{
@@ -45,7 +22,6 @@ const ComponentPreview: React.FC<{
     return null
   }
   const PreviewComponent = prevCompo.previewComponent
-  // @ts-ignore
   return (
     <PreviewComponent
       component={component}

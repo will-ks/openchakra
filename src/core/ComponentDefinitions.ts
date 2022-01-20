@@ -269,8 +269,8 @@ class ComponentDefinitions {
     const previewComponents: Partial<
       {
         [k in ComponentType]: {
-          previewComponent: React.ComponentType
-          component: React.ComponentType
+          previewComponent: React.ComponentType<any>
+          component: React.ComponentType<any>
           props?: { [key: string]: any }
         }
       }
@@ -354,7 +354,7 @@ class ComponentDefinitions {
 
   collectInspectorComponents() {
     const inspectorComponents: Partial<{
-      [k: string]: React.ComponentType
+      [k: string]: React.ComponentType<any>
     }> = {}
     Object.keys(this.defs).forEach(name => {
       const obj = this.defs[name]
@@ -378,7 +378,7 @@ class ComponentDefinitions {
   }
 
   collectTargetComponents() {
-    const defaultProps: Partial<{ [k: string]: React.ComponentType }> = {}
+    const defaultProps: Partial<{ [k: string]: React.ComponentType<any> }> = {}
     Object.keys(this.defs).forEach(name => {
       const obj = this.defs[name]
       defaultProps[name] = obj.component
