@@ -98,8 +98,8 @@ import PaddingPanel from '~components/inspector/panels/styles/PaddingPanel'
 import TextPanel from '~components/inspector/panels/styles/TextPanel'
 import BackgroundColorPanel from '~components/inspector/panels/styles/BackgroundColorPanel'
 import SpacingPanel from '~components/inspector/panels/styles/SpacingPanel'
-import {BuilderFn, ComponentType} from '~core/ComponentDefinitions'
-import {Button} from "native-base";
+import { BuilderFn, ComponentType } from '~core/ComponentDefinitions'
+import { Button } from 'native-base'
 // using ChildrenControl following original Panel.tsx logic
 // import TextPanel from "~components/inspector/panels/styles/TextPanel";
 
@@ -569,7 +569,6 @@ const nativebaseComponentDefs: ComponentDefs = {
   },
   Flex: {
     component: Chakra['Flex'],
-    inspectorComponent: FlexPanel,
     previewDefaultProps: {
       form: {
         display: 'flex',
