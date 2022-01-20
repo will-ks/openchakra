@@ -99,7 +99,7 @@ import TextPanel from '~components/inspector/panels/styles/TextPanel'
 import BackgroundColorPanel from '~components/inspector/panels/styles/BackgroundColorPanel'
 import SpacingPanel from '~components/inspector/panels/styles/SpacingPanel'
 import { BuilderFn, ComponentType } from '~core/ComponentDefinitions'
-import { Button } from 'native-base'
+import { Button, Box, Row } from 'native-base'
 // using ChildrenControl following original Panel.tsx logic
 // import TextPanel from "~components/inspector/panels/styles/TextPanel";
 
@@ -279,7 +279,6 @@ const nativebaseComponentDefDefaults: ComponentDefDefault = {
     simple: {
       component: PreviewContainer,
       applyTo: [
-        'NativeBaseButton',
         'Badge',
         'Image',
         'Text',
@@ -307,6 +306,7 @@ const nativebaseComponentDefDefaults: ComponentDefDefault = {
         isBoxWrapped: true,
       },
       applyTo: [
+        'NativeBaseButton',
         'AlertIcon',
         'Progress',
         'CloseButton',
@@ -327,6 +327,7 @@ const nativebaseComponentDefDefaults: ComponentDefDefault = {
         enableVisualHelper: true,
       },
       applyTo: [
+        'NativeBaseBox',
         'Box',
         'SimpleGrid',
         'Flex',
@@ -371,6 +372,11 @@ const nativebaseComponentDefs: ComponentDefs = {
       bg: 'green.500',
     },
   },
+  NativeBaseBox: {
+    component: Box,
+    inspectorComponent: BoxPanel,
+  },
+
   Accordion: {
     component: Chakra['Accordion'],
     previewComponent: AccordionPreview,
