@@ -106,7 +106,11 @@ import {
   IComponent,
   StylePanelsDef,
 } from '~core/ComponentDefinitions'
-import { Button, Box, Row } from 'native-base'
+import { Button, Box, Row, HStack, Column } from 'native-base'
+import { StatusView } from '~nativebase/WS/StatusView'
+import { OperationList } from '~nativebase/WS/OperationList'
+import { InstructionText } from '~nativebase/WS/InstructionText'
+import { InstructionInteractions } from '~nativebase/WS/InstructionInteractions'
 // using ChildrenControl following original Panel.tsx logic
 // import TextPanel from "~components/inspector/panels/styles/TextPanel";
 
@@ -270,6 +274,15 @@ const nativebaseComponentDefDefaults: ComponentDefDefault = {
       },
       applyTo: [
         'NativeBaseBox',
+        'HStack',
+        'VStack',
+        'WitRow',
+        'WitCol',
+        'WitScreenView',
+        'StatusView',
+        'OperationList',
+        'InstructionText',
+        'InstructionInteractions',
         'Box',
         'SimpleGrid',
         'Flex',
@@ -310,11 +323,17 @@ const nativebaseComponentDefDefaults: ComponentDefDefault = {
       ...props,
       // Nativebase doesn't support raw boxShadow, it only accepts predifined settings via numebrs
       // so use raw css instead. These work for both chakra and NB.
-      style: {
-        boxShadow: `${
-          focusInput ? '#ffc4c7' : '#4FD1C5'
-        } 0px 0px 0px 2px inset`,
-      },
+      // style: {
+      //   boxShadow: `${
+      //     focusInput ? '#ffc4c7' : '#4FD1C5'
+      //   } 0px 0px 0px 2px inset`,
+      // },
+      // boxShadow: `${
+      //     focusInput ? '#ffc4c7' : '#4FD1C5'
+      // } 0px 0px 0px 2px inset`,
+      borderWidth: 1,
+      borderColor: 'cyan.400',
+      borderStyle: 'solid',
     }
   },
 
@@ -324,9 +343,12 @@ const nativebaseComponentDefDefaults: ComponentDefDefault = {
       ...props,
       // Nativebase doesn't support raw border, it only accepts predifined settings via numebrs
       // so use raw css instead. These work for both chakra and NB.
-      style: {
-        border: `1px dashed #718096`,
-      },
+      // style: {
+      //   border: `1px dashed #718096`,
+      // },
+      // NB like styling, because the style above won't work for every NB component, eg. Row.
+      borderWidth: '1',
+      borderStyle: 'dashed',
       padding: props.p || props.padding ? props.p || props.padding : 4,
     }
   },
@@ -336,7 +358,7 @@ const nativebaseComponentDefs: ComponentDefs = {
   NativeBaseButton: {
     component: Button,
     inspectorComponent: ButtonPanel,
-    // previewComponent: ButtonPreview,
+    previewComponent: ButtonPreview,
     previewDefaultProps: {
       children: 'A NativeBaseButton',
       width: 200,
@@ -347,6 +369,56 @@ const nativebaseComponentDefs: ComponentDefs = {
   },
   NativeBaseBox: {
     component: Box,
+    inspectorComponent: BoxPanel,
+  },
+  VStack: {
+    component: Column,
+    inspectorComponent: BoxPanel,
+  },
+  HStack: {
+    component: Row,
+    inspectorComponent: BoxPanel,
+  },
+
+  WitRow: {
+    component: Row,
+    inspectorComponent: BoxPanel,
+    previewDefaultProps: {
+      height: 200,
+      flex: 1,
+    },
+  },
+  WitCol: {
+    component: Column,
+    inspectorComponent: BoxPanel,
+    previewDefaultProps: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+    },
+  },
+  WitScreenView: {
+    component: Box,
+    inspectorComponent: BoxPanel,
+    previewDefaultProps: {
+      width: '100%',
+      padding: '10px',
+    },
+  },
+  StatusView: {
+    component: StatusView,
+    inspectorComponent: BoxPanel,
+  },
+  OperationList: {
+    component: OperationList,
+    inspectorComponent: BoxPanel,
+  },
+  InstructionText: {
+    component: InstructionText,
+    inspectorComponent: BoxPanel,
+  },
+  InstructionInteractions: {
+    component: InstructionInteractions,
     inspectorComponent: BoxPanel,
   },
 
