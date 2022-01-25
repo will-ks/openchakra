@@ -1,6 +1,6 @@
 import { generateId } from './generateId'
 import { duplicateComponent, deleteComponent } from './recursive'
-import { IComponents } from '~core/ComponentDefinitions'
+import { IComponents } from '~core/Ocho'
 
 jest.mock('./generateId')
 

@@ -7,8 +7,8 @@ import {
   getIsHovered,
 } from '../core/selectors/components'
 import { getShowLayout, getFocusedComponent } from '../core/selectors/app'
-import { IComponent } from '~core/ComponentDefinitions'
-import { useComponentDefinitions } from '~contexts/component-definition'
+import { IComponent } from '~core/Ocho'
+import { useOcho } from '~contexts/ocho-context'
 
 export const useInteractive = (
   component: IComponent,
@@ -19,7 +19,7 @@ export const useInteractive = (
   const isComponentSelected = useSelector(getIsSelectedComponent(component.id))
   const isHovered = useSelector(getIsHovered(component.id))
   const focusInput = useSelector(getFocusedComponent(component.id))
-  const componentDefs = useComponentDefinitions()
+  const ocho = useOcho()
 
   const [, drag] = useDrag({
     item: { id: component.id, type: component.type, isMoved: true },
@@ -50,11 +50,11 @@ export const useInteractive = (
   }
 
   if (showLayout && enableVisualHelper) {
-    props = componentDefs.calcComponentVisualHelperStyle(component, props)
+    props = ocho.calcComponentVisualHelperStyle(component, props)
   }
 
   if (isHovered || isComponentSelected) {
-    props = componentDefs.calcComponentHoverStyle(component, props, focusInput)
+    props = ocho.calcComponentHoverStyle(component, props, focusInput)
   }
 
   return { props, ref: drag(ref), drag }

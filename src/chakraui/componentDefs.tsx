@@ -70,11 +70,11 @@ import {
 } from '~core/models/composer/builder'
 import React from 'react'
 import {
-  ComponentDefDefault,
-  ComponentDefs,
+  OchoConfig,
+  ComponentsConfig,
   IComponent,
-  StylePanelsDef,
-} from '~core/ComponentDefinitions'
+  StylePanelsConfig,
+} from '~core/Ocho'
 import AccordionPreview, {
   AccordionButtonPreview,
   AccordionItemPreview,
@@ -96,19 +96,15 @@ import BorderPanel from '~components/inspector/panels/styles/BorderPanel'
 import DimensionPanel from '~components/inspector/panels/styles/DimensionPanel'
 import EffectsPanel from '~components/inspector/panels/styles/EffectsPanel'
 import DisplayPanel from '~components/inspector/panels/styles/DisplayPanel'
-import PaddingPanel from '~components/inspector/panels/styles/PaddingPanel'
 import TextPanel from '~components/inspector/panels/styles/TextPanel'
 import BackgroundColorPanel from '~components/inspector/panels/styles/BackgroundColorPanel'
 import SpacingPanel from '~components/inspector/panels/styles/SpacingPanel'
-import { ComponentType } from '~core/ComponentDefinitions'
-// using ChildrenControl following original Panel.tsx logic
-// import TextPanel from "~components/inspector/panels/styles/TextPanel";
 
 // Style panels displayed by StylesPanel set styleProps on the currently selected
 // component. Here we can se what properties should be set. The key is the abstract name
 // of the property, the value is the actual value to set. be default the two are the same
 // for chakraui
-const chakrauiStylePanels: StylePanelsDef = {
+const chakrauiStylePanels: StylePanelsConfig = {
   Layout: {
     title: 'Layout',
     component: DisplayPanel,
@@ -210,111 +206,7 @@ const chakrauiStylePanels: StylePanelsDef = {
   },
 }
 
-const chakrauiComponentDefDefaults: ComponentDefDefault = {
-  previewComponents: {
-    simple: {
-      component: PreviewContainer,
-      applyTo: [
-        'Badge',
-        'Image',
-        'Text',
-        'Link',
-        'Spinner',
-        'Checkbox',
-        'Textarea',
-        'CircularProgress',
-        'Heading',
-        'Switch',
-        'FormLabel',
-        'FormHelperText',
-        'FormErrorMessage',
-        'TabPanel',
-        'Tab',
-        'Input',
-        'Radio',
-        'ListItem',
-        'BreadcrumbLink',
-      ],
-    },
-    simpleWrapped: {
-      component: PreviewContainer,
-      props: {
-        isBoxWrapped: true,
-      },
-      applyTo: [
-        'AlertIcon',
-        'Progress',
-        'CloseButton',
-        'AccordionIcon',
-        'Code',
-        'ListIcon',
-        'Divider',
-        'AlertDescription',
-        'AlertTitle',
-        'InputRightAddon',
-        'InputLeftAddon',
-        'Tag',
-      ],
-    },
-    withChildren: {
-      component: WithChildrenPreviewContainer,
-      props: {
-        enableVisualHelper: true,
-      },
-      applyTo: [
-        'Box',
-        'SimpleGrid',
-        'Flex',
-        'FormControl',
-        'Tabs',
-        'List',
-        'TabList',
-        'TabPanels',
-        'Grid',
-        'Center',
-        'Container',
-      ],
-    },
-    withChildrenWrapped: {
-      component: WithChildrenPreviewContainer,
-      props: {
-        isBoxWrapped: true,
-        enableVisualHelper: true,
-      },
-      applyTo: ['RadioGroup', 'Stack', 'InputGroup'],
-    },
-  },
-
-  // The main component which displays stylePanels configured below
-  stylePanelComponent: StylesPanel,
-
-  // The default style panel configuration to use for components, which do not specify and
-  // explicit configuration
-  stylePanelDef: chakrauiStylePanels,
-
-  // When a component is hovered with the mouse in the Editor, add to props to make it highglight. Eg. boxShadow
-  calcComponentHoverStyle: (
-    component: IComponent,
-    props: any,
-    focusInput: boolean,
-  ) => {
-    return {
-      ...props,
-      boxShadow: `${focusInput ? '#ffc4c7' : '#4FD1C5'} 0px 0px 0px 2px inset`,
-    }
-  },
-
-  // When a component is selected in the Editor, add to props to make it "selected". Eg. border
-  calcComponentVisualHelperStyle: (component: IComponent, props: any) => {
-    return {
-      ...props,
-      border: `1px dashed #718096`,
-      padding: props.p || props.padding ? props.p || props.padding : 4,
-    }
-  },
-}
-
-const chakrauiComponentDefs: ComponentDefs = {
+const chakrauiComponents: ComponentsConfig = {
   Accordion: {
     component: Chakra['Accordion'],
     previewComponent: AccordionPreview,
@@ -789,21 +681,110 @@ const chakrauiComponentDefs: ComponentDefs = {
   // "TabPanels"*/
 }
 
-// // TODO: this cannot be moved to AccordionPreview becuase it causes circular dependency
-// // because of componentNames
-// const ALERT_COMPONENTS = [
-//   'Alert',
-//   'AlertDescription',
-//   'AlertIcon',
-//   'AlertTitle',
-// ]
-//
-// const AccordionWhitelist = componentNames.filter(
-//   name => !ALERT_COMPONENTS.includes(name),
-// )
-//
-// // Must be called here, AccordionPreview.tsd cannot call functions from here otherwise we have circular
-// // dependency
-// setAccordionWhitelist(AccordionWhitelist)
+const chakrauiOchoConfig: OchoConfig = {
+  components: chakrauiComponents,
 
-export { chakrauiComponentDefs, chakrauiComponentDefDefaults }
+  previewComponents: {
+    simple: {
+      component: PreviewContainer,
+      applyTo: [
+        'Badge',
+        'Image',
+        'Text',
+        'Link',
+        'Spinner',
+        'Checkbox',
+        'Textarea',
+        'CircularProgress',
+        'Heading',
+        'Switch',
+        'FormLabel',
+        'FormHelperText',
+        'FormErrorMessage',
+        'TabPanel',
+        'Tab',
+        'Input',
+        'Radio',
+        'ListItem',
+        'BreadcrumbLink',
+      ],
+    },
+    simpleWrapped: {
+      component: PreviewContainer,
+      props: {
+        isBoxWrapped: true,
+      },
+      applyTo: [
+        'AlertIcon',
+        'Progress',
+        'CloseButton',
+        'AccordionIcon',
+        'Code',
+        'ListIcon',
+        'Divider',
+        'AlertDescription',
+        'AlertTitle',
+        'InputRightAddon',
+        'InputLeftAddon',
+        'Tag',
+      ],
+    },
+    withChildren: {
+      component: WithChildrenPreviewContainer,
+      props: {
+        enableVisualHelper: true,
+      },
+      applyTo: [
+        'Box',
+        'SimpleGrid',
+        'Flex',
+        'FormControl',
+        'Tabs',
+        'List',
+        'TabList',
+        'TabPanels',
+        'Grid',
+        'Center',
+        'Container',
+      ],
+    },
+    withChildrenWrapped: {
+      component: WithChildrenPreviewContainer,
+      props: {
+        isBoxWrapped: true,
+        enableVisualHelper: true,
+      },
+      applyTo: ['RadioGroup', 'Stack', 'InputGroup'],
+    },
+  },
+
+  // The main component which displays stylePanels configured below
+  stylesPanelComponent: StylesPanel,
+
+  // The default style panel configuration to use for components, which do not specify and
+  // explicit configuration
+  stylePanels: chakrauiStylePanels,
+
+  // When a component is hovered with the mouse in the Editor, add to props to make it highglight. Eg. boxShadow
+  calcComponentHoverStyle: (
+    component: IComponent,
+    props: any,
+    focusInput: boolean,
+  ) => {
+    return {
+      ...props,
+      boxShadow: `${focusInput ? '#ffc4c7' : '#4FD1C5'} 0px 0px 0px 2px inset`,
+    }
+  },
+
+  // When a component is selected in the Editor, add to props to make it "selected". Eg. border
+  calcComponentVisualHelperStyle: (component: IComponent, props: any) => {
+    return {
+      ...props,
+      border: `1px dashed #718096`,
+      padding: props.p || props.padding ? props.p || props.padding : 4,
+    }
+  },
+}
+
+export { chakrauiOchoConfig }

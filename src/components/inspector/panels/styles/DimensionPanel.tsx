@@ -9,7 +9,7 @@ import {
   isStylePropEnabled,
   stylePropDetail,
   targetStyleProp,
-} from '~core/ComponentDefinitions'
+} from '~core/Ocho'
 
 const DimensionPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()

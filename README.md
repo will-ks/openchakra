@@ -1,3 +1,11 @@
+# Ocho - OpenChakra Optimized: a modular version OpenChakra for building drag-and-drop page builders for React components
+
+Ocho is a library, which can be used to build interactive page builders using React components and generating React source code.
+
+Ocho is a fork of OpenChakra, which provides a page builder specifically for the chkraui UI library. Ocho can be used to build page builders using any UI library or custom components. Ocho, of course, can be used to create a page builder fully compatible with OpenChakra itself.
+
+<hr/>
+
 <div align="center" style="display:flex;flex-direction:column;">
   <a href="https://openchakra.app">
     <img src="./public/images/github-banner.png" alt="Openchakra: Visual editor for Chakra UI." />

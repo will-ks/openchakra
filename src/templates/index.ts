@@ -1,7 +1,7 @@
 import { onboarding } from './onboarding'
 import { productHunt } from './producthunt'
 import { secretchakra } from './secretchakra'
-import { IComponents } from '~core/ComponentDefinitions'
+import { IComponents } from '~core/Ocho'
 
 export type TemplateType = 'onboarding' | 'ph' | 'secretchakra'
 

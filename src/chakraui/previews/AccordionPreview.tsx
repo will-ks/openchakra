@@ -9,8 +9,8 @@ import {
   AccordionPanel,
 } from '@chakra-ui/react'
 import ComponentPreview from '~components/editor/ComponentPreview'
-import { ComponentType } from '~core/ComponentDefinitions'
-import { IPreviewProps } from '~core/ComponentDefinitions'
+import { ComponentType } from '~core/Ocho'
+import { IPreviewProps } from '~core/Ocho'
 
 const acceptedTypes: ComponentType[] = ['AccordionItem']
 

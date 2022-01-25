@@ -2,16 +2,16 @@ import { useSelector } from 'react-redux'
 import { RootState } from '~core/store'
 import { useInspectorUpdate } from '~contexts/inspector-context'
 import { useEffect } from 'react'
-import { useComponentDefinitions } from '~contexts/component-definition'
-import { ComponentType } from '~core/ComponentDefinitions'
+import { useOcho } from '~contexts/ocho-context'
+import { ComponentType } from '~core/Ocho'
 
 const usePropsSelector = (propsName: string) => {
   const { addActiveProps } = useInspectorUpdate()
-  const componentDefs = useComponentDefinitions()
+  const ocho = useOcho()
 
   const getDefaultFormProps = (type: ComponentType) => {
-    const previewProps = componentDefs.previewDefaultProps[type]
-    const defaultProps = componentDefs.targetComponents[type]!.defaultProps
+    const previewProps = ocho.previewDefaultProps[type]
+    const defaultProps = ocho.targetComponents[type]!.defaultProps
     return { ...defaultProps, ...previewProps?.form }
   }
 

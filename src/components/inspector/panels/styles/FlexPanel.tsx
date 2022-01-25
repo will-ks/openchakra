@@ -4,7 +4,7 @@ import FormControl from '~chakraui/inspector/controls/FormControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
-import { targetStyleProp } from '~core/ComponentDefinitions'
+import { targetStyleProp } from '~core/Ocho'
 
 const FlexPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()

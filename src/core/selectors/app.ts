@@ -1,5 +1,5 @@
 import { RootState } from '~core/store'
-import { IComponent } from '~core/ComponentDefinitions'
+import { IComponent } from '~core/Ocho'
 
 export const getShowLayout = (state: RootState) => state.app.showLayout
 

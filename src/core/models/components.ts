@@ -4,11 +4,7 @@ import templates, { TemplateType } from '~templates'
 import { generateId } from '~utils/generateId'
 import { duplicateComponent, deleteComponent } from '~utils/recursive'
 import omit from 'lodash/omit'
-import {
-  ComponentType,
-  IComponent,
-  IComponents,
-} from '~core/ComponentDefinitions'
+import { ComponentType, IComponent, IComponents } from '~core/Ocho'
 import { previewDefaultProps } from '~core/store'
 
 export type ComponentsState = {

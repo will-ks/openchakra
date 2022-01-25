@@ -1,4 +1,4 @@
-import { IComponents } from '~core/ComponentDefinitions'
+import { IComponents } from '~core/Ocho'
 
 export const secretchakra: IComponents = {
   root: {

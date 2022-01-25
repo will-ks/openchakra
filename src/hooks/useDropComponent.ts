@@ -1,7 +1,7 @@
 import { useDrop, DropTargetMonitor } from 'react-dnd'
 import useDispatch from './useDispatch'
-import { useComponentDefinitions } from '~contexts/component-definition'
-import { ComponentItemProps } from '~core/ComponentDefinitions'
+import { useOcho } from '~contexts/ocho-context'
+import { ComponentItemProps } from '~core/Ocho'
 
 export const useDropComponent = (
   componentId: string,
@@ -9,10 +9,10 @@ export const useDropComponent = (
   canDrop: boolean = true,
 ) => {
   const dispatch = useDispatch()
-  const componentDefs = useComponentDefinitions()
+  const ocho = useOcho()
   let finalAccept = accept
   if (finalAccept.length === 0) {
-    finalAccept = componentDefs.rootDraggables
+    finalAccept = ocho.rootDraggables
   }
   const [{ isOver }, drop] = useDrop({
     accept: finalAccept,
@@ -32,7 +32,7 @@ export const useDropComponent = (
       } else if (item.isMeta) {
         //dispatch.components.addMetaComponent(builder[item.type](componentId))
         dispatch.components.addMetaComponent(
-          componentDefs.componentModelBuilders[item.type]!(componentId),
+          ocho.componentModelBuilders[item.type]!(componentId),
         )
       } else {
         dispatch.components.addComponent({

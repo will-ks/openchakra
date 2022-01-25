@@ -1,5 +1,5 @@
 import * as LZString from 'lz-string'
-import { IComponents } from '~core/ComponentDefinitions'
+import { IComponents } from '~core/Ocho'
 
 export const createShareUrl = (components: IComponents) =>
   `${document.location.protocol}//${

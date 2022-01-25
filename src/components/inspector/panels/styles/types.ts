@@ -1,6 +1,6 @@
-import { StylePanelDef } from '~core/ComponentDefinitions'
+import { StylePanelConfig } from '~core/Ocho'
 
 export type StylePanelProps = {
-  panelDef: StylePanelDef
+  panelDef: StylePanelConfig
   isRoot: boolean
 }

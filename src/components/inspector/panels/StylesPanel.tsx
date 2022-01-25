@@ -5,13 +5,13 @@ import AccordionContainer from '~components/inspector/AccordionContainer'
 import ChildrenInspector from '~components/inspector/ChildrenInspector'
 import ParentInspector from '~components/inspector/ParentInspector'
 import CustomPropsPanel from './CustomPropsPanel'
-import { StylePanelsDef } from '~core/ComponentDefinitions'
+import { StylePanelsConfig } from '~core/Ocho'
 
 interface Props {
   isRoot: boolean
   showChildren: boolean
   parentIsRoot: boolean
-  stylePanels: StylePanelsDef
+  stylePanels: StylePanelsConfig
 }
 
 const StylesPanel: React.FC<Props> = ({

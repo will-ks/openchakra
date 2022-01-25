@@ -1,6 +1,6 @@
 import { fileOpen, fileSave } from 'browser-nativefs'
 import { INITIAL_COMPONENTS } from '~core/models/components'
-import { IComponents } from '~core/ComponentDefinitions'
+import { IComponents } from '~core/Ocho'
 
 export async function loadFromJSON() {
   const blob = await fileOpen({

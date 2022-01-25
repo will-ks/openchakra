@@ -1,5 +1,5 @@
 import { generateComponentCode, generateCode, formatCode } from './code'
-import { IComponents } from '~core/ComponentDefinitions'
+import { IComponents } from '~core/Ocho'
 
 const componentFixtures: IComponents = {
   root: {

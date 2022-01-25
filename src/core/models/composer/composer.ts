@@ -1,5 +1,5 @@
 import { generateId } from '~utils/generateId'
-import { ComponentType, IComponents } from '~core/ComponentDefinitions'
+import { ComponentType, IComponents } from '~core/Ocho'
 import { previewDefaultProps } from '~core/store'
 
 type AddNode = {

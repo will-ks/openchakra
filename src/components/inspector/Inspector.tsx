@@ -37,7 +37,7 @@ import ActionButton from './ActionButton'
 import { generateComponentCode, formatCode } from '~utils/code'
 import useClipboard from '~hooks/useClipboard'
 import { useInspectorUpdate } from '~contexts/inspector-context'
-import { useComponentDefinitions } from '~contexts/component-definition'
+import { useOcho } from '~contexts/ocho-context'
 
 const CodeActionButton = memo(() => {
   const [isLoading, setIsLoading] = useState(false)
@@ -78,7 +78,7 @@ const Inspector = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [componentName, onChangeComponentName] = useState('')
   const componentsNames = useSelector(getComponentNames)
-  const componentDefs = useComponentDefinitions()
+  const ocho = useOcho()
 
   const { clearActiveProps } = useInspectorUpdate()
 
@@ -96,9 +96,9 @@ const Inspector = () => {
       !!componentName.match(/^[A-Z]\w*$/g) &&
       !componentsNames.includes(componentName) &&
       // @ts-ignore
-      !componentDefs.componentNames.includes(componentName)
+      !ocho.componentNames.includes(componentName)
     )
-  }, [componentDefs.componentNames, componentName, componentsNames])
+  }, [ocho.componentNames, componentName, componentsNames])
 
   const { type, rootParentType, id, children } = component
 
@@ -112,6 +112,12 @@ const Inspector = () => {
     clearActiveProps()
   }, [clearActiveProps])
 
+  console.log('+++ componentDefs.stylePanels', ocho.stylePanels)
+  console.log('+++ component.type', component.type)
+  console.log(
+    '+++ componentDefs.stylePanels[component.type]',
+    ocho.stylePanels[component.type],
+  )
   return (
     <>
       <Box bg="white">
@@ -192,7 +198,7 @@ const Inspector = () => {
         isRoot={isRoot}
         showChildren={componentHasChildren}
         parentIsRoot={parentIsRoot}
-        stylePanels={componentDefs.stylePanels[component.type]!}
+        stylePanels={ocho.stylePanels[component.type]!}
       />
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay>

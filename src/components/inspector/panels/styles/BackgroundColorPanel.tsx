@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import ColorsControl from '~chakraui/inspector/controls/ColorsControl'
 import GradientControl from '~chakraui/inspector/controls/GradientControl'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
-import { isStylePropEnabled, targetStyleProp } from '~core/ComponentDefinitions'
+import { isStylePropEnabled, targetStyleProp } from '~core/Ocho'
 
 const BackgroundColorPanel: React.FC<StylePanelProps> = ({
   isRoot,

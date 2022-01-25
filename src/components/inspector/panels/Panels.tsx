@@ -1,20 +1,20 @@
 import React, { memo } from 'react'
 
-import { IComponent } from '~core/ComponentDefinitions'
-import { useComponentDefinitions } from '~contexts/component-definition'
+import { IComponent } from '~core/Ocho'
+import { useOcho } from '~contexts/ocho-context'
 
 const Panels: React.FC<{ component: IComponent; isRoot: boolean }> = ({
   component,
   isRoot,
 }) => {
-  const componentDefs = useComponentDefinitions()
+  const ocho = useOcho()
   const { type } = component
 
   if (isRoot) {
     return null
   }
 
-  const InspectorComponent = componentDefs.inspectorComponents[type]
+  const InspectorComponent = ocho.inspectorComponents[type]
   if (InspectorComponent) {
     return <InspectorComponent />
   }

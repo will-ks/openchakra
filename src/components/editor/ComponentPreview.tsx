@@ -2,12 +2,12 @@ import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 
 import { getComponentBy } from '~core/selectors/components'
-import { useComponentDefinitions } from '~contexts/component-definition'
+import { useOcho } from '~contexts/ocho-context'
 
 const ComponentPreview: React.FC<{
   componentName: string
 }> = ({ componentName, ...forwardedProps }) => {
-  const componentDefs = useComponentDefinitions()
+  const ocho = useOcho()
   const component = useSelector(getComponentBy(componentName))
   if (!component) {
     console.error(`ComponentPreview unavailable for component ${componentName}`)
@@ -17,7 +17,7 @@ const ComponentPreview: React.FC<{
   if (!type) {
     return null
   }
-  const prevCompo = componentDefs.previewComponents[type]
+  const prevCompo = ocho.previewComponents[type]
   if (!prevCompo) {
     return null
   }

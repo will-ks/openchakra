@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { XYCoord, useDrop, DragObjectWithType, useDrag } from 'react-dnd'
 import ElementListItem from './ElementListItem'
-import { IComponent } from '~core/ComponentDefinitions'
+import { IComponent } from '~core/Ocho'
 
 interface Props extends Pick<IComponent, 'type' | 'id'> {
   index: number

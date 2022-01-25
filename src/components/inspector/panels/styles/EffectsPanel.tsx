@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import TextControl from '~chakraui/inspector/controls/TextControl'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
-import { isStylePropEnabled, targetStyleProp } from '~core/ComponentDefinitions'
+import { isStylePropEnabled, targetStyleProp } from '~core/Ocho'
 
 const EffectsPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValue } = useForm()

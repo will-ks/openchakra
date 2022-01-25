@@ -5,7 +5,7 @@ import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import FlexPanel from './FlexPanel'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
-import { isStylePropEnabled, targetStyleProp } from '~core/ComponentDefinitions'
+import { isStylePropEnabled, targetStyleProp } from '~core/Ocho'
 
 const DisplayPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()
