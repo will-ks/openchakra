@@ -1,4 +1,3 @@
-
 export type ComponentDefDefault = {
   previewComponents: {
     [key: string]: {
@@ -8,14 +7,18 @@ export type ComponentDefDefault = {
         [key: string]: any
       }
     }
-  },
+  }
   stylePanelComponent: React.ComponentType<any>
   // The default style panel configuration to use for components, which do not specify and
   // explicit configuration
   stylePanelDef: StylePanelsDef
 
   // When a component is hovered with the mouse in the Editor, add to props to make it highglight. Eg. boxShadow
-  calcComponentHoverStyle: (component: IComponent, props: any, focusInput: boolean) => any
+  calcComponentHoverStyle: (
+    component: IComponent,
+    props: any,
+    focusInput: boolean,
+  ) => any
 
   // When a component is selected in the Editor, add to props to make it "selected". Eg. border
   calcComponentVisualHelperStyle: (component: IComponent, props: any) => any
@@ -26,12 +29,12 @@ export type StylePanelsDef = {
 }
 
 export type StylePanelDef = {
-  title: string,
+  title: string
   component: React.ComponentType<any>
   props?: {
     [key: string]: any
   }
-  children?: StylePanelsDef,
+  children?: StylePanelsDef
   // Complex config in case styleProps mapping is not enough/applicable
   config?: {
     [key: string]: any
@@ -42,8 +45,8 @@ export type StylePanelDef = {
 }
 
 export type StylePropDetail = {
-  targetName: string,
-  enabled?: boolean,
+  targetName: string
+  enabled?: boolean
   [key: string]: any
 }
 
@@ -71,7 +74,7 @@ export type ComponentDefs = {
 }
 
 type ComponentDefsType = ComponentDefs
-type ComponentDefsTypeKeys = Extract<keyof ComponentDefsType, string>;
+type ComponentDefsTypeKeys = Extract<keyof ComponentDefsType, string>
 
 // Same as in react-app-env.d.ts
 export type ComponentType = ComponentDefsTypeKeys
@@ -86,8 +89,7 @@ type MenuItems = Partial<
   {
     [k in ComponentType]: MenuItem
   }
-  >
-
+>
 
 export interface IComponent {
   children: string[]
@@ -118,7 +120,6 @@ export interface ComponentItemProps {
   rootParentType?: ComponentType
 }
 
-
 export type ComposedComponent = {
   components: IComponents
   root: string
@@ -145,7 +146,6 @@ export type MetaComponentType =
  * core OpenChakra components and all custom components via useComponentDefinitions()
  */
 class ComponentDefinitions {
-
   defs: ComponentDefs
   defDefaults: ComponentDefDefault
   componentNames: string[]
@@ -160,8 +160,10 @@ class ComponentDefinitions {
   targetComponents
   stylePanels
 
-
-  constructor(componendDefs: ComponentDefs, componentDefaults: ComponentDefDefault) {
+  constructor(
+    componendDefs: ComponentDefs,
+    componentDefaults: ComponentDefDefault,
+  ) {
     this.defs = componendDefs
     this.defDefaults = componentDefaults
     this.componentNames = this.collectComponentNames()
@@ -176,17 +178,17 @@ class ComponentDefinitions {
     this.targetComponents = this.collectTargetComponents()
     this.stylePanels = this.collectStylePanels()
 
-    console.log("*** componentNames", this.componentNames)
-    console.log("*** rootComponentNames", this.rootComponentNames)
-    console.log("*** childComponentNames", this.childComponentNames)
-    console.log("*** menuItems", this.menuItems)
-    console.log("*** previewComponents", this.previewComponents)
-    console.log("*** rootDraggables", this.rootDraggables)
-    console.log("*** componentModelBuilders", this.componentModelBuilders)
-    console.log("*** inspectorComponents", this.inspectorComponents)
-    console.log("*** previewDefaultProps", this.previewDefaultProps)
-    console.log("*** targetComponents", this.targetComponents)
-    console.log("*** stylePanels", this.stylePanels)
+    console.log('*** componentNames', this.componentNames)
+    console.log('*** rootComponentNames', this.rootComponentNames)
+    console.log('*** childComponentNames', this.childComponentNames)
+    console.log('*** menuItems', this.menuItems)
+    console.log('*** previewComponents', this.previewComponents)
+    console.log('*** rootDraggables', this.rootDraggables)
+    console.log('*** componentModelBuilders', this.componentModelBuilders)
+    console.log('*** inspectorComponents', this.inspectorComponents)
+    console.log('*** previewDefaultProps', this.previewDefaultProps)
+    console.log('*** targetComponents', this.targetComponents)
+    console.log('*** stylePanels', this.stylePanels)
   }
 
   /**
@@ -196,7 +198,7 @@ class ComponentDefinitions {
   collectComponentNames() {
     //: ComponentDefsTypeKeys[]
     return Object.keys(this.defs).filter(
-      k => k != '_Defaults',
+      k => k !== '_Defaults',
     ) as ComponentDefsTypeKeys[]
   }
 
@@ -277,12 +279,12 @@ class ComponentDefinitions {
     const previewComponents: Partial<
       {
         [k in ComponentType]: {
-        previewComponent: React.ComponentType<any>
-        component: React.ComponentType<any>
-        props?: { [key: string]: any }
+          previewComponent: React.ComponentType<any>
+          component: React.ComponentType<any>
+          props?: { [key: string]: any }
+        }
       }
-      }
-      > = {}
+    > = {}
 
     Object.keys(this.defs).forEach(compoName => {
       const compoDef = this.defs[compoName]
@@ -296,12 +298,12 @@ class ComponentDefinitions {
       } else {
         // Find in one of the default previewComponents where compoName appears in the section's
         // applyTo
-        const sectionKey = Object.keys(
-          this.defDefaults.previewComponents,
-        ).find(sectionKey => {
-          const section = this.defDefaults.previewComponents[sectionKey]
-          return section.applyTo.includes(compoName)
-        })
+        const sectionKey = Object.keys(this.defDefaults.previewComponents).find(
+          sectionKey => {
+            const section = this.defDefaults.previewComponents[sectionKey]
+            return section.applyTo.includes(compoName)
+          },
+        )
         if (!sectionKey) {
           throw Error(`No preview component defined for ${compoName}`)
         }
@@ -322,11 +324,13 @@ class ComponentDefinitions {
    * @param defs
    */
   collectRootDraggables() {
-    const draggables: string[] = this.collectRootComponentNames().filter(name => {
-      const obj = this.defs[name]
-      // For roots: if undefined defaults to true
-      return obj.rootDraggable === undefined || obj.rootDraggable === true
-    })
+    const draggables: string[] = this.collectRootComponentNames().filter(
+      name => {
+        const obj = this.defs[name]
+        // For roots: if undefined defaults to true
+        return obj.rootDraggable === undefined || obj.rootDraggable === true
+      },
+    )
 
     // Add meta for roots with children
     draggables.forEach(name => {
@@ -359,7 +363,9 @@ class ComponentDefinitions {
   }
 
   collectInspectorComponents() {
-    const inspectorComponents: Partial<{ [k: string]: React.ComponentType<any> }> = {}
+    const inspectorComponents: Partial<{
+      [k: string]: React.ComponentType<any>
+    }> = {}
     Object.keys(this.defs).forEach(name => {
       const obj = this.defs[name]
       if (obj.inspectorComponent) {
@@ -396,44 +402,51 @@ class ComponentDefinitions {
       for (const [key, val] of Object.entries(source)) {
         if (val !== null && typeof val === `object`) {
           // @ts-ignore
-          target[key] = val;
-          merge(val, target[key]);
+          target[key] = val
+          merge(val, target[key])
         } else {
-          target[key] = val;
+          target[key] = val
         }
       }
-      return target; // we're replacing in-situ, so this is more for chaining than anything else
+      return target // we're replacing in-situ, so this is more for chaining than anything else
     }
 
     function cloneObject(obj: any) {
-      var clone = {} as any;
-      for(var i in obj) {
-        if(obj[i] != null &&  typeof(obj[i])=="object")
-          clone[i] = cloneObject(obj[i]);
-        else
-          clone[i] = obj[i];
+      var clone = {} as any
+      for (var i in obj) {
+        if (obj[i] != null && typeof obj[i] == 'object')
+          clone[i] = cloneObject(obj[i])
+        else clone[i] = obj[i]
       }
-      return clone;
+      return clone
     }
 
     const stylePanels: Partial<{ [k: string]: StylePanelsDef }> = {}
-      Object.keys(this.defs).forEach(name => {
-        const obj = this.defs[name]
-        let stylePanelsDef = obj.stylePanelsDef || this.defDefaults.stylePanelDef
-        if (obj.stylePanelsOverride) {
-          // we will modify stylePanelsDef, so clone it
-          stylePanelsDef = cloneObject(stylePanelsDef)
-          // Merge the override into the default one
-          stylePanelsDef = merge(obj.stylePanelsOverride, stylePanelsDef)
-        }
-        stylePanels[name] = stylePanelsDef
-      })
+    Object.keys(this.defs).forEach(name => {
+      const obj = this.defs[name]
+      let stylePanelsDef = obj.stylePanelsDef || this.defDefaults.stylePanelDef
+      if (obj.stylePanelsOverride) {
+        // we will modify stylePanelsDef, so clone it
+        stylePanelsDef = cloneObject(stylePanelsDef)
+        // Merge the override into the default one
+        stylePanelsDef = merge(obj.stylePanelsOverride, stylePanelsDef)
+      }
+      stylePanels[name] = stylePanelsDef
+    })
 
-      return stylePanels
+    return stylePanels
   }
 
-  calcComponentHoverStyle(component: IComponent, props: any, focusInput: boolean) {
-    return this.defDefaults.calcComponentHoverStyle(component, props, focusInput)
+  calcComponentHoverStyle(
+    component: IComponent,
+    props: any,
+    focusInput: boolean,
+  ) {
+    return this.defDefaults.calcComponentHoverStyle(
+      component,
+      props,
+      focusInput,
+    )
   }
 
   calcComponentVisualHelperStyle(component: IComponent, props: any) {
@@ -441,21 +454,19 @@ class ComponentDefinitions {
   }
 }
 
-
-
 function isStylePropEnabled(prop: string, panelDef: StylePanelDef) {
   const propDef = panelDef.styleProps[prop]
   if (!propDef) {
     return true
   }
-  if (typeof propDef === "object") {
+  if (typeof propDef === 'object') {
     // if explicitly set, then use this value
-    if (typeof (propDef as StylePropDetail).enabled !== "undefined") {
+    if (typeof (propDef as StylePropDetail).enabled !== 'undefined') {
       return (propDef as StylePropDetail).enabled
     }
     // .. otherwise default to true
   }
-  return true;
+  return true
 }
 
 function targetStyleProp(prop: string, panelDef: StylePanelDef) {
@@ -463,18 +474,22 @@ function targetStyleProp(prop: string, panelDef: StylePanelDef) {
   if (!propDef) {
     return prop
   }
-  if (typeof propDef === "object") {
+  if (typeof propDef === 'object') {
     return (propDef as StylePropDetail).targetName
   }
   return propDef
 }
 
-function stylePropDetail(prop: string, detail: string, panelDef: StylePanelDef) {
+function stylePropDetail(
+  prop: string,
+  detail: string,
+  panelDef: StylePanelDef,
+) {
   const propDef = panelDef.styleProps[prop]
   if (!propDef) {
     return null
   }
-  if (typeof propDef === "object") {
+  if (typeof propDef === 'object') {
     return propDef[detail]
   }
   return null
@@ -482,8 +497,4 @@ function stylePropDetail(prop: string, detail: string, panelDef: StylePanelDef) 
 
 export default ComponentDefinitions
 
-export  {
-  isStylePropEnabled,
-  targetStyleProp,
-  stylePropDetail
-}
+export { isStylePropEnabled, targetStyleProp, stylePropDetail }

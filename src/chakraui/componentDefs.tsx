@@ -44,14 +44,12 @@ import AlertDescriptionPanel from '~chakraui/inspector/panels/AlertDescriptionPa
 import FlexPanel from '~components/inspector/panels/styles/FlexPanel'
 import StackPanel from '~chakraui/inspector/panels/StackPanel'
 import FormControlPanel from '~chakraui/inspector/panels/FormControlPanel'
-import TabsPanel from '~chakraui/inspector/panels/TabsPanel'
 import InputPanel from '~chakraui/inspector/panels/InputPanel'
 import RadioPanel from '~chakraui/inspector/panels/RadioPanel'
 import RadioGroupPanel from '~chakraui/inspector/panels/RadioGroupPanel'
 import SelectPanel from '~chakraui/inspector/panels/SelectPanel'
 import ListPanel from '~chakraui/inspector/panels/ListPanel'
 import ListItemPanel from '~chakraui/inspector/panels/ListItemPanel'
-import ListIconPanel from '~chakraui/inspector/panels/ListIconPanel'
 import AccordionItemPanel from '~chakraui/inspector/panels/AccordionItemPanel'
 import AccordionPanel from '~chakraui/inspector/panels/AccordionPanel'
 import FormLabelPanel from '~chakraui/inspector/panels/FormLabelPanel'
@@ -62,7 +60,6 @@ import NumberInputPanel from '~chakraui/inspector/panels/NumberInputPanel'
 import AspectRatioPanel from '~chakraui/inspector/panels/AspectRatioPanel'
 import BreadcrumbPanel from '~chakraui/inspector/panels/BreadcrumbPanel'
 import BreadcrumbItemPanel from '~chakraui/inspector/panels/BreadcrumbItemPanel'
-import { BreadcrumbLink } from '@chakra-ui/react'
 import {
   buildAccordion,
   buildAlert,
@@ -73,17 +70,15 @@ import {
 } from '~core/models/composer/builder'
 import React from 'react'
 import {
-  BuilderFn,
   ComponentDefDefault,
-  ComponentDefs, IComponent,
-  MetaComponentType,
-  StylePanelsDef
+  ComponentDefs,
+  IComponent,
+  StylePanelsDef,
 } from '~core/ComponentDefinitions'
 import AccordionPreview, {
   AccordionButtonPreview,
   AccordionItemPreview,
   AccordionPanelPreview,
-  setAccordionWhitelist,
 } from '~chakraui/previews/AccordionPreview'
 import AlertPreview from '~chakraui/previews/AlertPreview'
 import AvatarPreview, {
@@ -96,16 +91,16 @@ import InputRightAddonPreview from '~chakraui/previews/InputRightAddonPreview'
 import { InputRightElementPreview } from '~chakraui/previews/InputRightElement'
 import { InputLeftElementPreview } from '~chakraui/previews/InputLeftElement'
 import StackPreview from '~chakraui/previews/StackPreview'
-import StylesPanel from "~components/inspector/panels/StylesPanel";
-import BorderPanel from "~components/inspector/panels/styles/BorderPanel";
-import DimensionPanel from "~components/inspector/panels/styles/DimensionPanel";
-import EffectsPanel from "~components/inspector/panels/styles/EffectsPanel";
-import DisplayPanel from "~components/inspector/panels/styles/DisplayPanel";
-import PaddingPanel from "~components/inspector/panels/styles/PaddingPanel";
-import TextPanel from "~components/inspector/panels/styles/TextPanel";
-import BackgroundColorPanel from "~components/inspector/panels/styles/BackgroundColorPanel";
-import SpacingPanel from "~components/inspector/panels/styles/SpacingPanel";
-import {ComponentType} from "~core/ComponentDefinitions";
+import StylesPanel from '~components/inspector/panels/StylesPanel'
+import BorderPanel from '~components/inspector/panels/styles/BorderPanel'
+import DimensionPanel from '~components/inspector/panels/styles/DimensionPanel'
+import EffectsPanel from '~components/inspector/panels/styles/EffectsPanel'
+import DisplayPanel from '~components/inspector/panels/styles/DisplayPanel'
+import PaddingPanel from '~components/inspector/panels/styles/PaddingPanel'
+import TextPanel from '~components/inspector/panels/styles/TextPanel'
+import BackgroundColorPanel from '~components/inspector/panels/styles/BackgroundColorPanel'
+import SpacingPanel from '~components/inspector/panels/styles/SpacingPanel'
+import { ComponentType } from '~core/ComponentDefinitions'
 // using ChildrenControl following original Panel.tsx logic
 // import TextPanel from "~components/inspector/panels/styles/TextPanel";
 
@@ -115,35 +110,28 @@ import {ComponentType} from "~core/ComponentDefinitions";
 // for chakraui
 const chakrauiStylePanels: StylePanelsDef = {
   Layout: {
-    title: "Layout",
+    title: 'Layout',
     component: DisplayPanel,
-    children:
-      {
-        FlexPanel: {
-          title: "Flex",
-          component: FlexPanel,
-          styleProps: {
-            alignItems: "alignItems",
-            flexDirection: "flexDirection",
-            justifyContent: "justifyContent",
-          }
-        }
+    children: {
+      FlexPanel: {
+        title: 'Flex',
+        component: FlexPanel,
+        styleProps: {
+          alignItems: 'alignItems',
+          flexDirection: 'flexDirection',
+          justifyContent: 'justifyContent',
+        },
       },
+    },
     styleProps: {
       display: {
-        targetName: "display",
-        options: [
-          "block",
-          "flex",
-          "inline",
-          "grid",
-          "inline-block",
-        ]
-      }
-    }
+        targetName: 'display',
+        options: ['block', 'flex', 'inline', 'grid', 'inline-block'],
+      },
+    },
   },
   Spacing: {
-    title: "Spacing",
+    title: 'Spacing',
     component: SpacingPanel,
     // PaddingPanel handles both margin and padding, normal styleProps based config is not used
     config: {
@@ -162,67 +150,63 @@ const chakrauiStylePanels: StylePanelsDef = {
         top: 'pt',
       },
     },
-    styleProps: {}
+    styleProps: {},
   },
   Size: {
-    title: "Size",
+    title: 'Size',
     component: DimensionPanel,
     styleProps: {
-      width: "width",
-      height: "height",
-      minWidth: "minWidth",
-      minHeight: "minHeight",
-      maxWidth: "maxWidth",
-      maxHeight: "maxHeight",
+      width: 'width',
+      height: 'height',
+      minWidth: 'minWidth',
+      minHeight: 'minHeight',
+      maxWidth: 'maxWidth',
+      maxHeight: 'maxHeight',
       // Example of detailed setting: the value maybe disabled
       overflow: {
-        targetName: "overflow",
+        targetName: 'overflow',
         enabled: true,
         // configuration of the setting
-        options: [
-          "visible",
-          "scroll",
-          "visible",
-        ]
-      }
-    }
+        options: ['visible', 'scroll', 'visible'],
+      },
+    },
   },
   Typography: {
-    title: "Typography",
+    title: 'Typography',
     component: TextPanel,
     styleProps: {
-      fontWeight: "fontWeight",
-      fontStyle: "fontStyle",
-      textAlign: "textAlign",
-      fontSize: "fontSize",
-      letterSpacing: "letterSpacing",
-      lineHeight: "lineHeight",
-      color: "color"
-    }
+      fontWeight: 'fontWeight',
+      fontStyle: 'fontStyle',
+      textAlign: 'textAlign',
+      fontSize: 'fontSize',
+      letterSpacing: 'letterSpacing',
+      lineHeight: 'lineHeight',
+      color: 'color',
+    },
   },
   Backgrounds: {
-    title: "Backgrounds",
+    title: 'Backgrounds',
     component: BackgroundColorPanel,
     styleProps: {
-      backgroundColor: "backgroundColor",
-      bgGradient: "bgGradient"
-    }
+      backgroundColor: 'backgroundColor',
+      bgGradient: 'bgGradient',
+    },
   },
   Border: {
-    title: "Border",
+    title: 'Border',
     component: BorderPanel,
-      styleProps: {
-      border: "border",
-        borderRadius: "borderRadius",
-    }
+    styleProps: {
+      border: 'border',
+      borderRadius: 'borderRadius',
+    },
   },
   Effect: {
-    title: "Effect",
+    title: 'Effect',
     component: EffectsPanel,
-      styleProps: {
-      opacity: "opacity",
-        boxShadow: "boxShadow"
-    }
+    styleProps: {
+      opacity: 'opacity',
+      boxShadow: 'boxShadow',
+    },
   },
 }
 
@@ -309,10 +293,14 @@ const chakrauiComponentDefDefaults: ComponentDefDefault = {
   stylePanelDef: chakrauiStylePanels,
 
   // When a component is hovered with the mouse in the Editor, add to props to make it highglight. Eg. boxShadow
-  calcComponentHoverStyle: (component: IComponent, props: any, focusInput: boolean)  => {
+  calcComponentHoverStyle: (
+    component: IComponent,
+    props: any,
+    focusInput: boolean,
+  ) => {
     return {
       ...props,
-      boxShadow: `${focusInput ? '#ffc4c7' : '#4FD1C5'} 0px 0px 0px 2px inset`
+      boxShadow: `${focusInput ? '#ffc4c7' : '#4FD1C5'} 0px 0px 0px 2px inset`,
     }
   },
 
@@ -323,11 +311,10 @@ const chakrauiComponentDefDefaults: ComponentDefDefault = {
       border: `1px dashed #718096`,
       padding: props.p || props.padding ? props.p || props.padding : 4,
     }
-  }
-
+  },
 }
 
-const chakrauiComponentDefs : ComponentDefs = {
+const chakrauiComponentDefs: ComponentDefs = {
   Accordion: {
     component: Chakra['Accordion'],
     previewComponent: AccordionPreview,
@@ -335,15 +322,15 @@ const chakrauiComponentDefs : ComponentDefs = {
     componentModelBuilder: buildAccordion,
     stylePanelsOverride: {
       Backgrounds: {
-        title: "Accordion BG",
+        title: 'Accordion BG',
         component: BackgroundColorPanel,
         styleProps: {
-          backgroundColor: "bg",
+          backgroundColor: 'bg',
           bgGradient: {
-            targetName: "bgGradient",
-            enabled: false
-          }
-        }
+            targetName: 'bgGradient',
+            enabled: false,
+          },
+        },
       },
     },
     children: [
@@ -819,7 +806,4 @@ const chakrauiComponentDefs : ComponentDefs = {
 // // dependency
 // setAccordionWhitelist(AccordionWhitelist)
 
-export {
-  chakrauiComponentDefs,
-  chakrauiComponentDefDefaults
-}
+export { chakrauiComponentDefs, chakrauiComponentDefDefaults }
