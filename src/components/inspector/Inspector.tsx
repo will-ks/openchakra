@@ -37,7 +37,7 @@ import ActionButton from './ActionButton'
 import { generateComponentCode, formatCode } from '~utils/code'
 import useClipboard from '~hooks/useClipboard'
 import { useInspectorUpdate } from '~contexts/inspector-context'
-import {useComponentDefinitions} from "~contexts/component-definition";
+import { useComponentDefinitions } from '~contexts/component-definition'
 
 const CodeActionButton = memo(() => {
   const [isLoading, setIsLoading] = useState(false)
@@ -98,7 +98,7 @@ const Inspector = () => {
       // @ts-ignore
       !componentDefs.componentNames.includes(componentName)
     )
-  }, [componentName, componentsNames])
+  }, [componentDefs.componentNames, componentName, componentsNames])
 
   const { type, rootParentType, id, children } = component
 
