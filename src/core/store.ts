@@ -9,7 +9,7 @@ import { ComponentsStateWithUndo } from './models/components'
 import { AppState } from './models/app'
 import models from './models'
 import filterUndoableActions from '~utils/undo'
-import ComponentDefinitions from "~core/ComponentDefinitions";
+import ComponentDefinitions from '~core/ComponentDefinitions'
 
 export type RootState = {
   app: AppState
@@ -64,7 +64,4 @@ function initStore(componentDefs: ComponentDefinitions) {
   return createWrapper<RootState>(makeStore)
 }
 
-export {
-  initStore,
-  previewDefaultProps
-}
+export { initStore, previewDefaultProps }

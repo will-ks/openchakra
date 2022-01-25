@@ -3,17 +3,18 @@ import { Select } from '@chakra-ui/react'
 import FormControl from '~chakraui/inspector/controls/FormControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
-import {StylePanelProps} from "~components/inspector/panels/styles/types";
-import {targetStyleProp} from "~core/ComponentDefinitions";
+import { StylePanelProps } from '~components/inspector/panels/styles/types'
+import { targetStyleProp } from '~core/ComponentDefinitions'
 
-const FlexPanel: React.FC<StylePanelProps> = ({
-  isRoot,
-  panelDef
-}) => {
+const FlexPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()
   const alignItems = usePropsSelector(targetStyleProp('alignItems', panelDef))
-  const flexDirection = usePropsSelector(targetStyleProp('flexDirection', panelDef))
-  const justifyContent = usePropsSelector(targetStyleProp('justifyContent', panelDef))
+  const flexDirection = usePropsSelector(
+    targetStyleProp('flexDirection', panelDef),
+  )
+  const justifyContent = usePropsSelector(
+    targetStyleProp('justifyContent', panelDef),
+  )
 
   return (
     <>

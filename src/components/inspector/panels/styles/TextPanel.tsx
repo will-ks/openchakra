@@ -13,13 +13,10 @@ import { ComboboxOption } from '@reach/combobox'
 import InputSuggestion from '~components/inspector/inputs/InputSuggestion'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
-import {StylePanelProps} from "~components/inspector/panels/styles/types";
-import {isStylePropEnabled, targetStyleProp} from "~core/ComponentDefinitions";
+import { StylePanelProps } from '~components/inspector/panels/styles/types'
+import { isStylePropEnabled, targetStyleProp } from '~core/ComponentDefinitions'
 
-const TextPanel: React.FC<StylePanelProps> = ({
-  isRoot,
-  panelDef
-}) => {
+const TextPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValue, setValueFromEvent } = useForm()
   const theme = useTheme()
 
@@ -27,46 +24,52 @@ const TextPanel: React.FC<StylePanelProps> = ({
   const fontStyle = usePropsSelector(targetStyleProp('fontStyle', panelDef))
   const textAlign = usePropsSelector(targetStyleProp('textAlign', panelDef))
   const fontSize = usePropsSelector(targetStyleProp('fontSize', panelDef))
-  const letterSpacing = usePropsSelector(targetStyleProp('letterSpacing', panelDef))
+  const letterSpacing = usePropsSelector(
+    targetStyleProp('letterSpacing', panelDef),
+  )
   const lineHeight = usePropsSelector(targetStyleProp('lineHeight', panelDef))
 
   return (
     <>
-      {
-        isStylePropEnabled('fontWeight', panelDef) && isStylePropEnabled('fontStyle', panelDef)
-        && <FormControl label="Style">
-          <IconButton
-            mr={1}
-            aria-label="bold"
-            icon={<GoBold />}
-            onClick={() => {
-              setValue(targetStyleProp('fontWeight', panelDef), fontWeight ? null : 'bold')
-            }}
-            size="xs"
-            colorScheme={fontWeight ? 'whatsapp' : 'gray'}
-            variant={fontWeight ? 'solid' : 'outline'}
-          >
-            Bold
-          </IconButton>
-          <IconButton
-            aria-label="italic"
-            icon={<GoItalic />}
-            onClick={() => {
-              setValue(targetStyleProp('fontStyle', panelDef), fontStyle === 'italic' ? null : 'italic')
-            }}
-            size="xs"
-            colorScheme={fontStyle === 'italic' ? 'whatsapp' : 'gray'}
-            variant={fontStyle === 'italic' ? 'solid' : 'outline'}
-          >
-            Italic
-          </IconButton>
-        </FormControl>
+      {isStylePropEnabled('fontWeight', panelDef) &&
+        isStylePropEnabled('fontStyle', panelDef) && (
+          <FormControl label="Style">
+            <IconButton
+              mr={1}
+              aria-label="bold"
+              icon={<GoBold />}
+              onClick={() => {
+                setValue(
+                  targetStyleProp('fontWeight', panelDef),
+                  fontWeight ? null : 'bold',
+                )
+              }}
+              size="xs"
+              colorScheme={fontWeight ? 'whatsapp' : 'gray'}
+              variant={fontWeight ? 'solid' : 'outline'}
+            >
+              Bold
+            </IconButton>
+            <IconButton
+              aria-label="italic"
+              icon={<GoItalic />}
+              onClick={() => {
+                setValue(
+                  targetStyleProp('fontStyle', panelDef),
+                  fontStyle === 'italic' ? null : 'italic',
+                )
+              }}
+              size="xs"
+              colorScheme={fontStyle === 'italic' ? 'whatsapp' : 'gray'}
+              variant={fontStyle === 'italic' ? 'solid' : 'outline'}
+            >
+              Italic
+            </IconButton>
+          </FormControl>
+        )}
 
-      }
-
-      {
-        isStylePropEnabled('textAlign', panelDef)
-        && <FormControl label="Text align">
+      {isStylePropEnabled('textAlign', panelDef) && (
+        <FormControl label="Text align">
           <ButtonGroup size="xs" isAttached>
             <IconButton
               aria-label="bold"
@@ -109,56 +112,57 @@ const TextPanel: React.FC<StylePanelProps> = ({
             />
           </ButtonGroup>
         </FormControl>
-      }
-      {
-        isStylePropEnabled('fontSize', panelDef)
-        && <FormControl label="Font size" htmlFor="fontSize">
+      )}
+      {isStylePropEnabled('fontSize', panelDef) && (
+        <FormControl label="Font size" htmlFor="fontSize">
           <InputSuggestion
             value={fontSize}
             handleChange={setValueFromEvent}
-            name={targetStyleProp("fontSize", panelDef)}
+            name={targetStyleProp('fontSize', panelDef)}
           >
             {Object.keys(theme.fontSizes).map(option => (
               <ComboboxOption key={option} value={option} />
             ))}
           </InputSuggestion>
         </FormControl>
-      }
+      )}
 
-      {
-        isStylePropEnabled('color', panelDef)
-        &&  <ColorsControl withFullColor enableHues name={targetStyleProp("color", panelDef)} label="Color" />
-      }
+      {isStylePropEnabled('color', panelDef) && (
+        <ColorsControl
+          withFullColor
+          enableHues
+          name={targetStyleProp('color', panelDef)}
+          label="Color"
+        />
+      )}
 
-      {
-        isStylePropEnabled('lineHeight', panelDef)
-        && <FormControl label="Line height" htmlFor="lineHeight">
+      {isStylePropEnabled('lineHeight', panelDef) && (
+        <FormControl label="Line height" htmlFor="lineHeight">
           <InputSuggestion
             value={lineHeight}
             handleChange={setValueFromEvent}
-            name={targetStyleProp("lineHeight", panelDef)}
+            name={targetStyleProp('lineHeight', panelDef)}
           >
             {Object.keys(theme.lineHeights).map(option => (
               <ComboboxOption key={option} value={option} />
             ))}
           </InputSuggestion>
         </FormControl>
-      }
+      )}
 
-      {
-        isStylePropEnabled('letterSpacing', panelDef)
-        && <FormControl label="Letter spacing" htmlFor="letterSpacing">
+      {isStylePropEnabled('letterSpacing', panelDef) && (
+        <FormControl label="Letter spacing" htmlFor="letterSpacing">
           <InputSuggestion
             value={letterSpacing}
             handleChange={setValueFromEvent}
-            name={targetStyleProp("letterSpacing", panelDef)}
+            name={targetStyleProp('letterSpacing', panelDef)}
           >
             {Object.keys(theme.letterSpacings).map(option => (
               <ComboboxOption key={option} value={option} />
             ))}
           </InputSuggestion>
         </FormControl>
-      }
+      )}
     </>
   )
 }

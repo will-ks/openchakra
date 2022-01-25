@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 
-import {IComponent} from "~core/ComponentDefinitions";
-import {useComponentDefinitions} from "~contexts/component-definition";
+import { IComponent } from '~core/ComponentDefinitions'
+import { useComponentDefinitions } from '~contexts/component-definition'
 
 const Panels: React.FC<{ component: IComponent; isRoot: boolean }> = ({
   component,
@@ -16,7 +16,7 @@ const Panels: React.FC<{ component: IComponent; isRoot: boolean }> = ({
 
   const InspectorComponent = componentDefs.inspectorComponents[type]
   if (InspectorComponent) {
-    return <InspectorComponent/>
+    return <InspectorComponent />
   }
   return null
 }

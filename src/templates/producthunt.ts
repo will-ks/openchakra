@@ -1,4 +1,4 @@
-import {IComponents} from "~core/ComponentDefinitions";
+import { IComponents } from '~core/ComponentDefinitions'
 
 export const productHunt: IComponents = {
   root: {

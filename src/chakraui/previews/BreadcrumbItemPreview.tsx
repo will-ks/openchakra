@@ -3,8 +3,8 @@ import { useInteractive } from '~hooks/useInteractive'
 import { useDropComponent } from '~hooks/useDropComponent'
 import ComponentPreview from '~components/editor/ComponentPreview'
 import { BreadcrumbItem } from '@chakra-ui/react'
-import {IPreviewProps} from "~core/ComponentDefinitions";
-import {ComponentType} from "~core/ComponentDefinitions";
+import { IPreviewProps } from '~core/ComponentDefinitions'
+import { ComponentType } from '~core/ComponentDefinitions'
 
 const BreadcrumbItemPreview: React.FC<IPreviewProps> = ({ component }) => {
   const acceptedTypes = ['BreadcrumbLink'] as ComponentType[]

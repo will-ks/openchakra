@@ -1,6 +1,6 @@
-import {StylePanelDef} from "~core/ComponentDefinitions";
+import { StylePanelDef } from '~core/ComponentDefinitions'
 
 export type StylePanelProps = {
-  panelDef: StylePanelDef,
+  panelDef: StylePanelDef
   isRoot: boolean
 }

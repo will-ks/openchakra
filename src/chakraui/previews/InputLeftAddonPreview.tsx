@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, InputLeftAddon } from '@chakra-ui/react'
 import { useInteractive } from '~hooks/useInteractive'
-import {IComponent} from "~core/ComponentDefinitions";
+import { IComponent } from '~core/ComponentDefinitions'
 
 const InputLeftAddonPreview: React.FC<{ component: IComponent }> = ({
   component,

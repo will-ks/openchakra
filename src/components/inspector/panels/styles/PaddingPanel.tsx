@@ -16,8 +16,8 @@ import {
 } from '@chakra-ui/icons'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
-import {StylePanelProps} from "~components/inspector/panels/styles/types";
-import {stylePropDetail} from "~core/ComponentDefinitions";
+import { StylePanelProps } from '~components/inspector/panels/styles/types'
+import { stylePropDetail } from '~core/ComponentDefinitions'
 
 type PaddingPanelPropsType = {
   type: 'margin' | 'padding'
@@ -43,7 +43,7 @@ const DEFAULT_ATTRIBUTES = {
 const PaddingPanel: React.FC<StylePanelProps & PaddingPanelPropsType> = ({
   isRoot,
   panelDef,
-  type
+  type,
 }) => {
   const { setValueFromEvent } = useForm()
   const ATTRIBUTES = panelDef.config || DEFAULT_ATTRIBUTES

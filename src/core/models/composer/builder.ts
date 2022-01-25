@@ -1,5 +1,5 @@
 import Composer from './composer'
-import {IComponents} from "~core/ComponentDefinitions";
+import { IComponents } from '~core/ComponentDefinitions'
 
 type ComposedComponent = {
   components: IComponents

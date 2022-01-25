@@ -1,6 +1,6 @@
 import { generateId } from '~utils/generateId'
-import {ComponentType, IComponents} from "~core/ComponentDefinitions";
-import {previewDefaultProps} from "~core/store";
+import { ComponentType, IComponents } from '~core/ComponentDefinitions'
+import { previewDefaultProps } from '~core/store'
 
 type AddNode = {
   type: ComponentType

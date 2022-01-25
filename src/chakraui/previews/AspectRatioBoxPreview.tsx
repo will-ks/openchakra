@@ -3,7 +3,7 @@ import { Box, AspectRatio } from '@chakra-ui/react'
 import { useInteractive } from '~hooks/useInteractive'
 import { useDropComponent } from '~hooks/useDropComponent'
 import ComponentPreview from '~components/editor/ComponentPreview'
-import {IComponent} from "~core/ComponentDefinitions";
+import { IComponent } from '~core/ComponentDefinitions'
 
 const AspectRatioPreview: React.FC<{ component: IComponent }> = ({
   component,

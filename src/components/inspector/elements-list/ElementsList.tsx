@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
 import ElementListItem from './ElementListItemDraggable'
-import {IComponent} from "~core/ComponentDefinitions";
+import { IComponent } from '~core/ComponentDefinitions'
 
 interface Props {
   elements: IComponent[]

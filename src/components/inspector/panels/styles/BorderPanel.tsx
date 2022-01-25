@@ -1,21 +1,26 @@
 import React, { memo } from 'react'
 import TextControl from '~chakraui/inspector/controls/TextControl'
-import {StylePanelProps} from "~components/inspector/panels/styles/types";
-import {isStylePropEnabled, targetStyleProp} from "~core/ComponentDefinitions";
+import { StylePanelProps } from '~components/inspector/panels/styles/types'
+import { isStylePropEnabled, targetStyleProp } from '~core/ComponentDefinitions'
 
 const BackgroundColorPanel: React.FC<StylePanelProps> = ({
   isRoot,
-  panelDef
+  panelDef,
 }) => {
-
   return (
     <>
-      {isStylePropEnabled("border", panelDef)
-      && <TextControl name={targetStyleProp("border", panelDef)} label="Border" />
-      }
-      {isStylePropEnabled("borderRadius", panelDef)
-      && <TextControl name={targetStyleProp("borderRadius", panelDef)} label="Border radius" />
-      }
+      {isStylePropEnabled('border', panelDef) && (
+        <TextControl
+          name={targetStyleProp('border', panelDef)}
+          label="Border"
+        />
+      )}
+      {isStylePropEnabled('borderRadius', panelDef) && (
+        <TextControl
+          name={targetStyleProp('borderRadius', panelDef)}
+          label="Border radius"
+        />
+      )}
     </>
   )
 }

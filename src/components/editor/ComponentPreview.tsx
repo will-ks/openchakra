@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 
 import { getComponentBy } from '~core/selectors/components'
-import {useComponentDefinitions} from "~contexts/component-definition";
+import { useComponentDefinitions } from '~contexts/component-definition'
 
 const ComponentPreview: React.FC<{
   componentName: string
@@ -22,9 +22,14 @@ const ComponentPreview: React.FC<{
     return null
   }
   const PreviewComponent = prevCompo.previewComponent
-  return <PreviewComponent component={component} type={prevCompo.component} {...prevCompo.props} {...forwardedProps}/>
-
-
+  return (
+    <PreviewComponent
+      component={component}
+      type={prevCompo.component}
+      {...prevCompo.props}
+      {...forwardedProps}
+    />
+  )
 
   // switch (type) {
   //   // Simple components

@@ -2,7 +2,7 @@ import React from 'react'
 import { useDrag } from 'react-dnd'
 import { Text, Box } from '@chakra-ui/react'
 import { DragHandleIcon } from '@chakra-ui/icons'
-import {ComponentItemProps} from "~core/ComponentDefinitions";
+import { ComponentItemProps } from '~core/ComponentDefinitions'
 
 const DragItem: React.FC<ComponentItemProps> = ({
   type,

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { useInteractive } from '~hooks/useInteractive'
 import iconsList from '~iconsList'
 import { Select } from '@chakra-ui/react'
-import {IComponent} from "~core/ComponentDefinitions";
+import { IComponent } from '~core/ComponentDefinitions'
 
 interface IProps {
   component: IComponent

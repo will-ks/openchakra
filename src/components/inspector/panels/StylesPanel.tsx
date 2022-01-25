@@ -5,12 +5,12 @@ import AccordionContainer from '~components/inspector/AccordionContainer'
 import ChildrenInspector from '~components/inspector/ChildrenInspector'
 import ParentInspector from '~components/inspector/ParentInspector'
 import CustomPropsPanel from './CustomPropsPanel'
-import {StylePanelsDef} from "~core/ComponentDefinitions";
+import { StylePanelsDef } from '~core/ComponentDefinitions'
 
 interface Props {
   isRoot: boolean
   showChildren: boolean
-  parentIsRoot: boolean,
+  parentIsRoot: boolean
   stylePanels: StylePanelsDef
 }
 
@@ -18,29 +18,27 @@ const StylesPanel: React.FC<Props> = ({
   isRoot,
   showChildren,
   parentIsRoot,
-  stylePanels
+  stylePanels,
 }) => {
   let panels = []
   if (isRoot) {
-    const panelDef = stylePanels["Backgrounds"]
+    const panelDef = stylePanels['Backgrounds']
     const BgComp = panelDef.component
 
     panels.push(
-      <AccordionContainer title={panelDef.title} key={"Backgrounds"}>
-        <BgComp isRoot={isRoot} panelDef={panelDef}/>
-      </AccordionContainer>
+      <AccordionContainer title={panelDef.title} key={'Backgrounds'}>
+        <BgComp isRoot={isRoot} panelDef={panelDef} />
+      </AccordionContainer>,
     )
-  }
-  else {
+  } else {
     Object.keys(stylePanels).map(key => {
       const panelDef = stylePanels[key]
       const Panel = panelDef.component
       panels.push(
         <AccordionContainer title={panelDef.title} key={key}>
-          <Panel isRoot={isRoot} panelDef={panelDef}/>
-        </AccordionContainer>
+          <Panel isRoot={isRoot} panelDef={panelDef} />
+        </AccordionContainer>,
       )
-
     })
   }
 
@@ -48,19 +46,19 @@ const StylesPanel: React.FC<Props> = ({
     <Accordion defaultIndex={[0]} allowMultiple>
       {!isRoot && (
         <AccordionContainer title="Custom props">
-          <CustomPropsPanel/>
+          <CustomPropsPanel />
         </AccordionContainer>
       )}
 
       {!isRoot && !parentIsRoot && (
         <AccordionContainer title="Parent">
-          <ParentInspector/>
+          <ParentInspector />
         </AccordionContainer>
       )}
 
       {showChildren && (
         <AccordionContainer title="Children">
-          <ChildrenInspector/>
+          <ChildrenInspector />
         </AccordionContainer>
       )}
 

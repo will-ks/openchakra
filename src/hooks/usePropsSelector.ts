@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux'
 import { RootState } from '~core/store'
 import { useInspectorUpdate } from '~contexts/inspector-context'
 import { useEffect } from 'react'
-import {useComponentDefinitions} from "~contexts/component-definition";
-import {ComponentType} from "~core/ComponentDefinitions";
+import { useComponentDefinitions } from '~contexts/component-definition'
+import { ComponentType } from '~core/ComponentDefinitions'
 
 const usePropsSelector = (propsName: string) => {
   const { addActiveProps } = useInspectorUpdate()

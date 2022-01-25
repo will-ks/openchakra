@@ -9,8 +9,8 @@ import {
 } from '@chakra-ui/react'
 import { CloseIcon, SearchIcon } from '@chakra-ui/icons'
 import DragItem from './DragItem'
-import {useComponentDefinitions} from "~contexts/component-definition";
-import {ComponentType, MenuItem} from "~core/ComponentDefinitions";
+import { useComponentDefinitions } from '~contexts/component-definition'
+import { ComponentType, MenuItem } from '~core/ComponentDefinitions'
 
 const Menu = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -73,7 +73,9 @@ const Menu = () => {
                   label={childName}
                   type={childName as any}
                   id={childName as any}
-                  rootParentType={componentDefs.menuItems[name]?.rootParentType || name}
+                  rootParentType={
+                    componentDefs.menuItems[name]?.rootParentType || name
+                  }
                 >
                   {childName}
                 </DragItem>
@@ -87,7 +89,9 @@ const Menu = () => {
                   label={name}
                   type={`${name}Meta` as any}
                   id={`${name}Meta` as any}
-                  rootParentType={componentDefs.menuItems[name]?.rootParentType || name}
+                  rootParentType={
+                    componentDefs.menuItems[name]?.rootParentType || name
+                  }
                 >
                   {name}
                 </DragItem>,
@@ -102,7 +106,9 @@ const Menu = () => {
                 label={name}
                 type={name as any}
                 id={name as any}
-                rootParentType={componentDefs.menuItems[name]?.rootParentType || name}
+                rootParentType={
+                  componentDefs.menuItems[name]?.rootParentType || name
+                }
               >
                 {name}
               </DragItem>

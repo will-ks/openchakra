@@ -9,13 +9,10 @@ import {
   SliderThumb,
 } from '@chakra-ui/react'
 import TextControl from '~chakraui/inspector/controls/TextControl'
-import {StylePanelProps} from "~components/inspector/panels/styles/types";
-import {isStylePropEnabled, targetStyleProp} from "~core/ComponentDefinitions";
+import { StylePanelProps } from '~components/inspector/panels/styles/types'
+import { isStylePropEnabled, targetStyleProp } from '~core/ComponentDefinitions'
 
-const EffectsPanel: React.FC<StylePanelProps> = ({
-  isRoot,
-  panelDef
-}) => {
+const EffectsPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValue } = useForm()
   const opacity = usePropsSelector(targetStyleProp('opacity', panelDef))
 
@@ -25,12 +22,13 @@ const EffectsPanel: React.FC<StylePanelProps> = ({
 
   return (
     <>
-      {
-        isStylePropEnabled("opacity", panelDef)
-        && <FormControl label="Opacity">
+      {isStylePropEnabled('opacity', panelDef) && (
+        <FormControl label="Opacity">
           <Slider
             min={1}
-            onChange={(value: any) => setValue(targetStyleProp('opacity', panelDef), value / 100)}
+            onChange={(value: any) =>
+              setValue(targetStyleProp('opacity', panelDef), value / 100)
+            }
             value={normalizedOpacity}
             mr={2}
           >
@@ -40,13 +38,14 @@ const EffectsPanel: React.FC<StylePanelProps> = ({
             <SliderThumb />
           </Slider>
         </FormControl>
-      }
+      )}
 
-      {
-        isStylePropEnabled("boxShadow", panelDef)
-        && <TextControl name={targetStyleProp('boxShadow', panelDef)} label="Box Shadow" />
-      }
-
+      {isStylePropEnabled('boxShadow', panelDef) && (
+        <TextControl
+          name={targetStyleProp('boxShadow', panelDef)}
+          label="Box Shadow"
+        />
+      )}
     </>
   )
 }
