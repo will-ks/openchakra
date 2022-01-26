@@ -72,11 +72,9 @@ const DimensionPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
           >
             <>
               {stylePropDetail('overflow', 'config', panelDef) ? (
-                (stylePropDetail(
-                  'overflow',
-                  'config',
-                  panelDef,
-                )! as string[]).map(op => <option>{op}</option>)
+                (
+                  stylePropDetail('overflow', 'config', panelDef)! as string[]
+                ).map((op) => <option>{op}</option>)
               ) : (
                 <>
                   <option>visible</option>

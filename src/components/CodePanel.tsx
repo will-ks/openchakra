@@ -5,19 +5,23 @@ import { generateCode } from '~utils/code'
 import theme from 'prism-react-renderer/themes/nightOwl'
 import { useSelector } from 'react-redux'
 import { getComponents } from '~core/selectors/components'
+import { useOcho } from '~contexts'
 
 const CodePanel = () => {
+  const ocho = useOcho()
   const components = useSelector(getComponents)
   const [code, setCode] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     const getCode = async () => {
-      const code = await generateCode(components)
+      const code = ocho.config.generateCode
+        ? await ocho.config.generateCode(components)
+        : await generateCode(components)
       setCode(code)
     }
 
     getCode()
-  }, [components])
+  }, [components, ocho.config])
 
   const { onCopy, hasCopied } = useClipboard(code!)
 

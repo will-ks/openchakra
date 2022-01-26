@@ -1,5 +1,5 @@
-import Composer from './composer'
-import { IComponents } from '~core/Ocho'
+import Composer from '../../core/models/composer/composer'
+import { IComponents, Ocho } from '~core/Ocho'
 
 type ComposedComponent = {
   components: IComponents
@@ -7,8 +7,8 @@ type ComposedComponent = {
   parent: string
 }
 
-export const buildAlert = (parent: string): ComposedComponent => {
-  const composer = new Composer()
+export const buildAlert = (parent: string, ocho: Ocho): ComposedComponent => {
+  const composer = new Composer(ocho)
 
   const nodeId = composer.addNode({
     type: 'Alert',
@@ -28,8 +28,11 @@ export const buildAlert = (parent: string): ComposedComponent => {
   }
 }
 
-export const buildBreadcrumb = (parent: string): ComposedComponent => {
-  const composer = new Composer()
+export const buildBreadcrumb = (
+  parent: string,
+  ocho: Ocho,
+): ComposedComponent => {
+  const composer = new Composer(ocho)
 
   const nodeId = composer.addNode({ type: 'Breadcrumb', parent })
   const itemId = composer.addNode({ type: 'BreadcrumbItem', parent: nodeId })
@@ -50,8 +53,11 @@ export const buildBreadcrumb = (parent: string): ComposedComponent => {
   }
 }
 
-export const buildFormControl = (parent: string): ComposedComponent => {
-  const composer = new Composer()
+export const buildFormControl = (
+  parent: string,
+  ocho: Ocho,
+): ComposedComponent => {
+  const composer = new Composer(ocho)
 
   const nodeId = composer.addNode({ type: 'FormControl', parent })
 
@@ -69,8 +75,11 @@ export const buildFormControl = (parent: string): ComposedComponent => {
   }
 }
 
-export const buildAccordion = (parent: string): ComposedComponent => {
-  const composer = new Composer('Accordion')
+export const buildAccordion = (
+  parent: string,
+  ocho: Ocho,
+): ComposedComponent => {
+  const composer = new Composer(ocho, 'Accordion')
 
   const nodeId = composer.addNode({ type: 'Accordion', parent })
   const itemId = composer.addNode({ type: 'AccordionItem', parent: nodeId })
@@ -90,8 +99,8 @@ export const buildAccordion = (parent: string): ComposedComponent => {
   }
 }
 
-export const buildList = (parent: string): ComposedComponent => {
-  const composer = new Composer('List')
+export const buildList = (parent: string, ocho: Ocho): ComposedComponent => {
+  const composer = new Composer(ocho, 'List')
 
   const nodeId = composer.addNode({ type: 'List', parent })
   composer.addNode({ type: 'ListItem', parent: nodeId })
@@ -105,8 +114,11 @@ export const buildList = (parent: string): ComposedComponent => {
   }
 }
 
-export const buildInputGroup = (parent: string): ComposedComponent => {
-  const composer = new Composer('Input')
+export const buildInputGroup = (
+  parent: string,
+  ocho: Ocho,
+): ComposedComponent => {
+  const composer = new Composer(ocho, 'Input')
 
   const nodeId = composer.addNode({ type: 'InputGroup', parent })
   composer.addNode({

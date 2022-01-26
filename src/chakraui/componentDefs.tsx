@@ -67,7 +67,7 @@ import {
   buildFormControl,
   buildInputGroup,
   buildList,
-} from '~core/models/composer/builder'
+} from '~chakraui/models/builder'
 import React from 'react'
 import {
   OchoConfig,
@@ -99,6 +99,10 @@ import DisplayPanel from '~components/inspector/panels/styles/DisplayPanel'
 import TextPanel from '~components/inspector/panels/styles/TextPanel'
 import BackgroundColorPanel from '~components/inspector/panels/styles/BackgroundColorPanel'
 import SpacingPanel from '~components/inspector/panels/styles/SpacingPanel'
+import { productHunt } from '~chakraui/templates/producthunt'
+import { onboarding } from '~chakraui/templates/onboarding'
+import { secretchakra } from '~chakraui/templates/secretchakra'
+import { generateCode } from '~chakraui/code'
 
 // Style panels displayed by StylesPanel set styleProps on the currently selected
 // component. Here we can se what properties should be set. The key is the abstract name
@@ -683,7 +687,12 @@ const chakrauiComponents: ComponentsConfig = {
 
 const chakrauiOchoConfig: OchoConfig = {
   components: chakrauiComponents,
-
+  templates: {
+    ph: productHunt,
+    onboarding,
+    secretchakra,
+  },
+  generateCode: generateCode,
   previewComponents: {
     simple: {
       component: PreviewContainer,

@@ -23,7 +23,7 @@ function InspectorProvider({ children }: InspectorProviderProps) {
   const [activeProps, setActiveProps] = useState<string[]>([])
 
   const addActiveProps = useCallback((propsName: string) => {
-    setActiveProps(prevActiveProps => [...prevActiveProps, propsName])
+    setActiveProps((prevActiveProps) => [...prevActiveProps, propsName])
   }, [])
 
   const clearActiveProps = useCallback(() => {

@@ -1,3 +1,5 @@
+import templates, { TemplateType } from '~chakraui/templates'
+
 export type OchoConfig = {
   // Component definitions: components, whcih can be dragged onto the editor
   components: ComponentsConfig
@@ -8,6 +10,13 @@ export type OchoConfig = {
   // The default style panel configuration to use for components, which do not specify an
   // explicit configuration
   stylePanels: StylePanelsConfig
+
+  // Example, onboarding templates
+  templates?: {
+    [key: string]: IComponents
+  }
+
+  generateCode?: (components: IComponents) => Promise<string>
 
   // When a component is hovered with the mouse in the Editor, add to props to make it highglight. Eg. boxShadow
   calcComponentHoverStyle: (
@@ -91,11 +100,9 @@ export type MenuItem = {
   rootParentType?: ComponentType
 }
 
-type MenuItems = Partial<
-  {
-    [k in ComponentType]: MenuItem
-  }
->
+type MenuItems = Partial<{
+  [k in ComponentType]: MenuItem
+}>
 
 export interface IComponent {
   children: string[]
@@ -132,7 +139,7 @@ export type ComposedComponent = {
   parent: string
 }
 
-export type BuilderFn = (parent: string) => ComposedComponent
+export type BuilderFn = (parent: string, ocho: Ocho) => ComposedComponent
 
 export type ComposerBuilders = {
   [k: string]: BuilderFn
@@ -159,9 +166,11 @@ class Ocho {
   previewDefaultProps
   targetComponents
   stylePanels
+  templates
 
   constructor(config: OchoConfig) {
     this.config = config
+    this.templates = config.templates
     this.componentNames = this.collectComponentNames()
     this.rootComponentNames = this.collectRootComponentNames()
     this.childComponentNames = this.collectChildComponentNames()
@@ -193,7 +202,7 @@ class Ocho {
   collectComponentNames() {
     //: ComponentDefsTypeKeys[]
     return Object.keys(this.config.components).filter(
-      k => k !== '_Defaults',
+      (k) => k !== '_Defaults',
     ) as ComponentDefsTypeKeys[]
   }
 
@@ -204,7 +213,7 @@ class Ocho {
     // && !defs[name].rootParentType
     const childNames = this.collectChildComponentNames()
     // Roots are everything that is not a child, except those that have children and can act both as root and child
-    return Object.keys(this.config.components).filter(k => {
+    return Object.keys(this.config.components).filter((k) => {
       return !childNames.includes(k) || this.config.components[k].children
     })
   }
@@ -233,7 +242,7 @@ class Ocho {
   collectMenuItems() {
     const menuItems: MenuItems = {}
 
-    this.rootComponentNames.forEach(name => {
+    this.rootComponentNames.forEach((name) => {
       const compoDef: ComponentConfig = this.config.components[name]
 
       // Create root item
@@ -271,17 +280,15 @@ class Ocho {
   }
 
   collectPreviewComponents() {
-    const previewComponents: Partial<
-      {
-        [k in ComponentType]: {
-          previewComponent: React.ComponentType<any>
-          component: React.ComponentType<any>
-          props?: { [key: string]: any }
-        }
+    const previewComponents: Partial<{
+      [k in ComponentType]: {
+        previewComponent: React.ComponentType<any>
+        component: React.ComponentType<any>
+        props?: { [key: string]: any }
       }
-    > = {}
+    }> = {}
 
-    Object.keys(this.config.components).forEach(compoName => {
+    Object.keys(this.config.components).forEach((compoName) => {
       const compoDef = this.config.components[compoName]
 
       // Component with its own previewComponent
@@ -294,7 +301,7 @@ class Ocho {
         // Find in one of the default previewComponents where compoName appears in the section's
         // applyTo
         const sectionKey = Object.keys(this.config.previewComponents).find(
-          sectionKey => {
+          (sectionKey) => {
             const section = this.config.previewComponents[sectionKey]
             return section.applyTo.includes(compoName)
           },
@@ -319,7 +326,7 @@ class Ocho {
    */
   collectRootDraggables() {
     const draggables: string[] = this.collectRootComponentNames().filter(
-      name => {
+      (name) => {
         const obj = this.config.components[name]
         // For roots: if undefined defaults to true
         return obj.rootDraggable === undefined || obj.rootDraggable === true
@@ -327,7 +334,7 @@ class Ocho {
     )
 
     // Add meta for roots with children
-    draggables.forEach(name => {
+    draggables.forEach((name) => {
       const obj = this.config.components[name]
       if (obj.children) {
         draggables.push(name + 'Meta')
@@ -335,7 +342,7 @@ class Ocho {
     })
 
     // Add child compos with explicit rootDraggable=true
-    this.collectChildComponentNames().forEach(name => {
+    this.collectChildComponentNames().forEach((name) => {
       const obj = this.config.components[name]
       // For children: an explicit true is required
       obj.rootDraggable && draggables.push(name)
@@ -346,7 +353,7 @@ class Ocho {
 
   collectBuilders() {
     const builders: Partial<{ [k: string]: BuilderFn }> = {}
-    Object.keys(this.config.components).forEach(name => {
+    Object.keys(this.config.components).forEach((name) => {
       const obj = this.config.components[name]
       if (obj.componentModelBuilder) {
         builders[name + 'Meta'] = obj.componentModelBuilder
@@ -360,7 +367,7 @@ class Ocho {
     const inspectorComponents: Partial<{
       [k: string]: React.ComponentType<any>
     }> = {}
-    Object.keys(this.config.components).forEach(name => {
+    Object.keys(this.config.components).forEach((name) => {
       const obj = this.config.components[name]
       if (obj.inspectorComponent) {
         inspectorComponents[name] = obj.inspectorComponent
@@ -372,7 +379,7 @@ class Ocho {
 
   collectPreviewDefaultProps() {
     const defaultProps: Partial<{ [k: string]: any }> = {}
-    Object.keys(this.config.components).forEach(name => {
+    Object.keys(this.config.components).forEach((name) => {
       const obj = this.config.components[name]
       let props = obj.previewDefaultProps || {}
       defaultProps[name] = props
@@ -383,7 +390,7 @@ class Ocho {
 
   collectTargetComponents() {
     const defaultProps: Partial<{ [k: string]: React.ComponentType<any> }> = {}
-    Object.keys(this.config.components).forEach(name => {
+    Object.keys(this.config.components).forEach((name) => {
       const obj = this.config.components[name]
       defaultProps[name] = obj.component
     })
@@ -416,7 +423,7 @@ class Ocho {
     }
 
     const stylePanels: Partial<{ [k: string]: StylePanelsConfig }> = {}
-    Object.keys(this.config.components).forEach(name => {
+    Object.keys(this.config.components).forEach((name) => {
       const obj = this.config.components[name]
       let stylePanelsDef = obj.stylePanels || this.config.stylePanels
       if (obj.stylePanelsOverride) {
@@ -485,6 +492,4 @@ function stylePropDetail(
   return null
 }
 
-export default Ocho
-
-export { isStylePropEnabled, targetStyleProp, stylePropDetail }
+export { Ocho, isStylePropEnabled, targetStyleProp, stylePropDetail }

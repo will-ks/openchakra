@@ -203,8 +203,7 @@ export const productHunt: IComponents = {
     id: 'comp-K6IAX6IXQ7CAC',
     props: {
       size: 'md',
-      src:
-        'https://pbs.twimg.com/profile_images/1227316457845018626/8-B-ZDL8_400x400.jpg',
+      src: 'https://pbs.twimg.com/profile_images/1227316457845018626/8-B-ZDL8_400x400.jpg',
     },
     children: ['comp-K6IAYZAIA7RJT'],
     type: 'Avatar',
@@ -295,8 +294,7 @@ export const productHunt: IComponents = {
       height: '80px',
       width: '80px',
       fallbackSrc: 'https://via.placeholder.com/150',
-      src:
-        'https://user-images.githubusercontent.com/1102595/74273767-41168880-4d11-11ea-8f7f-3fb7a02624ea.gif',
+      src: 'https://user-images.githubusercontent.com/1102595/74273767-41168880-4d11-11ea-8f7f-3fb7a02624ea.gif',
       mr: '2',
     },
     children: [],

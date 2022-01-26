@@ -8,7 +8,7 @@ export async function loadFromJSON() {
     mimeTypes: ['application/json'],
   })
 
-  const contents: string = await new Promise(resolve => {
+  const contents: string = await new Promise((resolve) => {
     const reader = new FileReader()
     reader.readAsText(blob, 'utf8')
     reader.onloadend = () => {

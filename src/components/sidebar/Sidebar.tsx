@@ -61,12 +61,12 @@ const Menu = () => {
         </InputGroup>
 
         {(Object.keys(ocho.menuItems) as ComponentType[])
-          .filter(c => c.toLowerCase().includes(searchTerm.toLowerCase()))
-          .map(name => {
+          .filter((c) => c.toLowerCase().includes(searchTerm.toLowerCase()))
+          .map((name) => {
             const { children, soon } = ocho.menuItems[name] as MenuItem
 
             if (children) {
-              const elements = Object.keys(children).map(childName => (
+              const elements = Object.keys(children).map((childName) => (
                 <DragItem
                   isChild
                   key={childName}

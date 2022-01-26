@@ -1,16 +1,15 @@
 import React, { createContext, useContext } from 'react'
-import Ocho from '~core/Ocho'
+import { Ocho } from '~core/Ocho'
+// import Ocho from '~core/Ocho'
 
 type OchoProviderProps = {
   children: React.ReactNode
-  definitions: Ocho
+  ocho: Ocho
 }
 
 const OchoContext = createContext<Ocho>({} as Ocho)
-function OchoProvider({ definitions, children }: OchoProviderProps) {
-  return (
-    <OchoContext.Provider value={definitions}>{children}</OchoContext.Provider>
-  )
+function OchoProvider({ ocho, children }: OchoProviderProps) {
+  return <OchoContext.Provider value={ocho}>{children}</OchoContext.Provider>
 }
 
 function useOcho() {

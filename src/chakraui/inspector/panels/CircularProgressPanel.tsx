@@ -22,7 +22,7 @@ const CircularProgressPanel = () => {
     <>
       <FormControl label="Value">
         <Slider
-          onChange={value => setValue('value', value)}
+          onChange={(value) => setValue('value', value)}
           min={0}
           max={100}
           step={1}
@@ -39,7 +39,7 @@ const CircularProgressPanel = () => {
 
       <FormControl label="Thickness">
         <Slider
-          onChange={value => setValue('thickness', value)}
+          onChange={(value) => setValue('thickness', value)}
           min={0.1}
           max={1}
           step={0.1}

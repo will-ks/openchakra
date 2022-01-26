@@ -24,7 +24,7 @@ const HuesPickerControl = (props: HuesPickerPropType) => {
   return (
     <>
       <Grid mb={2} templateColumns="repeat(5, 1fr)" gap={0}>
-        {Object.keys(props.themeColors).map(colorName =>
+        {Object.keys(props.themeColors).map((colorName) =>
           props.gradient ? (
             <Box
               border={colorName.includes('white') ? '1px solid lightgrey' : ''}
@@ -67,7 +67,7 @@ const HuesPickerControl = (props: HuesPickerPropType) => {
       {props.enableHues && (
         <>
           <Slider
-            onChange={value => {
+            onChange={(value) => {
               value = value === 0 ? 50 : value
               setHue(value)
             }}

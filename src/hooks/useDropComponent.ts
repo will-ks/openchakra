@@ -16,7 +16,7 @@ export const useDropComponent = (
   }
   const [{ isOver }, drop] = useDrop({
     accept: finalAccept,
-    collect: monitor => ({
+    collect: (monitor) => ({
       isOver: monitor.isOver({ shallow: true }) && monitor.canDrop(),
     }),
     drop: (item: ComponentItemProps, monitor: DropTargetMonitor) => {
@@ -32,7 +32,7 @@ export const useDropComponent = (
       } else if (item.isMeta) {
         //dispatch.components.addMetaComponent(builder[item.type](componentId))
         dispatch.components.addMetaComponent(
-          ocho.componentModelBuilders[item.type]!(componentId),
+          ocho.componentModelBuilders[item.type]!(componentId, ocho),
         )
       } else {
         dispatch.components.addComponent({

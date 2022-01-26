@@ -44,7 +44,7 @@ const AvatarGroupPanel = () => {
 
       <FormControl label="Spacing">
         <Slider
-          onChange={value => setValue('spacing', value)}
+          onChange={(value) => setValue('spacing', value)}
           min={-3}
           max={6}
           step={1}
@@ -60,7 +60,7 @@ const AvatarGroupPanel = () => {
       <FormControl label="max">
         <NumberInput
           size="sm"
-          onChange={value => setValue('max', value)}
+          onChange={(value) => setValue('max', value)}
           value={max}
           min={1}
         >

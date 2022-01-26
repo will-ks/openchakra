@@ -120,7 +120,7 @@ const TextPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
             handleChange={setValueFromEvent}
             name={targetStyleProp('fontSize', panelDef)}
           >
-            {Object.keys(theme.fontSizes).map(option => (
+            {Object.keys(theme.fontSizes).map((option) => (
               <ComboboxOption key={option} value={option} />
             ))}
           </InputSuggestion>
@@ -143,7 +143,7 @@ const TextPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
             handleChange={setValueFromEvent}
             name={targetStyleProp('lineHeight', panelDef)}
           >
-            {Object.keys(theme.lineHeights).map(option => (
+            {Object.keys(theme.lineHeights).map((option) => (
               <ComboboxOption key={option} value={option} />
             ))}
           </InputSuggestion>
@@ -157,7 +157,7 @@ const TextPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
             handleChange={setValueFromEvent}
             name={targetStyleProp('letterSpacing', panelDef)}
           >
-            {Object.keys(theme.letterSpacings).map(option => (
+            {Object.keys(theme.letterSpacings).map((option) => (
               <ComboboxOption key={option} value={option} />
             ))}
           </InputSuggestion>

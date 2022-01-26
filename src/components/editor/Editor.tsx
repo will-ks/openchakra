@@ -8,6 +8,7 @@ import useDispatch from '~hooks/useDispatch'
 import { getComponents } from '~core/selectors/components'
 import { getShowLayout, getShowCode } from '~core/selectors/app'
 import ComponentPreview from '~components/editor/ComponentPreview'
+import { useOcho } from '~contexts'
 
 export const gridStyles = {
   backgroundImage:
@@ -18,6 +19,7 @@ export const gridStyles = {
 }
 
 const Editor: React.FC = () => {
+  const ocho = useOcho()
   const showCode = useSelector(getShowCode)
   const showLayout = useSelector(getShowLayout)
   const components = useSelector(getComponents)
@@ -60,18 +62,24 @@ const Editor: React.FC = () => {
     >
       {isEmpty && (
         <Text maxWidth="md" color="gray.400" fontSize="xl" textAlign="center">
-          Drag some component to start coding without code! Or load{' '}
-          <Link
-            color="gray.500"
-            onClick={(e: React.MouseEvent) => {
-              e.stopPropagation()
-              dispatch.components.loadDemo('onboarding')
-            }}
-            textDecoration="underline"
-          >
-            the onboarding components
-          </Link>
-          .
+          {ocho.templates ? (
+            <>
+              Drag some component to start coding without code! Or load{' '}
+              <Link
+                color="gray.500"
+                onClick={(e: React.MouseEvent) => {
+                  e.stopPropagation()
+                  dispatch.components.loadDemo('onboarding')
+                }}
+                textDecoration="underline"
+              >
+                the onboarding components
+              </Link>
+              .
+            </>
+          ) : (
+            'Drag some component to start coding without code!'
+          )}
         </Text>
       )}
 

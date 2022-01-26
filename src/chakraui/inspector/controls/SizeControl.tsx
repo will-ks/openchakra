@@ -26,7 +26,7 @@ const SizeControl = (props: SizeControlPropsType) => {
         value={props.value || ''}
         onChange={setValueFromEvent}
       >
-        {choices.map(choice => (
+        {choices.map((choice) => (
           <option key={choice}>{choice}</option>
         ))}
       </Select>

@@ -31,7 +31,7 @@ const StylesPanel: React.FC<Props> = ({
       </AccordionContainer>,
     )
   } else {
-    Object.keys(stylePanels).map(key => {
+    Object.keys(stylePanels).map((key) => {
       const panelDef = stylePanels[key]
       const Panel = panelDef.component
       panels.push(

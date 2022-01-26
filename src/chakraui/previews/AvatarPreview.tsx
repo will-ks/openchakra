@@ -13,10 +13,12 @@ import { useSelector } from 'react-redux'
 import { getComponents } from '~core/selectors/components'
 import { IPreviewProps } from '~core/Ocho'
 
-const AvatarPreview: React.FC<IPreviewProps & {
-  spacing?: BoxProps['marginLeft']
-  index?: number
-}> = ({ component, spacing, index }) => {
+const AvatarPreview: React.FC<
+  IPreviewProps & {
+    spacing?: BoxProps['marginLeft']
+    index?: number
+  }
+> = ({ component, spacing, index }) => {
   const { drop, isOver } = useDropComponent(component.id, ['AvatarBadge'])
   const { props, ref } = useInteractive(component)
 

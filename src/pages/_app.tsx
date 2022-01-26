@@ -10,13 +10,13 @@ import AppErrorBoundary from '~components/errorBoundaries/AppErrorBoundary'
 import { AppProps } from 'next/app'
 import { OchoProvider } from '~contexts/ocho-context'
 import { chakrauiOchoConfig } from '~chakraui/componentDefs'
-import Ocho from '~core/Ocho'
+import { Ocho } from '~core/Ocho'
 
-const componentDefs = new Ocho(chakrauiOchoConfig)
+const ocho = new Ocho(chakrauiOchoConfig)
 
 const Main = ({ Component, pageProps }: AppProps) => (
   <BugsnagErrorBoundary>
-    <OchoProvider definitions={componentDefs}>
+    <OchoProvider ocho={ocho}>
       <ChakraProvider resetCSS theme={theme}>
         <AppErrorBoundary>
           <Component {...pageProps} />
@@ -25,5 +25,5 @@ const Main = ({ Component, pageProps }: AppProps) => (
     </OchoProvider>
   </BugsnagErrorBoundary>
 )
-// componentDefs passed to initStore so that it can use previewDefaultProps
-export default initStore(componentDefs).withRedux(Main)
+// ocho passed to initStore so that it can use previewDefaultProps
+export default initStore(ocho).withRedux(Main)

@@ -31,12 +31,11 @@ const MenuItemLink: React.FC<MenuItemLinkProps> = React.forwardRef(
 )
 
 // @ts-ignore
-const CustomMenuButton: React.FC<
-  MenuButtonProps | ButtonProps
-> = React.forwardRef((props, ref: React.Ref<HTMLLinkElement>) => {
-  // @ts-ignore
-  return <MenuButton as={Button} {...props} />
-})
+const CustomMenuButton: React.FC<MenuButtonProps | ButtonProps> =
+  React.forwardRef((props, ref: React.Ref<HTMLLinkElement>) => {
+    // @ts-ignore
+    return <MenuButton as={Button} {...props} />
+  })
 
 const ExportMenuItem = dynamic(() => import('./ExportMenuItem'), { ssr: false })
 const ImportMenuItem = dynamic(() => import('./ImportMenuItem'), { ssr: false })

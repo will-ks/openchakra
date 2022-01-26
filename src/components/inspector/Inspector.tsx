@@ -112,12 +112,6 @@ const Inspector = () => {
     clearActiveProps()
   }, [clearActiveProps])
 
-  console.log('+++ componentDefs.stylePanels', ocho.stylePanels)
-  console.log('+++ component.type', component.type)
-  console.log(
-    '+++ componentDefs.stylePanels[component.type]',
-    ocho.stylePanels[component.type],
-  )
   return (
     <>
       <Box bg="white">

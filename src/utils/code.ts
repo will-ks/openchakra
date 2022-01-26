@@ -26,13 +26,13 @@ export const formatCode = async (code: string) => {
   return formattedCode
 }
 
-type BuildBlockParams = {
+export type BuildBlockParams = {
   component: IComponent
   components: IComponents
   forceBuildBlock?: boolean
 }
 
-const buildBlock = ({
+export const buildBlock = ({
   component,
   components,
   forceBuildBlock = false,
@@ -47,13 +47,15 @@ const buildBlock = ({
       const componentName = capitalize(childComponent.type)
       let propsContent = ''
 
-      const propsNames = Object.keys(childComponent.props).filter(propName => {
-        if (childComponent.type === 'Icon') {
-          return propName !== 'icon'
-        }
+      const propsNames = Object.keys(childComponent.props).filter(
+        (propName) => {
+          if (childComponent.type === 'Icon') {
+            return propName !== 'icon'
+          }
 
-        return true
-      })
+          return true
+        },
+      )
 
       propsNames.forEach((propName: string) => {
         const propsValue = childComponent.props[propName]
@@ -106,15 +108,17 @@ const buildBlock = ({
   return content
 }
 
-const buildComponents = (components: IComponents) => {
-  const codes = filter(components, comp => !!comp.componentName).map(comp => {
-    return generateComponentCode({
-      component: { ...components[comp.parent], children: [comp.id] },
-      components,
-      forceBuildBlock: true,
-      componentName: comp.componentName,
-    })
-  })
+export const buildComponents = (components: IComponents) => {
+  const codes = filter(components, (comp) => !!comp.componentName).map(
+    (comp) => {
+      return generateComponentCode({
+        component: { ...components[comp.parent], children: [comp.id] },
+        components,
+        forceBuildBlock: true,
+        componentName: comp.componentName,
+      })
+    },
+  )
 
   return codes.reduce((acc, val) => {
     return `
@@ -153,11 +157,11 @@ const ${componentName} = () => (
 }
 
 const getIconsImports = (components: IComponents) => {
-  return Object.keys(components).flatMap(name => {
+  return Object.keys(components).flatMap((name) => {
     return Object.keys(components[name].props)
-      .filter(prop => prop.toLowerCase().includes('icon'))
-      .filter(prop => !!components[name].props[prop])
-      .map(prop => components[name].props[prop])
+      .filter((prop) => prop.toLowerCase().includes('icon'))
+      .filter((prop) => !!components[name].props[prop])
+      .map((prop) => components[name].props[prop])
   })
 }
 
@@ -169,31 +173,15 @@ export const generateCode = async (components: IComponents) => {
   const imports = [
     ...new Set(
       Object.keys(components)
-        .filter(name => name !== 'root')
-        .map(name => components[name].type),
+        .filter((name) => name !== 'root')
+        .map((name) => components[name].type),
     ),
   ]
 
-  code = `import React from 'react';
-import {
-  ChakraProvider,
-  ${imports.join(',')}
-} from "@chakra-ui/react";${
-    iconImports.length
-      ? `
-import { ${iconImports.join(',')} } from "@chakra-ui/icons";`
-      : ''
-  }
-
-${componentsCodes}
-
-const App = () => (
-  <ChakraProvider resetCSS>
+  code = `
     ${code}
-  </ChakraProvider>
-);
+  `
 
-export default App;`
-
-  return await formatCode(code)
+  // formatCode adds a ';' in front, get rid of that
+  return (await formatCode(code)).substring(1)
 }

@@ -5,9 +5,9 @@ import { IComponent } from '~core/Ocho'
 export const getComponents = (state: RootState) =>
   state.components.present.components
 
-export const getComponentBy = (nameOrId: string | IComponent['id']) => (
-  state: RootState,
-) => state.components.present.components[nameOrId]
+export const getComponentBy =
+  (nameOrId: string | IComponent['id']) => (state: RootState) =>
+    state.components.present.components[nameOrId]
 
 export const getSelectedComponent = (state: RootState) =>
   state.components.present.components[state.components.present.selectedId]
@@ -22,12 +22,12 @@ export const getPropsForSelectedComponent = (
 export const getSelectedComponentId = (state: RootState) =>
   state.components.present.selectedId
 
-export const getIsSelectedComponent = (componentId: IComponent['id']) => (
-  state: RootState,
-) => state.components.present.selectedId === componentId
+export const getIsSelectedComponent =
+  (componentId: IComponent['id']) => (state: RootState) =>
+    state.components.present.selectedId === componentId
 
 export const getSelectedComponentChildren = (state: RootState) => {
-  return getSelectedComponent(state).children.map(child =>
+  return getSelectedComponent(state).children.map((child) =>
     getComponentBy(child)(state),
   )
 }
@@ -44,8 +44,8 @@ export const getIsHovered = (id: IComponent['id']) => (state: RootState) =>
 export const getComponentNames = (state: RootState) => {
   const names = map(
     state.components.present.components,
-    comp => comp.componentName,
-  ).filter(comp => !!comp)
+    (comp) => comp.componentName,
+  ).filter((comp) => !!comp)
 
   return Array.from(new Set(names))
 }

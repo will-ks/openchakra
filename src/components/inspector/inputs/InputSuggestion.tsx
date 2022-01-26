@@ -32,7 +32,7 @@ const InputSuggestion: React.FC<FormControlPropType> = ({
   return (
     <Combobox
       openOnFocus
-      onSelect={item => {
+      onSelect={(item) => {
         setValue(name, item)
       }}
     >

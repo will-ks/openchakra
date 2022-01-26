@@ -8,11 +8,13 @@ import {
   AccordionItemProps,
 } from '@chakra-ui/react'
 
-const AccordionContainer: React.FC<{
-  title: ReactNode
-  defaultIsOpen?: boolean
-  children: ReactNode
-} & AccordionItemProps> = ({ title, children, defaultIsOpen = true }) => {
+const AccordionContainer: React.FC<
+  {
+    title: ReactNode
+    defaultIsOpen?: boolean
+    children: ReactNode
+  } & AccordionItemProps
+> = ({ title, children, defaultIsOpen = true }) => {
   return (
     <AccordionItem>
       {/* <AccordionItem defaultIsOpen={defaultIsOpen}> */}

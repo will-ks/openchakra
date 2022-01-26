@@ -11,7 +11,7 @@ export const duplicateComponent = (
 
   const cloneComponent = (component: IComponent) => {
     const newid = generateId()
-    const children = component.children.map(child => {
+    const children = component.children.map((child) => {
       return cloneComponent(components[child])
     })
 
@@ -21,11 +21,11 @@ export const duplicateComponent = (
       // Get all components with a similar name (same base component name + number suffix)
       const similarComponents = filter(
         components,
-        comp => !!comp.componentName?.includes(matches![1]),
+        (comp) => !!comp.componentName?.includes(matches![1]),
       )
       let highestNumber = 0
       // Get the highest suffix number
-      similarComponents.forEach(comp => {
+      similarComponents.forEach((comp) => {
         const nameMatches = /^([a-zA-Z]*)(\d+)?$/g.exec(comp.componentName!)
         const number = nameMatches?.length === 2 ? 0 : Number(nameMatches![2])
 
@@ -48,7 +48,7 @@ export const duplicateComponent = (
       componentName: newComponentName,
     }
 
-    children.forEach(child => {
+    children.forEach((child) => {
       clonedComponents[child].parent = newid
     })
 
@@ -72,7 +72,7 @@ export const deleteComponent = (
     children: IComponent['children'],
     id: IComponent['id'],
   ) => {
-    children.forEach(child => {
+    children.forEach((child) => {
       updatedComponents[child] &&
         deleteRecursive(updatedComponents[child].children, child)
     })

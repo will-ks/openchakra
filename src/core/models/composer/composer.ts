@@ -1,6 +1,5 @@
 import { generateId } from '~utils/generateId'
-import { ComponentType, IComponents } from '~core/Ocho'
-import { previewDefaultProps } from '~core/store'
+import { ComponentType, IComponents, Ocho } from '~core/Ocho'
 
 type AddNode = {
   type: ComponentType
@@ -14,7 +13,10 @@ class Composer {
 
   rootComponentType: ComponentType | undefined = undefined
 
-  constructor(name?: ComponentType) {
+  ocho: Ocho
+
+  constructor(ocho: Ocho, name?: ComponentType) {
+    this.ocho = ocho
     if (name) {
       this.rootComponentType = name
     }
@@ -33,7 +35,7 @@ class Composer {
     }
     const localRootParentType = rootParentType || this.rootComponentType
 
-    const { form, ...defaultProps } = previewDefaultProps[type] || {}
+    const { form, ...defaultProps } = this.ocho.previewDefaultProps[type] || {}
 
     this.components = {
       ...this.components,

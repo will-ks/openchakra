@@ -25,7 +25,7 @@ const IconControl: React.FC<IconControlProps> = ({ name, label }) => {
         name={name}
       >
         {(Object.keys(icons) as Array<keyof typeof icons>)
-          .filter(icon => icon.includes(value) || !value)
+          .filter((icon) => icon.includes(value) || !value)
           .map((icon, index) => {
             const IconComponent = icons[icon]
             return (

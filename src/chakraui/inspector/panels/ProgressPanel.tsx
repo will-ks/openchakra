@@ -22,7 +22,7 @@ const ProgressPanel = () => {
     <>
       <FormControl label="Value">
         <Slider
-          onChange={value => setValue('value', value)}
+          onChange={(value) => setValue('value', value)}
           min={0}
           max={100}
           step={1}
