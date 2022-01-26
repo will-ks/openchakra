@@ -12,16 +12,18 @@ export const formatCode = async (code: string) => {
   let formattedCode = `// 🚨 Your props contains invalid code`
 
   const prettier = await import('prettier/standalone')
-  const babylonParser = await import('prettier/parser-babylon')
+  const babelParser = await import('prettier/parser-babel')
 
   try {
     formattedCode = prettier.format(code, {
       parser: 'babel',
-      plugins: [babylonParser],
+      plugins: [babelParser],
       semi: false,
       singleQuote: true,
     })
-  } catch (e) {}
+  } catch (e) {
+    console.error('Error: ', e)
+  }
 
   return formattedCode
 }

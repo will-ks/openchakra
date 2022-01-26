@@ -692,7 +692,9 @@ const chakrauiOchoConfig: OchoConfig = {
     onboarding,
     secretchakra,
   },
+
   generateCode: generateCode,
+
   previewComponents: {
     simple: {
       component: PreviewContainer,
