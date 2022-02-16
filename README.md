@@ -6,6 +6,14 @@ Ocho is a fork of OpenChakra, which provides a page builder specifically for the
 
 <hr/>
 
+When used as a library the following dependencies need to be added:
+
+```
+yarn add @rematch/core lodash redux react react-dom chakra-ui etc.
+```
+
+<hr/>
+
 <div align="center" style="display:flex;flex-direction:column;">
   <a href="https://openchakra.app">
     <img src="./public/images/github-banner.png" alt="Openchakra: Visual editor for Chakra UI." />

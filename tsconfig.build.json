@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "lib/esm",
+    "outDir": "lib",
     "target": "es5",
     "downlevelIteration": true,
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -15,7 +15,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "jsx": "preserve",
+    "jsx": "react",
+    "emitDeclarationOnly": true,
     "declaration": true,
     "baseUrl": ".",
     "paths": {

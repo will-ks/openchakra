@@ -1,10 +1,10 @@
 {
   "name": "@beepsoft/ocho",
-  "version": "0.1.0",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
+  "version": "0.1.1",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "./*"
+    "lib"
   ],
   "dependencies": {
     "@bugsnag/js": "^6.5.2",
@@ -49,9 +49,14 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:tsc": "rm -rf lib && tsc --build && cp package.json lib/esm",
+    "build": "time yarn build:esbuild && time yarn build:tsc && time yarn build:tscpaths",
+    "build:esbuild": "echo 'Running esbuild' && node esbuild.config.js",
+    "build:tsc": "echo 'Generating typescript types' && tsc --project tsconfig.build.json && yarn build:tscpaths",
+    "build:tscpaths": "echo 'Fixing ~ import prefixes' && tscpaths -p tsconfig.build.json -s ./src -o ./lib",
+    "build:tsup": "NOT USED tsup src --format cjs,esm --dts --clean",
+    "npmPublish": "cd lib/esm && yarn publish --access public",
     "publish": "cd lib/esm && yarn publish --access public",
+    "build:next": "next build",
     "start": "next start",
     "test": "jest",
     "analyze": "BUNDLE_VISUALIZE=1 react-app-rewired build",
@@ -84,6 +89,9 @@
     "@types/react-color": "^3.0.1",
     "@types/react-redux": "^7.1.7",
     "babel-jest": "^26.2.2",
+    "esbuild": "^0.14.21",
+    "esbuild-node-externals": "^1.4.1",
+    "glob": "^7.2.0",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.7",
     "next-compose-plugins": "^2.2.0",
@@ -91,6 +99,7 @@
     "prettier": "^2.5.1",
     "pretty-quick": "^2.0.2",
     "ts-jest": "^26.1.4",
+    "tscpaths": "^0.0.9",
     "tsup": "^5.11.11",
     "typedoc": "^0.16.9"
   },
