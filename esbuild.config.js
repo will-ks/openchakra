@@ -21,12 +21,13 @@ esbuild
     // entryPoints: ['./src/index.ts'],
     // outfile: 'lib/index.js',
     bundle: true,
-    minify: true,
+    // minify: true,
     platform: 'node',
     sourcemap: true,
     target: 'node14',
-    format: 'esm',
+    format: 'cjs',
     target: ['esnext'],
+    //splitting: true,
     plugins: [nodeExternalsPlugin()],
   })
   .catch(() => process.exit(1))

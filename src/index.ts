@@ -28,6 +28,11 @@ import {
   InspectorProvider,
 } from '~contexts/inspector-context'
 
+import Editor from '~components/editor/Editor'
+import ComponentPreview from '~components/editor/ComponentPreview'
+import PreviewContainer from '~components/editor/PreviewContainer'
+import { initStore } from '~core/store'
+
 export { Ocho, isStylePropEnabled, targetStyleProp, stylePropDetail }
 
 export type {
@@ -52,3 +57,7 @@ export type {
 export * from '~core/models'
 export { useOcho, OchoProvider }
 export { useInspectorState, InspectorProvider }
+
+export { Editor, ComponentPreview, PreviewContainer }
+
+export { initStore }
