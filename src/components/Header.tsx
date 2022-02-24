@@ -98,9 +98,7 @@ const Header = () => {
 
         <Flex flexGrow={1} justifyContent="space-between" alignItems="center">
           <HStack spacing={4} justify="center" align="center">
-            <Box>
-              <HeaderMenu />
-            </Box>
+            <Box>{/*<HeaderMenu />*/}</Box>
             <FormControl flexDirection="row" display="flex" alignItems="center">
               <Tooltip
                 zIndex={100}
