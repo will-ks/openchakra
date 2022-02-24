@@ -89,12 +89,14 @@ export type ComponentConfig = {
     [key: string]: any
   }
   children?: string[]
+  isPreset?: boolean
   rootParentType?: ComponentType
   rootDraggable?: boolean // default: true for root elements and false for child elements.
   soon?: boolean
 }
 
 export type MenuItem = {
+  isPreset?: boolean
   children?: MenuItems
   soon?: boolean
   rootParentType?: ComponentType
@@ -253,6 +255,9 @@ class Ocho {
       if (compoDef.soon) {
         menuItem.soon = compoDef.soon
       }
+      if (compoDef.isPreset || compoDef.componentModelBuilder) {
+        menuItem.isPreset = true
+      }
 
       // Add children
       if (compoDef.children) {
@@ -336,7 +341,7 @@ class Ocho {
     // Add meta for roots with children
     draggables.forEach((name) => {
       const obj = this.config.components[name]
-      if (obj.children) {
+      if (obj.children || obj.isPreset || obj.componentModelBuilder) {
         draggables.push(name + 'Meta')
       }
     })

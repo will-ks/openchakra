@@ -63,36 +63,60 @@ const Menu = () => {
         {(Object.keys(ocho.menuItems) as ComponentType[])
           .filter((c) => c.toLowerCase().includes(searchTerm.toLowerCase()))
           .map((name) => {
-            const { children, soon } = ocho.menuItems[name] as MenuItem
+            const { children, soon, isPreset } = ocho.menuItems[
+              name
+            ] as MenuItem
 
-            if (children) {
-              const elements = Object.keys(children).map((childName) => (
-                <DragItem
-                  isChild
-                  key={childName}
-                  label={childName}
-                  type={childName as any}
-                  id={childName as any}
-                  rootParentType={ocho.menuItems[name]?.rootParentType || name}
-                >
-                  {childName}
-                </DragItem>
-              ))
+            if (children || isPreset) {
+              if (children) {
+                const elements = Object.keys(children).map((childName) => (
+                  <DragItem
+                    isChild
+                    key={childName}
+                    label={childName}
+                    type={childName as any}
+                    id={childName as any}
+                    rootParentType={
+                      ocho.menuItems[name]?.rootParentType || name
+                    }
+                  >
+                    {childName}
+                  </DragItem>
+                ))
 
-              return [
-                <DragItem
-                  isMeta
-                  soon={soon}
-                  key={`${name}Meta`}
-                  label={name}
-                  type={`${name}Meta` as any}
-                  id={`${name}Meta` as any}
-                  rootParentType={ocho.menuItems[name]?.rootParentType || name}
-                >
-                  {name}
-                </DragItem>,
-                ...elements,
-              ]
+                return [
+                  <DragItem
+                    isMeta
+                    soon={soon}
+                    key={`${name}Meta`}
+                    label={name}
+                    type={`${name}Meta` as any}
+                    id={`${name}Meta` as any}
+                    rootParentType={
+                      ocho.menuItems[name]?.rootParentType || name
+                    }
+                  >
+                    {name}
+                  </DragItem>,
+                  ...elements,
+                ]
+              } else {
+                return (
+                  <DragItem
+                    isMeta
+                    soon={soon}
+                    key={`${name}Meta`}
+                    label={name}
+                    type={`${name}Meta` as any}
+                    id={`${name}Meta` as any}
+                    rootParentType={
+                      ocho.menuItems[name]?.rootParentType || name
+                    }
+                  >
+                    {name}
+                  </DragItem>
+                )
+              }
             }
 
             return (
