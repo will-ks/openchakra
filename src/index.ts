@@ -80,9 +80,6 @@ import { initStore } from '~core/store'
 import ButtonPanel from '~chakraui/inspector/panels/ButtonPanel'
 import ImagePanel from '~chakraui/inspector/panels/ImagePanel'
 import ListPanel from '~chakraui/inspector/panels/ListPanel'
-import { secretchakra } from '~chakraui/templates/secretchakra'
-import { productHunt } from '~chakraui/templates/producthunt'
-import { onboarding } from '~chakraui/templates/onboarding'
 
 export { Ocho, isStylePropEnabled, targetStyleProp, stylePropDetail }
 
@@ -157,4 +154,3 @@ export { initStore }
 
 // Temp exports from chakraui
 export { ButtonPanel, ImagePanel, ListPanel }
-export { secretchakra, onboarding, productHunt }
