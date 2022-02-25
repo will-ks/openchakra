@@ -75,6 +75,17 @@ import { getComponents } from '~core/selectors/components'
 import { getShowLayout, getShowCode } from '~core/selectors/app'
 import { buildBlock, formatCode } from '~utils/code'
 import { initStore } from '~core/store'
+import {
+  getSelectedComponent,
+  getSelectedComponentId,
+  getComponentBy,
+  getPropsForSelectedComponent,
+  getSelectedComponentChildren,
+  getSelectedComponentParent,
+  getIsHovered,
+  getHoveredId,
+  getComponentNames,
+} from '~core/selectors/components'
 
 // Temp imports from chakraui
 import ButtonPanel from '~chakraui/inspector/panels/ButtonPanel'
@@ -162,6 +173,17 @@ export { getComponents }
 export { getShowLayout, getShowCode }
 export { buildBlock, formatCode }
 export { initStore }
+export {
+  getSelectedComponent,
+  getSelectedComponentId,
+  getComponentBy,
+  getPropsForSelectedComponent,
+  getSelectedComponentChildren,
+  getSelectedComponentParent,
+  getIsHovered,
+  getHoveredId,
+  getComponentNames,
+}
 
 // Temp exports from chakraui
 export { ButtonPanel, ImagePanel, ListPanel }
