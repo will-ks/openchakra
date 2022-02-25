@@ -3,10 +3,7 @@ import TextControl from '~chakraui/inspector/controls/TextControl'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
 import { isStylePropEnabled, targetStyleProp } from '~core/Ocho'
 
-const BackgroundColorPanel: React.FC<StylePanelProps> = ({
-  isRoot,
-  panelDef,
-}) => {
+const BorderPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   return (
     <>
       {isStylePropEnabled('border', panelDef) && (
@@ -25,4 +22,4 @@ const BackgroundColorPanel: React.FC<StylePanelProps> = ({
   )
 }
 
-export default memo(BackgroundColorPanel)
+export default memo(BorderPanel)
