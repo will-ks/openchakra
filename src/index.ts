@@ -80,6 +80,17 @@ import { initStore } from '~core/store'
 import ButtonPanel from '~chakraui/inspector/panels/ButtonPanel'
 import ImagePanel from '~chakraui/inspector/panels/ImagePanel'
 import ListPanel from '~chakraui/inspector/panels/ListPanel'
+import ColorPickerControl from '~chakraui/inspector/controls/ColorPickerControl'
+import ColorsControl from '~chakraui/inspector/controls/ColorsControl'
+import FormControl from '~chakraui/inspector/controls/FormControl'
+import GradientControl from '~chakraui/inspector/controls/GradientControl'
+import HuesPickerControl from '~chakraui/inspector/controls/HuesPickerControl'
+import IconControl from '~chakraui/inspector/controls/IconControl'
+import NumberControl from '~chakraui/inspector/controls/NumberControl'
+import SizeControl from '~chakraui/inspector/controls/SizeControl'
+import SwitchControl from '~chakraui/inspector/controls/SwitchControl'
+import TextControl from '~chakraui/inspector/controls/TextControl'
+import VariantsControl from '~chakraui/inspector/controls/VariantsControl'
 
 export { Ocho, isStylePropEnabled, targetStyleProp, stylePropDetail }
 
@@ -154,3 +165,16 @@ export { initStore }
 
 // Temp exports from chakraui
 export { ButtonPanel, ImagePanel, ListPanel }
+export {
+  ColorPickerControl,
+  ColorsControl,
+  FormControl,
+  GradientControl,
+  HuesPickerControl,
+  IconControl,
+  NumberControl,
+  SizeControl,
+  SwitchControl,
+  TextControl,
+  VariantsControl,
+}
