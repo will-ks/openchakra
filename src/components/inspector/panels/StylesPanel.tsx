@@ -12,6 +12,7 @@ interface Props {
   showChildren: boolean
   parentIsRoot: boolean
   stylePanels: StylePanelsConfig
+  codeGenerationOnly: boolean
 }
 
 const StylesPanel: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const StylesPanel: React.FC<Props> = ({
   showChildren,
   parentIsRoot,
   stylePanels,
+  codeGenerationOnly,
 }) => {
   let panels = []
   if (isRoot) {
@@ -44,7 +46,7 @@ const StylesPanel: React.FC<Props> = ({
 
   return (
     <Accordion defaultIndex={[0]} allowMultiple>
-      {!isRoot && (
+      {!isRoot && !codeGenerationOnly && (
         <AccordionContainer title="Custom props">
           <CustomPropsPanel />
         </AccordionContainer>
@@ -56,7 +58,7 @@ const StylesPanel: React.FC<Props> = ({
         </AccordionContainer>
       )}
 
-      {showChildren && (
+      {showChildren && !codeGenerationOnly && (
         <AccordionContainer title="Children">
           <ChildrenInspector />
         </AccordionContainer>

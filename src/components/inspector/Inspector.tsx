@@ -107,6 +107,9 @@ const Inspector = () => {
 
   const docType = rootParentType || type
   const componentHasChildren = children.length > 0
+  // All the components that are only used for code generation named like "<component>Placeholder",
+  // eg: HeadingPlaceholder
+  const codeGenerationOnly = type.toLowerCase().includes('placeholder')
 
   useEffect(() => {
     clearActiveProps()
@@ -192,6 +195,7 @@ const Inspector = () => {
         isRoot={isRoot}
         showChildren={componentHasChildren}
         parentIsRoot={parentIsRoot}
+        codeGenerationOnly={codeGenerationOnly}
         stylePanels={ocho.stylePanels[component.type]!}
       />
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
