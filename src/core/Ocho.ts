@@ -93,6 +93,10 @@ export type ComponentConfig = {
   rootParentType?: ComponentType
   rootDraggable?: boolean // default: true for root elements and false for child elements.
   soon?: boolean
+  codeGenerationProps?: {
+    [key: string]: any
+  }
+  codeGenerationOnly?: boolean
 }
 
 export type MenuItem = {
@@ -216,7 +220,10 @@ class Ocho {
     const childNames = this.collectChildComponentNames()
     // Roots are everything that is not a child, except those that have children and can act both as root and child
     return Object.keys(this.config.components).filter((k) => {
-      return !childNames.includes(k) || this.config.components[k].children
+      return (
+        (!childNames.includes(k) || this.config.components[k].children) &&
+        !this.config.components[k].codeGenerationOnly
+      )
     })
   }
 
