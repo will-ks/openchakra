@@ -40,23 +40,23 @@ const DimensionPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
           <SimpleGrid columns={2} spacing={1}>
             <TextControl
               hasColumn
-              label="Min W"
+              label="MinW"
               name={targetStyleProp('minWidth', panelDef)}
             />
             <TextControl
               hasColumn
-              label="Min H"
+              label="MinH"
               name={targetStyleProp('minHeight', panelDef)}
             />
 
             <TextControl
               hasColumn
-              label="Max W"
+              label="MaxW"
               name={targetStyleProp('maxWidth', panelDef)}
             />
             <TextControl
               hasColumn
-              label="Max H"
+              label="MaxH"
               name={targetStyleProp('maxHeight', panelDef)}
             />
           </SimpleGrid>
