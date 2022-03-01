@@ -62,7 +62,7 @@ import DragItem from '~components/sidebar/DragItem'
 import Sidebar from '~components/sidebar/Sidebar'
 import CodePanel from '~components/CodePanel'
 import Header from '~components/Header'
-import Metadata from '~components/Metadata'
+// import Metadata from '~components/Metadata'
 import Composer from '~core/models/composer/composer'
 import useClipboard from '~hooks/useClipboard'
 import useDispatch from '~hooks/useDispatch'
@@ -74,7 +74,7 @@ import useShortcuts from '~hooks/useShortcuts'
 import { getComponents } from '~core/selectors/components'
 import { getShowLayout, getShowCode } from '~core/selectors/app'
 import { buildBlock, formatCode } from '~utils/code'
-import { initStore } from '~core/store'
+import { /*initStore,*/ createStoreConfig } from '~core/store'
 import {
   getSelectedComponent,
   getSelectedComponentId,
@@ -158,7 +158,7 @@ export {
   ParentInspector,
 }
 export { DragItem, Sidebar }
-export { CodePanel, Header, Metadata }
+export { CodePanel, Header /*, Metadata */ }
 export { Composer }
 export {
   useClipboard,
@@ -172,7 +172,7 @@ export {
 export { getComponents }
 export { getShowLayout, getShowCode }
 export { buildBlock, formatCode }
-export { initStore }
+export { /*initStore,*/ createStoreConfig }
 export {
   getSelectedComponent,
   getSelectedComponentId,

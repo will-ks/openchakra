@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 import undoable from 'redux-undo'
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { createWrapper, MakeStore } from 'next-redux-wrapper'
+// import { createWrapper, MakeStore } from 'next-redux-wrapper'
 
 import { ComponentsStateWithUndo, initComponents } from './models/components'
 import { AppState, initApp } from './models/app'
@@ -27,13 +27,13 @@ const persistConfig = {
 
 const persistPlugin = {
   onStoreCreated(store: any) {
-    if (process.browser) {
+    if (typeof process == 'undefined' || process.browser) {
       persistStore(store)
     }
   },
 }
 
-function initStore(ocho: Ocho) {
+function createStoreConfig(ocho: Ocho) {
   const components = initComponents(ocho)
   const app = initApp(ocho)
 
@@ -59,10 +59,13 @@ function initStore(ocho: Ocho) {
     },
     plugins: [persistPlugin],
   }
-  // @ts-ignore
-  const makeStore: MakeStore<RootState> = () => init(storeConfig)
-
-  return createWrapper<RootState>(makeStore)
+  return storeConfig
 }
 
-export { initStore }
+// function initStore(ocho: Ocho) {
+//   // @ts-ignore
+//   const makeStore: MakeStore<RootState> = () => init(createStoreConfig(ocho))
+//   return createWrapper<RootState>(makeStore)
+// }
+
+export { createStoreConfig }

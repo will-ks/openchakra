@@ -50,7 +50,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "rm -rf lib; time yarn build:esbuild && time yarn build:tsc && time yarn build:tscpaths",
+    "build": "rm -rf lib; time yarn build:esbuild && time yarn build:tsc && time yarn build:tscpaths && scripts/cleanlib.sh",
     "build:esbuild": "echo 'Running esbuild' && node esbuild.config.js",
     "build:tsc": "echo 'Generating typescript types' && tsc --project tsconfig.build.json && yarn build:tscpaths",
     "build:tscpaths": "echo 'Fixing ~ import prefixes' && tscpaths -p tsconfig.build.json -s ./src -o ./lib",

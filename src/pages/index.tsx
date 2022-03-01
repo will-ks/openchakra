@@ -3,7 +3,7 @@ import { Flex, Box } from '@chakra-ui/react'
 import { DndProvider } from 'react-dnd'
 import Backend from 'react-dnd-html5-backend'
 import { Global } from '@emotion/react'
-import Metadata from '~components/Metadata'
+// import Metadata from '~components/Metadata'
 import useShortcuts from '~hooks/useShortcuts'
 import Header from '~components/Header'
 import Sidebar from '~components/sidebar/Sidebar'
@@ -11,6 +11,7 @@ import EditorErrorBoundary from '~components/errorBoundaries/EditorErrorBoundary
 import Editor from '~components/editor/Editor'
 import { InspectorProvider } from '~contexts/inspector-context'
 import Inspector from '~components/inspector/Inspector'
+import Metadata from '~chakraui/Metadata'
 
 const App = () => {
   useShortcuts()

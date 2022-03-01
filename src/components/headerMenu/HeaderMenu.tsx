@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 import {
   Box,
   Button,
@@ -18,6 +18,8 @@ import {
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { FaBomb } from 'react-icons/fa'
 import { GoRepo, GoArchive } from 'react-icons/go'
+import ExportMenuItem from '~components/headerMenu/ExportMenuItem'
+import ImportMenuItem from '~components/headerMenu/ImportMenuItem'
 
 type MenuItemLinkProps = MenuItemProps | LinkProps
 
@@ -37,8 +39,8 @@ const CustomMenuButton: React.FC<MenuButtonProps | ButtonProps> =
     return <MenuButton as={Button} {...props} />
   })
 
-const ExportMenuItem = dynamic(() => import('./ExportMenuItem'), { ssr: false })
-const ImportMenuItem = dynamic(() => import('./ImportMenuItem'), { ssr: false })
+// const ExportMenuItem = dynamic(() => import('./ExportMenuItem'), { ssr: false })
+// const ImportMenuItem = dynamic(() => import('./ImportMenuItem'), { ssr: false })
 
 const HeaderMenu = () => {
   return (
