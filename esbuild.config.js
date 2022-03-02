@@ -7,12 +7,16 @@
  */
 const esbuild = require('esbuild')
 const glob = require('glob')
-const entryPoints = glob.sync('./src/**/*.ts*')
+const entryPoints = glob
+  .sync('./src/**/*.ts*')
+  .filter(
+    (e) => !e.startsWith('./src/chakraui') && !e.startsWith('./src/pages'),
+  )
 
 // Automatically exclude all node_modules from the bundled version
 const { nodeExternalsPlugin } = require('esbuild-node-externals')
 
-// console.log(entryPoints)
+console.log(entryPoints)
 
 esbuild
   .build({
@@ -28,6 +32,31 @@ esbuild
     format: 'cjs',
     target: ['esnext'],
     //splitting: true,
-    plugins: [nodeExternalsPlugin()],
+    // plugins: [nodeExternalsPlugin()],
+    // don't automatically exclude all of dependencies. We control this via external
+    plugins: [
+      nodeExternalsPlugin({
+        dependencies: false,
+      }),
+    ],
+    // peer dependencies, which must be provided by ocho users
+    external: [
+      'react',
+      'react-dom',
+      // for nextjs projects
+      'next',
+      'next-redux-wrapper',
+      // or nextjs, cra, etc. projects as well:
+      '@chakra-ui/icons',
+      '@chakra-ui/react',
+      '@chakra-ui/theme',
+      '@emotion/styled',
+      '@emotion/react',
+      'framer-motion',
+      '@rematch/core',
+      'react-redux',
+      'react-dnd',
+      'react-dnd-html5-backend',
+    ],
   })
   .catch(() => process.exit(1))
