@@ -62,6 +62,7 @@ import DragItem from '~components/sidebar/DragItem'
 import Sidebar from '~components/sidebar/Sidebar'
 import CodePanel from '~components/CodePanel'
 import Header from '~components/Header'
+import { buildParameters } from '~utils/codesandbox'
 // import Metadata from '~components/Metadata'
 import Composer from '~core/models/composer/composer'
 import useClipboard from '~hooks/useClipboard'
@@ -184,6 +185,7 @@ export {
   getHoveredId,
   getComponentNames,
 }
+export { buildParameters }
 
 // Temp exports from chakraui
 export { ButtonPanel, ImagePanel, ListPanel }
