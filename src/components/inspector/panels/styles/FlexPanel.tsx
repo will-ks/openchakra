@@ -5,6 +5,7 @@ import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import { StylePanelProps } from '~components/inspector/panels/styles/types'
 import { targetStyleProp } from '~core/Ocho'
+import TextControl from '~chakraui/inspector/controls/TextControl'
 
 const FlexPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()
@@ -18,6 +19,7 @@ const FlexPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
 
   return (
     <>
+      <TextControl label="flex" name="flex" />
       <FormControl label="Direction">
         <Select
           name={targetStyleProp('flexDirection', panelDef)}
