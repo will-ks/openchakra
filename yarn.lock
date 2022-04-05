@@ -3094,10 +3094,10 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-browser-nativefs@^0.7.1:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/browser-nativefs/-/browser-nativefs-0.7.3.tgz#0f10fc91c86829e4e40bfe3b42947587980effa6"
-  integrity sha512-59YYmCMQf755E3MymsSDuIpc1InxoqMTtBVKE01STY1tEy+1eUabFZOBJKYs3fK8k5uTypCCBdBRmkdViobRAw==
+browser-fs-access@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/browser-fs-access/-/browser-fs-access-0.26.1.tgz#76ad32906e2efb67dff2be2ee276479275386bca"
+  integrity sha512-TMloUX9rl/MWe0CniUj5aDKzLuspvOzsxZhRFhG1LThtYqqwk2YaSzzDXhwMbX++fUJqs57+Z7kDocR4zsEGwQ==
 
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   version "1.2.0"

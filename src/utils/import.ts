@@ -1,10 +1,10 @@
-import { fileOpen, fileSave } from 'browser-nativefs'
+import { fileOpen, fileSave } from 'browser-fs-access'
 import { INITIAL_COMPONENTS } from '~core/models/components'
 import { IComponents } from '~core/Ocho'
 
 export async function loadFromJSON() {
   const blob = await fileOpen({
-    extensions: ['json'],
+    extensions: ['.json'],
     mimeTypes: ['application/json'],
   })
 
