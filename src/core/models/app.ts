@@ -27,6 +27,12 @@ export function initApp(ocho: Ocho) {
           showLayout: !state.showLayout,
         }
       },
+      setBuilderMode(state: AppState, isVisible: boolean): AppState {
+        return {
+          ...state,
+          showLayout: isVisible,
+        }
+      },
       toggleCodePanel(state: AppState): AppState {
         return {
           ...state,
