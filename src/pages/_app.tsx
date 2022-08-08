@@ -10,14 +10,14 @@ import AppErrorBoundary from '~components/errorBoundaries/AppErrorBoundary'
 import { AppProps } from 'next/app'
 import { ComponentDefinitionsProvider } from '~contexts/component-definition'
 import {
-  chakrauiComponentDefDefaults,
-  chakrauiComponentDefs,
-} from '~chakraui/componentDefs'
+  foouiComponentDefDefaults,
+  foouiComponentDefs,
+} from '~fooui/componentDefs'
 import ComponentDefinitions from '~core/ComponentDefinitions'
 
 const componentDefs = new ComponentDefinitions(
-  chakrauiComponentDefs,
-  chakrauiComponentDefDefaults,
+  foouiComponentDefs,
+  foouiComponentDefDefaults,
 )
 
 const Main = ({ Component, pageProps }: AppProps) => (
