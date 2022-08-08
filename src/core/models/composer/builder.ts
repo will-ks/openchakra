@@ -1,4 +1,5 @@
 import Composer from './composer'
+import { IComponents } from '~core/ComponentDefinitions'
 
 type ComposedComponent = {
   components: IComponents
@@ -134,19 +135,21 @@ export const buildInputGroup = (parent: string): ComposedComponent => {
   }
 }
 
-type BuilderFn = (parent: string) => ComposedComponent
+// handled by componentDefs.tsx, componentDefsTypes.ts
 
-type ComposerBuilders = {
-  [k: string]: BuilderFn
-}
-
-const builders: ComposerBuilders = {
-  AlertMeta: buildAlert,
-  FormControlMeta: buildFormControl,
-  AccordionMeta: buildAccordion,
-  ListMeta: buildList,
-  InputGroupMeta: buildInputGroup,
-  BreadcrumbMeta: buildBreadcrumb,
-}
-
-export default builders
+// type BuilderFn = (parent: string) => ComposedComponent
+//
+// type ComposerBuilders = {
+//   [k: string]: BuilderFn
+// }
+//
+// const builders: ComposerBuilders = {
+//   AlertMeta: buildAlert,
+//   FormControlMeta: buildFormControl,
+//   AccordionMeta: buildAccordion,
+//   ListMeta: buildList,
+//   InputGroupMeta: buildInputGroup,
+//   BreadcrumbMeta: buildBreadcrumb,
+// }
+//
+// export default builders

@@ -3,6 +3,7 @@ import { useInteractive } from '~hooks/useInteractive'
 import { useDropComponent } from '~hooks/useDropComponent'
 import ComponentPreview from '~components/editor/ComponentPreview'
 import { Box } from '@chakra-ui/react'
+import { IComponent } from '~core/ComponentDefinitions'
 
 const WithChildrenPreviewContainer: React.FC<{
   component: IComponent

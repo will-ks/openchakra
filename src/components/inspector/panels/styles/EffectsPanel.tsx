@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react'
-import FormControl from '~components/inspector/controls/FormControl'
+import FormControl from '~chakraui/inspector/controls/FormControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import {
@@ -8,11 +8,13 @@ import {
   Slider,
   SliderThumb,
 } from '@chakra-ui/react'
-import TextControl from '~components/inspector/controls/TextControl'
+import TextControl from '~chakraui/inspector/controls/TextControl'
+import { StylePanelProps } from '~components/inspector/panels/styles/types'
+import { isStylePropEnabled, targetStyleProp } from '~core/ComponentDefinitions'
 
-const EffectsPanel = () => {
+const EffectsPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValue } = useForm()
-  const opacity = usePropsSelector('opacity')
+  const opacity = usePropsSelector(targetStyleProp('opacity', panelDef))
 
   const normalizedOpacity = useMemo(() => {
     return opacity * 100 || 100
@@ -20,21 +22,30 @@ const EffectsPanel = () => {
 
   return (
     <>
-      <FormControl label="Opacity">
-        <Slider
-          min={1}
-          onChange={(value: any) => setValue('opacity', value / 100)}
-          value={normalizedOpacity}
-          mr={2}
-        >
-          <SliderTrack>
-            <SliderFilledTrack />
-          </SliderTrack>
-          <SliderThumb />
-        </Slider>
-      </FormControl>
+      {isStylePropEnabled('opacity', panelDef) && (
+        <FormControl label="Opacity">
+          <Slider
+            min={1}
+            onChange={(value: any) =>
+              setValue(targetStyleProp('opacity', panelDef), value / 100)
+            }
+            value={normalizedOpacity}
+            mr={2}
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb />
+          </Slider>
+        </FormControl>
+      )}
 
-      <TextControl name="boxShadow" label="Box Shadow" />
+      {isStylePropEnabled('boxShadow', panelDef) && (
+        <TextControl
+          name={targetStyleProp('boxShadow', panelDef)}
+          label="Box Shadow"
+        />
+      )}
     </>
   )
 }

@@ -5,7 +5,7 @@ import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import { useSelector } from 'react-redux'
 import { getInputTextFocused } from '~core/selectors/app'
-import FormControl from './FormControl'
+import FormControl from '../../../chakraui/inspector/controls/FormControl'
 
 const ChildrenControl: React.FC = () => {
   const dispatch = useDispatch()

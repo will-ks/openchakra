@@ -1,3 +1,5 @@
+import { IComponents } from '~core/ComponentDefinitions'
+
 export const airbnbCard: IComponents = {
   root: {
     id: 'root',

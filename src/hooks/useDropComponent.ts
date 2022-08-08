@@ -1,17 +1,21 @@
 import { useDrop, DropTargetMonitor } from 'react-dnd'
-import { rootComponents } from '~utils/editor'
 import useDispatch from './useDispatch'
-import builder from '~core/models/composer/builder'
+import { useComponentDefinitions } from '~contexts/component-definition'
+import { ComponentItemProps } from '~core/ComponentDefinitions'
 
 export const useDropComponent = (
   componentId: string,
-  accept: (ComponentType | MetaComponentType)[] = rootComponents,
+  accept: string[] = [],
   canDrop: boolean = true,
 ) => {
   const dispatch = useDispatch()
-
+  const componentDefs = useComponentDefinitions()
+  let finalAccept = accept
+  if (finalAccept.length === 0) {
+    finalAccept = componentDefs.rootDraggables
+  }
   const [{ isOver }, drop] = useDrop({
-    accept,
+    accept: finalAccept,
     collect: monitor => ({
       isOver: monitor.isOver({ shallow: true }) && monitor.canDrop(),
     }),
@@ -26,7 +30,10 @@ export const useDropComponent = (
           componentId: item.id,
         })
       } else if (item.isMeta) {
-        dispatch.components.addMetaComponent(builder[item.type](componentId))
+        //dispatch.components.addMetaComponent(builder[item.type](componentId))
+        dispatch.components.addMetaComponent(
+          componentDefs.componentModelBuilders[item.type]!(componentId),
+        )
       } else {
         dispatch.components.addComponent({
           parentName: componentId,

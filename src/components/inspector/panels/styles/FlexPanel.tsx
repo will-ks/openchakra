@@ -1,21 +1,26 @@
 import React, { memo } from 'react'
 import { Select } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
+import FormControl from '~chakraui/inspector/controls/FormControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
+import { StylePanelProps } from '~components/inspector/panels/styles/types'
+import { targetStyleProp } from '~core/ComponentDefinitions'
 
-const FlexPanel = () => {
+const FlexPanel: React.FC<StylePanelProps> = ({ isRoot, panelDef }) => {
   const { setValueFromEvent } = useForm()
-
-  const alignItems = usePropsSelector('alignItems')
-  const flexDirection = usePropsSelector('flexDirection')
-  const justifyContent = usePropsSelector('justifyContent')
+  const alignItems = usePropsSelector(targetStyleProp('alignItems', panelDef))
+  const flexDirection = usePropsSelector(
+    targetStyleProp('flexDirection', panelDef),
+  )
+  const justifyContent = usePropsSelector(
+    targetStyleProp('justifyContent', panelDef),
+  )
 
   return (
     <>
       <FormControl label="Direction">
         <Select
-          name="flexDirection"
+          name={targetStyleProp('flexDirection', panelDef)}
           size="sm"
           value={flexDirection}
           onChange={setValueFromEvent}
@@ -29,7 +34,7 @@ const FlexPanel = () => {
 
       <FormControl label="Justify content">
         <Select
-          name="justifyContent"
+          name={targetStyleProp('justifyContent', panelDef)}
           size="sm"
           value={justifyContent}
           onChange={setValueFromEvent}
@@ -44,7 +49,7 @@ const FlexPanel = () => {
 
       <FormControl label="Align items">
         <Select
-          name="alignItems"
+          name={targetStyleProp('alignItems', panelDef)}
           size="sm"
           value={alignItems || ''}
           onChange={setValueFromEvent}

@@ -37,7 +37,7 @@ import ActionButton from './ActionButton'
 import { generateComponentCode, formatCode } from '~utils/code'
 import useClipboard from '~hooks/useClipboard'
 import { useInspectorUpdate } from '~contexts/inspector-context'
-import { componentsList } from '~componentsList'
+import { useComponentDefinitions } from '~contexts/component-definition'
 
 const CodeActionButton = memo(() => {
   const [isLoading, setIsLoading] = useState(false)
@@ -78,6 +78,7 @@ const Inspector = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [componentName, onChangeComponentName] = useState('')
   const componentsNames = useSelector(getComponentNames)
+  const componentDefs = useComponentDefinitions()
 
   const { clearActiveProps } = useInspectorUpdate()
 
@@ -95,9 +96,9 @@ const Inspector = () => {
       !!componentName.match(/^[A-Z]\w*$/g) &&
       !componentsNames.includes(componentName) &&
       // @ts-ignore
-      !componentsList.includes(componentName)
+      !componentDefs.componentNames.includes(componentName)
     )
-  }, [componentName, componentsNames])
+  }, [componentDefs.componentNames, componentName, componentsNames])
 
   const { type, rootParentType, id, children } = component
 
@@ -191,6 +192,7 @@ const Inspector = () => {
         isRoot={isRoot}
         showChildren={componentHasChildren}
         parentIsRoot={parentIsRoot}
+        stylePanels={componentDefs.stylePanels[component.type]!}
       />
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay>
